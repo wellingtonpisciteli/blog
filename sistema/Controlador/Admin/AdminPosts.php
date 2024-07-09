@@ -60,3 +60,5 @@ class AdminPosts extends AdminControlador{
     }
     
 }
+
+//teste git
