@@ -1,0 +1,38 @@
+<div class="menu" id="menu">
+    <img class="imgLogo" src="/blog/templates/admin/assets/img/php-logo.svg" alt="">
+    <div class="menuItem">
+        <a class="adm" href="#">Administração</a>
+        <a href="{{url('admin/posts/listar')}}"> 
+            <i class="fa-solid fa-file-signature" style="padding-right: 3%;"></i>
+            Posts
+        </a>
+        <a href="{{url('admin/categorias/listar')}}">
+            <i class="fa-solid fa-list" style="padding-right: 3%;"></i>
+            Categorias
+        </a>
+        <a href="#">
+            <i class="fa-sharp fa-solid fa-users" style="padding-right: 2%;"></i>
+            Usuarios
+        </a>
+    </div>
+</div>
+<div class="menuFechado" id="menuFechado">
+    <a href="{{url('admin/posts/listar')}}"> 
+        <h2>
+            <i class="fa-solid fa-file-signature" style="padding-right: 3%;"></i>
+            <span class="tooltip">Posts</span>
+        </h2>
+    </a>
+    <a href="{{url('admin/categorias/listar')}}">
+        <h2>
+            <i class="fa-solid fa-list" style="padding-right: 3%;"></i>
+            <span class="tooltip">Categorias</span>
+        </h2>
+    </a>
+    <a href="#">
+        <h2>
+            <i class="fa-sharp fa-solid fa-users" style="padding-right: 2%;"></i>
+            <span class="tooltip">Usuários</span>
+        </h2>
+    </a>
+</div>

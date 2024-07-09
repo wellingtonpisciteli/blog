@@ -1,0 +1,21 @@
+{
+    "name": "ceounset/cursophp8",
+    "description": "Curso de php 8",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "sistema\\": "sistema/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Wellington Borges"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.0",
+        "pecee/simple-router": "^5.4",
+        "twig/twig": "^3.0"
+    }
+}

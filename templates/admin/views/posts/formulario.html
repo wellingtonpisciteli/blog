@@ -1,0 +1,67 @@
+{% extends "dashboard.html" %}
+
+{% block conteudo %} 
+
+    <div class="container" id="container">
+        <div class="opcoes" id="opcoes">
+            <a class="perfil" href="#">Perfil</a>
+            <a href="#">Sair</a>
+        </div>
+        {% include 'menu2.html' %}        
+        <div class="conteudo">
+            <div class="linkHome">
+                <h5>
+                    <a href="{{ url('admin/dashboard') }}" style="text-decoration: none;">Home</a>
+                </h5>
+                <h5>/ Posts</h5>
+            </div>
+
+            <div class="form">
+                <form action="{% if posts.id %}{{ url('admin/posts/editar/'~posts.id) }}{% else %}{{ url('admin/posts/cadastrar') }}{% endif %}" method="post">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Titulo</label>
+                        <input type="text" name="titulo" id="titulo" class="form-control" value="{{posts.titulo}}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="texto" class="form-label">Texto</label>
+                        <textarea name="texto" id="texto" class="form-control" rows="3" style="text-align: justify;">{{posts.texto}}</textarea>
+                    </div>
+
+                    <div class="categoriaEstatus">
+                        <div class="select status">
+                            <label id="status" for="status" class="form-label">
+                                Status
+                            </label>
+                            <select name="status" id="status" class="form-select" aria-label="Default select example">
+                                    <option value="1" {%if posts.status=="1"%}selected{%endif%}>Ativado</option>
+                                    <option value="0" {%if posts.status=="0"%}selected{%endif%}>Desativado</option>
+                            </select>
+                        </div>
+
+                        <div class="select categoria_id">
+                            <label id="categoria_id" for="categoria_id" class="form-label">
+                                Categoria
+                            </label>
+                            <select name="categoria_id" id="categoria_id" class="form-select" aria-label="Default select example">
+                                {% for categoria in categorias %}
+                                    <option value="{{categoria.id}}" {% if posts.categoria_id==categoria.id %} selected {% endif %}>
+                                        {{categoria.titulo}}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="btnCadastrar" id="btnCadastrar">
+                        {% if posts %}
+                            <input type="submit" value="Atualizar">
+                        {% else %}
+                            <input type="submit" value="Cadastrar" >
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

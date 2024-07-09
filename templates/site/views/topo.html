@@ -1,0 +1,42 @@
+<header class="p-3 text-bg-dark">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+        <ul class="navbar navbar-dark list-unstyled bg-dark col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 fs-5">
+          <li>
+            <a href="{{url()}}" class="nav-link px-2" tooltip="tooltip" title="Página Inicial"  style="margin-right: 15px;">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"  style="margin-right: 15px;">Categorias</a>
+            <ul class="dropdown-menu">
+              {% for categoria in categorias %}
+                <li>
+                  <a class="dropdown-item" href="{{url('categoria/'~categoria.id)}}">
+                    {{categoria.titulo}}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+          <li>
+            <a href="{{url('sobre-nos')}}" class="nav-link px-2 text-white" tooltip="tooltip" title="Sobre Nós"  style="margin-right: 15px;">Sobre nós</a>
+          </li>
+        </ul>
+
+        <form data-url-busca="{{url('buscar')}}" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+          <input id="busca" name="busca" class="form-control form-control-dark text-black bg-light" placeholder="Buscar..." aria-label="Search">
+        </form>
+
+        <div class="text-end">
+          <a href="" class="btn btn-outline-light me-2" tooltip="tooltip" title="Faça login">
+              Entrar
+          </a>
+          <a href="" class="btn btn-warning" tooltip="tooltip" title="Junte-se a nós">
+              Cadastre-se
+          </a>
+        </div>
+      </div>
+
+      <div id="buscaResultado"></div>
+    </div>
+  </header>

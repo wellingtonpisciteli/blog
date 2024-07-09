@@ -1,0 +1,453 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    --cor1: #3498db; /* Azul principal */
+    --cor2: #5da5e8; /* Azul claro */
+    --cor3: #2980b9; /* Azul escuro */
+    --cor4: #718da7; /* Azul acinzentado */
+    --cor5: #48a9a6; /* Azul ciano */
+    --cor6: #6bb9c7; /* Azul celeste */
+    --cor7: #34495e; /* Cinza escuro */
+    --cor8: #ecf0f1; /* Cinza claro */
+    --cor9: #ffffff; /* Branco */
+    --cor10: #1abc9c; /* Verde água */
+    --cor11: #2ecc71; /* Verde esmeralda */
+    --cor12: #16a085; /* Verde escuro */
+    --cor13: #8e44ad; /* Roxo */
+    --cor14: #9b59b6; /* Lavanda */
+    --cor15: #f1c40f; /* Amarelo ouro */
+    --cor16: #e67e22; /* Laranja */
+    --cor17: #e74c3c; /* Vermelho tomate */
+    --cor18: #c0392b; /* Vermelho escuro */
+}
+
+body{
+    font-family: "Inter", "Helvetica Neue", Arial;
+    margin: 0px;
+    padding: 0px;
+    background-color: black;
+}
+
+main{
+    height: 100vh;
+}
+
+.topo{
+    display: flex;
+    position:absolute ;
+    align-items: center;
+    justify-content: center;
+    background: var(--cor9);
+    right: 0%;
+    height: 11%;
+    left: 19.7%;
+    width: 80.2%;
+}
+
+.imgUser{
+    position: absolute;
+    height: 45%;
+    left: 1%;
+    top: 20%;
+    padding-left: 2.3%;
+}
+
+.nome {
+    position: absolute;
+    height: 60%;
+    right: 3%;
+    padding-left: 2.3%;
+    padding-right: 2.3%;
+    width: 220px;
+    cursor: pointer;
+    font-size: 1.1em;
+    border: none;
+    background: var(--cor9);
+    border-radius: 7px;
+}
+
+.imgUserAbrir{
+    position: absolute;
+    height: 30%;
+    right: 4%;
+    top: 40%;
+}
+
+.opcoes{
+    display: none;
+    position: absolute;
+    right: 3.2%;
+    top: -2%;
+    justify-content: center;
+    width: 160px;
+    height: 15%;
+    flex-direction: column;
+    background: var(--cor8);
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.opcoes a{
+    text-decoration: none;
+    font-size: 1.2em;
+    padding: 5px;
+    color: black;
+    font-weight: bold;
+    border-radius: 0px 0px 7px 7px;
+}
+
+.perfil:hover{
+    color: blue !important;
+    border-radius: 7px 7px 0px 0px;
+}
+
+.opcoes a:hover{
+    color: red;
+    font-weight: bolder;
+}
+
+@media(max-width:1350px){
+    .opcoes a{
+        padding: 2px;
+    }
+}
+
+#abrirMenu{
+    position: absolute;
+    left: 1%;
+    top: 20px;
+    cursor: pointer;
+}
+
+#abrirMenu2{
+    display: none;
+    position: absolute;
+    left: 1%;
+    top: 32%;
+    cursor: pointer;
+}
+
+.menu{
+    display: flex;
+    justify-content: center;
+    background: var(--cor3);
+    position: absolute;
+    left: 0%;
+    width: 19.8%;
+    height: 100%;
+}
+
+.imgLogo{
+    position: absolute;
+    top: 3%;
+    width: 45%;
+}
+
+.menuItem{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    width: 100%;
+    height: 30%;
+    top: 13%;
+    font-size: 1.2em;
+}
+
+.adm{
+    border-bottom: none !important;
+}
+
+.adm:hover{
+    background: var(--cor3) !important;
+    color: white !important;
+    cursor: default !important;
+    border: none !important;
+}
+
+.menuItem a{
+    text-decoration: none;
+    padding: 3%;
+    margin-bottom: 2%;
+    color: white;
+    border-bottom: 1px solid white;
+}
+
+.menuItem a:hover{
+    background: var(--cor8);
+    border: 1px solid white;
+    color: black;
+}
+
+.menuItem2{
+    display: none;
+    font-size: 1.2em;
+}
+
+.menuItem2 a:hover{
+    background: var(--cor8);
+    color: black;
+    width: 100%;
+}
+
+.menuFechado{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 0%;
+    height: 100%;
+    width: 5%;
+    background: var(--cor3);
+}
+
+.menuFechado h2{
+    margin-top: 25px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip {
+    visibility: hidden;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 100%;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.menuFechado h2:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.container{
+    display: flex;
+    position: absolute;
+    align-items: start;
+    justify-content: center;
+    right: 0%;
+    background:var(--cor8);
+    width: 80.2%;
+    height: 81%;
+    top: 11%;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.568);
+}
+
+@media(min-width:1000px){
+    .container{
+        max-width: 100%;
+    }
+}
+
+@media(min-width:500px){
+    .container{
+        max-width: 100%;
+    }
+}
+
+.conteudo{
+    background: var(--cor9);
+    width: 100%;
+    margin: 2%;
+    padding: 10px;
+    border-radius: 7px;
+    box-shadow: 2px 5px 5px 2px rgba(0, 0, 0, 0.075);
+}
+
+.icon{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+}
+
+.rodape{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    width: 80.2%;
+    height: 8%;
+    background: var(--cor9);
+}
+
+.copy{
+    text-indent: 5px;
+    font-size: 15px;
+    color: black;
+}
+
+.linksRodape{
+    position: absolute;
+    right: 1%;
+}
+
+.linksRodape a{
+    text-decoration: none;
+    color: black;
+    margin-left: 8px;
+    font-size: 15px;
+}
+
+
+@media(max-width:1000px){
+    .topo{
+        width: 100% !important;
+        left: 0% !important;
+    }
+
+    #abrirMenu{
+        display: none;
+    }
+
+    .menu{
+        display: none !important;
+    }
+
+    .menuFechado{
+        display: none !important;
+    }
+
+    #abrirMenu2{
+        display: flex;
+        position: absolute;
+        top: 25%;
+    }
+
+    .menu2{
+        display: none;
+        justify-content: center;
+        background: var(--cor3);
+        position: absolute;
+        left: 0%;
+        width: 30%;
+        height: 100%;
+    }
+
+    .menuItem2{
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        width: 100%;
+        height: 40%;
+        top: 2%;
+        font-size: 1.2em;
+    }
+
+    .menuItem2 a{
+        text-decoration: none;
+        padding: 3%;
+        margin-bottom: 1%;
+        color: white;
+        border-bottom: 1px solid white;
+        width: 94% !important;
+    }
+    
+    .container{
+        background:var(--cor8);
+        width: 100% !important;
+    }
+
+    .rodape{
+        width: 100% !important;
+        left: 0% !important;
+    }
+}
+
+@media(max-width:400px){
+    .menu2{
+        width: 50%;
+    }
+
+    .nome{
+        width: 50%;
+        font-size: 15px;
+    }
+
+    .imgUser{
+        width: 10%;
+        height: 40%;
+        top: 25%;
+    }
+
+    .imgUserAbrir{
+        width: 8%;
+        height: 35%;
+        top: 32%;
+    }
+}
+
+.linkHome{
+    display: flex;
+    flex-direction: row;
+    background-image: linear-gradient(to left, var(--cor1), var(--cor9));
+    margin: -10px;
+    margin-bottom: 5px;
+    padding: 5px;
+    padding-top: 10px;
+    border-radius: 7px 7px 0px 0px;
+}
+
+.linkHome a{
+    margin-right: 5px;
+}
+
+.linkHome a:hover{
+    color: black;
+}
+
+.btnCadastrar button{
+    background:  var(--cor2);
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.171);
+    margin-left: 5px;
+}
+
+.btnCadastrar input{
+    background:  var(--cor2);
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.171);
+    font-weight: bold;
+    color: white;
+}
+
+.btnCadastrar input:hover{
+    color: black;
+}
+
+.btnCadastrar a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.form label{
+    font-weight: bold;
+}
+
+.categoriaEstatus{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.status{
+    margin-right: 7.5px;
+}  
+
+.categoria_id{
+    margin-left: 7.5px;
+}
+
+.select{
+    width: 100%;
+}
+

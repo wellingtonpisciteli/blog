@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+
+<div class="container my-5">
+    
+    <div class="row border border-2 border-secondary p-3">
+            <div class="col-lg-9 col-md-12 ">
+                {% if posts %}
+                    <div class="row">
+                        {% for post in posts %}
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <a class="text-decoration-none text-dark" href="{{url('post/'~post.id)}}" tooltip="tooltip" title="{{post.titulo}}">
+                                        <h4 class="card-title">{{post.titulo}}</h4>
+                                        <p class="card-text">{{resumirTxt(post.texto, 150)}}</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>    
+                        {%endfor %}
+                    </div>   
+                {% else %}
+                    <div class="alert alert-warning" role="alert">
+                        "Ops! Parece que não há nada aqui que corresponda à sua pesquisa."
+                    </div>
+                {% endif %}
+            </div>
+        
+        <div class="col-lg-3">
+            {% include 'sidebar.html' %}
+        </div>        
+    </div>
+
+</div>
+
+{% endblock %}

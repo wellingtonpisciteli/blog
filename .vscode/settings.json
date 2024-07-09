@@ -1,0 +1,6 @@
+{
+    "phpserver.autoOpenOnReload": false,
+    "phpserver.browser": "",
+    "phpserver.phpConfigPath": "",
+    "phpserver.phpPath": ""
+}

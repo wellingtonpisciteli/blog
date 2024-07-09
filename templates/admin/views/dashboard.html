@@ -1,0 +1,28 @@
+
+{% extends "base.html" %}
+{% block corpo %}
+
+<main>
+    {% include 'topo.html' %}
+    {% include 'menu.html' %}
+    {% block conteudo %} 
+            <div class="container" id="container">
+                <div class="opcoes" id="opcoes">
+                    <a class="perfil" href="#">Perfil</a>
+                    <a href="#">Sair</a>
+                </div>
+                {% include 'menu2.html' %}        
+                <div class="conteudo">
+                    <div>
+                        <h4>Dashboard</h4>
+                    </div>
+                    <div>
+                        Conteúdo em desenvolvimento
+                    </div>
+                </div>
+            </div>
+    {% endblock %}
+    {% include 'rodape.html' %}
+</main>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+#serve para listar apenas ou arquivos index, questao de segurança
+
+Options -indexes
+
+RewriteEngine On
+
+RewriteBase /blog
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-l
+
+RewriteRule ^(.*)$ index.php/$1

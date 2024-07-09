@@ -1,0 +1,63 @@
+{% extends "dashboard.html" %}
+
+{% block conteudo %} 
+    <div class="container" id="container">
+        <div class="opcoes" id="opcoes">
+            <a class="perfil" href="#">Perfil</a>
+            <a href="#">Sair</a>
+        </div>
+        {% include 'menu2.html' %}        
+        <div class="conteudo">
+            <div  class="linkHome">
+                <h5>
+                    <a href="{{ url('admin/dashboard') }}" style="text-decoration: none;">Home</a>
+                </h5>
+                <h5>/ Posts /</h5>
+                <div class="btnCadastrar">
+                    <button>
+                        <a href="{{ url('admin/posts/cadastrar') }}">Cadastrar</a>
+                    </button>
+                </div>
+            </div>
+            <div class="posts">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Ação</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in posts %}
+                                <tr>
+                                    <th>{{ post.id }}</th>
+                                    <td>                    
+                                        {{ post.titulo }}
+                                    </td>
+                                    <td>
+                                        {% if post.status==1 %}
+                                            <img class="icon Ipost" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Circulo_verde.png" alt="">
+                                        {% else %}
+                                            <img class="icon Ipost" src="https://cdn.pixabay.com/photo/2022/01/01/15/22/red-6907837_1280.png" alt="">
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a style="color: blue; text-decoration: none;" href="{{url('admin/posts/editar/'~post.id)}}">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/posts/apagar/'~post.id) }}">
+                                            <i class="fa-sharp fa-solid fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

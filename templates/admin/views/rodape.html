@@ -1,0 +1,17 @@
+<div class="rodape" id="rodape">
+    <div class="copy">
+        &copy; {{ "now" | date("Y") }} - {{ constant('SITE_NOME') }}
+    </div>
+
+    <div class="linksRodape">
+        <a href="{{url('admin/posts/listar')}}">
+            Posts
+        </a>
+        <a href="{{url('admin/categorias/listar')}}">
+            Categorias
+        </a>
+        <a href="{{url('')}}">
+            Usuários
+        </a>
+    </div>
+</div>
