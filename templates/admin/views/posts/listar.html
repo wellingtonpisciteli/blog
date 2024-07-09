@@ -12,9 +12,10 @@
                 <h5>
                     <a href="{{ url('admin/dashboard') }}" style="text-decoration: none;">Home</a>
                 </h5>
-                <h5>/ Posts /</h5>
+                <h5>| Posts {{ total.total }} |</h5>
+                <h5 style="margin-left: 5px;">Ativos {{ total.ativo }} | Inativos {{ total.inativo }} |</h5>
                 <div class="btnCadastrar">
-                    <button>
+                    <button style="margin-left: 6px;">
                         <a href="{{ url('admin/posts/cadastrar') }}">Cadastrar</a>
                     </button>
                 </div>

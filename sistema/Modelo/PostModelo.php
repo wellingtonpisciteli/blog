@@ -9,16 +9,26 @@ use sistema\Nucleo\Conexao;
  * @author Wellington Borges
  */
 class PostModelo{
-    /**
-     * Busca todos os posts ativos.
+   /**
+     * Busca registros na tabela 'posts' com base em um termo opcional.
      *
-     * Esta função retorna todos os posts da tabela `posts` que têm o status igual a 1 ou 0,
-     * ordenados pelo campo `id` em ordem crescente.
+     * Este método executa uma consulta SQL na tabela 'posts' e retorna todos os registros que correspondem ao
+     * critério especificado pelo parâmetro `$termo`. Se nenhum termo for fornecido, ele retorna todos os registros.
      *
-     * @return array Retorna um array de objetos que representam os posts ativos.
+     * @param string|null $termo Termo opcional para filtrar os resultados da consulta. Deve ser uma cláusula SQL válida 
+     * que seria usada após 'WHERE'. Exemplos: "status IN (0, 1)", "titulo LIKE '%PHP%'". Se não for fornecido, retorna todos os registros.
+     *
+     * @return array Retorna um array contendo todos os registros que correspondem ao critério especificado. Cada elemento do array
+     * é um array associativo representando uma linha da tabela 'posts'.
+     *
+     * Exemplo de uso:
+     *  - $objeto->busca(); // Retorna todos os registros da tabela 'posts'.
+     *  - $objeto->busca("status IN (0, 1)"); // Retorna registros onde o status é 0 ou 1.
+     *  - $objeto->busca("titulo LIKE '%PHP%'"); // Retorna registros onde o título contém a palavra 'PHP'.
      */
-    public function busca():array{
-        $query="SELECT * FROM posts WHERE status IN (0,1) ORDER BY id ASC";
+    public function busca(?string $termo=null):array{
+        $termo=($termo ? "WHERE {$termo}" : "");
+        $query="SELECT * FROM posts {$termo}";
         $stmt=Conexao::getInstancia()->query($query);
         $resultado=$stmt->fetchAll();
         return $resultado;
@@ -91,7 +101,17 @@ class PostModelo{
     public function deletar(int $id):void{
         $query="DELETE FROM posts WHERE id={$id}";
         $stmt=Conexao::getInstancia()->prepare($query);
-        // $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
+    }
+
+    public function total(?string $termo=null):int{
+        $termo=($termo ? "WHERE {$termo}" : "");
+
+        $query="SELECT * FROM posts {$termo}";
+        $stmt=Conexao::getInstancia()->prepare($query);
+        $stmt->execute();
+        
+        // Retorna quantas linhas foram selecionadas
+        return $stmt->rowCount();
     }
 }
