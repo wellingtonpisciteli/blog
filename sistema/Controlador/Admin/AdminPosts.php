@@ -20,7 +20,7 @@ class AdminPosts extends AdminControlador{
     }
 
     public function cadastrar():void{
-        // Verifica se o método da requisição é POST
+        // Verifica se o método da requisição é POST //teste git
         if ($_SERVER["REQUEST_METHOD"]=="POST") {
             //Coleta todos os dados enviados via método POST e os filtra usando o filtro padrão do PHP. 
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
@@ -57,8 +57,5 @@ class AdminPosts extends AdminControlador{
     public function apagar(int $id):void{
         (new PostModelo())->deletar($id);
         Helpers::redirecionar('admin/posts/listar');
-    }
-    
+    }   
 }
-
-//teste git
