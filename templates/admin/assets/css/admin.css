@@ -404,29 +404,42 @@ main{
     color: black;
 }
 
+.btnCadastrar{
+    border-radius: 0px 0px 7px 7px;
+    background-image: linear-gradient(to left, var(--cor9), var(--cor1)); 
+    padding: 5px;
+}
+
 .btnCadastrar button{
-    background:  var(--cor2);
-    border-radius: 5px;
+    background:  var(--cor8);
+    border-radius: 0px 0px 0px 7px;
     border: 1px solid rgba(0, 0, 0, 0.171);
-    margin-left: 5px;
-}
-
-.btnCadastrar input{
-    background:  var(--cor2);
-    border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.171);
-    font-weight: bold;
-    color: white;
-}
-
-.btnCadastrar input:hover{
-    color: black;
 }
 
 .btnCadastrar a{
+    color: black !important;
+    font-size: 17px;
     text-decoration: none;
     color: white;
     font-weight: bold;
+}
+
+.btnCadastrar a:hover{
+    color: blue !important;
+}
+
+.btnCadastrar input{
+    border: 1px solid rgba(0, 0, 0, 0.171);
+    font-weight: bold;
+    color: black;
+    font-size: 17px;
+    background:  var(--cor8);
+    border-radius: 0px 0px 0px 7px;
+    border: 1px solid rgba(0, 0, 0, 0.171);
+}
+
+.btnCadastrar input:hover{
+    color: blue !important;
 }
 
 .form label{
@@ -449,5 +462,42 @@ main{
 
 .select{
     width: 100%;
+}
+
+.postsHome{
+    padding:5px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.171);
+    background-color: var(--cor2);
+    margin-left: 7px;
+}
+
+.postsHome a:hover{
+    color: black !important;
+}
+
+.total{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.171);
+    margin-left: 7px;
+    cursor: default;
+    color: white;
+    font-size: 1.05em;
+}
+
+.totalAtivo{
+    background-color: var(--cor11);
+}
+
+.totalInativo{
+    background-color: var(--cor17);
+}
+
+.totalPosts{
+    background-color: var(--cor7);
 }
 

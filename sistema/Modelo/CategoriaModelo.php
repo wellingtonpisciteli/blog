@@ -16,12 +16,13 @@ class CategoriaModelo{
      * Busca todas as categorias ativas.
      *
      * Esta função retorna todas as categorias da tabela 'categorias'
-     * que têm o status igual a 1 ou 0, ordenadas pelo id em ordem crescente.
+     * que têm o parametro do termo.
      *
-     * @return array Retorna um array de objetos que representam as categorias ativas.
+     * @return array Retorna um array de objetos que representam as categorias especificadas.
      */
-    public function busca():array{
-        $query="SELECT * FROM categorias WHERE status IN (0,1) ORDER BY id ASC";
+    public function busca(?string $termo=null):array{
+        $termo=($termo ? "WHERE {$termo}" : "");
+        $query="SELECT * FROM categorias {$termo}";
         $stmt=Conexao::getInstancia()->query($query);
         // fetchAll() serve para retornar todas as linhas do db categorias, conforme administramos acima.
         $resultado=$stmt->fetchAll();
@@ -85,5 +86,16 @@ class CategoriaModelo{
         $query="DELETE FROM categorias WHERE id={$id}";
         $stmt=Conexao::getInstancia()->prepare($query);
         $stmt->execute();
+    }
+
+    public function total(?string $termo=null):int{
+        $termo=($termo ? "WHERE {$termo}" : "");
+
+        $query="SELECT * FROM categorias {$termo}";
+        $stmt=Conexao::getInstancia()->prepare($query);
+        $stmt->execute();
+        
+        // Retorna quantas linhas foram selecionadas
+        return $stmt->rowCount();
     }
 }

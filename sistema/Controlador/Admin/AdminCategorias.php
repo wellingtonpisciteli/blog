@@ -7,8 +7,14 @@ use sistema\Nucleo\Helpers;
 
 class AdminCategorias extends AdminControlador{
     public function listar():void{
+        $categoria=new CategoriaModelo();
         echo($this->template->renderizar('categorias/listar.html', [
-            'categorias'=>(new CategoriaModelo())->busca()
+            'categorias'=>$categoria->busca(),
+            'total'=>[
+                'ativo'=>$categoria->total('status=1'),
+                'inativo'=>$categoria->total('status=0'),
+                'total'=>$categoria->total()
+            ]
         ]));
     }
 

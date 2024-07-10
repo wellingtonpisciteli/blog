@@ -9,10 +9,10 @@
         {% include 'menu2.html' %}        
         <div class="conteudo">
             <div class="linkHome">
-                <h5>
-                    <a href="{{ url('admin/dashboard') }}" style="text-decoration: none;">Home</a>
+                <h5 class="postsHome">
+                    <a href="{{ url('admin/dashboard') }}" style="text-decoration: none; color: white;">Home</a>
                 </h5>
-                <h5>/ Categorias</h5>
+                <h5 class="totalPosts total">Categorias</h5>
             </div>
             <div class="form">
                 <form action="{%if categorias.id%}{{ url('admin/categorias/editar/'~categorias.id) }}{%else%}{{ url('admin/categorias/cadastrar') }}{%endif%}" method="post">
