@@ -28,6 +28,7 @@ class AdminPosts extends AdminControlador{
             if(!empty($dados["titulo"]) && !empty($dados["texto"])){
                 //Armazena os dados.
                 (new PostModelo())->armazenar($dados);
+                $this->mensagem->sucesso('Post cadastrado com sucesso!')->flash();
                 Helpers::redirecionar('admin/posts/listar');
             }
         }     

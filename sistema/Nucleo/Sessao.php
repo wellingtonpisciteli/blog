@@ -36,4 +36,19 @@ class Sessao{
         session_destroy();
         return $this;
     }
+
+    public function __get($atributo){
+        if(!empty($_SESSION[$atributo])){
+            return $_SESSION[$atributo];
+        }
+    }
+
+    public function flash():?Mensagem{
+        if($this->checar('flash')){
+            $flash=$this->flash;
+            $this->limpar('flash');
+            return $flash;
+        }
+        return null;
+    }
 }

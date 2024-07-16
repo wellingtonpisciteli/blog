@@ -8,6 +8,7 @@
         </div>
         {% include 'menu2.html' %}        
         <div class="conteudo">
+            {{ flash() }}
             <div  class="linkHome">
                 <h5 class="postsHome">
                     <a href="{{ url('admin/dashboard') }}" style="text-decoration: none; color: white;">Home</a>
