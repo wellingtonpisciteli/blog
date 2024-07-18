@@ -46,6 +46,7 @@ class AdminPosts extends AdminControlador{
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
             if(!empty($dados["titulo"]) && !empty($dados["texto"])){
                 (new PostModelo())->atualizar($dados, $id);
+                $this->mensagem->sucesso('Post editado com sucesso!')->flash();
                 Helpers::redirecionar('admin/posts/listar');
             }
         }     
@@ -57,6 +58,7 @@ class AdminPosts extends AdminControlador{
 
     public function apagar(int $id):void{
         (new PostModelo())->deletar($id);
+        $this->mensagem->sucesso('Post apagado!')->flash();
         Helpers::redirecionar('admin/posts/listar');
     }   
 }

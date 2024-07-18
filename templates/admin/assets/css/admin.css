@@ -501,10 +501,3 @@ main{
     background-color: var(--cor7);
 }
 
-/* mensagens flash */
-
-.sucesso{
-    background-color: var(--cor11);
-    padding: 10px;
-}
-

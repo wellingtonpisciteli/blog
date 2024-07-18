@@ -8,6 +8,7 @@
         </div>
         {% include 'menu2.html' %}        
         <div class="conteudo">
+            {{ flash() }}
             <div class="linkHome">
                 <h5 class="postsHome">
                     <a href="{{ url('admin/dashboard') }}" style="text-decoration: none; color: white;">Home</a>
@@ -41,7 +42,7 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        <a style="color: blue; text-decoration: none;" href="{{ url('admin/categorias/editar/'~categoria.id) }}">
+                                        <a id="btnEditar" style="color: blue; text-decoration: none;" href="{{ url('admin/categorias/editar/'~categoria.id) }}">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                         <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/categorias/apagar/'~categoria.id) }}">

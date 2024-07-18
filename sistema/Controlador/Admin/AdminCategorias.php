@@ -23,6 +23,7 @@ class AdminCategorias extends AdminControlador{
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
             if(!empty($dados["titulo"]) && !empty($dados["texto"])){
                 (new CategoriaModelo())->armazenar($dados);
+                $this->mensagem->sucesso('Categoria cadastrado com sucesso!')->flash();
                 Helpers::redirecionar('admin/categorias/listar');
             }
         }  
@@ -36,6 +37,7 @@ class AdminCategorias extends AdminControlador{
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
             if(!empty($dados["titulo"]) && !empty($dados["texto"])){
                 (new CategoriaModelo())->atualizar($dados, $id);
+                $this->mensagem->sucesso('Categoria editado com sucesso!')->flash();
                 Helpers::redirecionar('admin/categorias/listar');
             }
         }  
@@ -46,6 +48,7 @@ class AdminCategorias extends AdminControlador{
 
     public function apagar(int $id):void{
         (new CategoriaModelo())->deletar($id);
+        $this->mensagem->sucesso('Categoria apagada!')->flash();
         Helpers::redirecionar('admin/categorias/listar');
     }
 }

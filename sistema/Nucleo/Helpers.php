@@ -7,6 +7,16 @@ use sistema\Nucleo\Sessao;
 
 class Helpers {
 
+    /**
+     * Retorna e exibe a mensagem flash da sessão.
+     *
+     * Este método estático utiliza a classe `Sessao` para obter a mensagem
+     * flash da sessão. Se uma mensagem flash estiver disponível, ela é
+     * exibida usando `echo` e depois retornada como uma string. Caso contrário,
+     * retorna `null`.
+     *
+     * @return string|null Retorna a mensagem flash se existir, ou `null` se não houver.
+     */
     public static function flash():?string{
         $sessao=new Sessao();
 
