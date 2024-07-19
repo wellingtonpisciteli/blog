@@ -29,12 +29,12 @@ class SiteControlador extends Controlador{
      * Exibe os últimos posts publicados e as categorias disponíveis.
      */
     public function index():void{
-        $posts=(new PostModelo())->buscaAtiva();
+        $posts=(new PostModelo())->buscaAtiva('status=1')->ordem('titulo ASC')->resultado(true);
 
         echo($this->template->renderizar('index.html', [
             'titulo'=>'Blog PHP',
             'posts'=>$posts,
-            'categorias'=>(new CategoriaModelo())->buscaAtiva(),
+            'categorias'=>(new CategoriaModelo())->buscaAtiva('status=1')->ordem('titulo ASC')->resultado(true),
         ]));
     }
 
@@ -67,7 +67,7 @@ class SiteControlador extends Controlador{
     public function sobre():void{
         echo($this->template->renderizar('sobre.html', [
             'titulo'=>'Sobre nós',
-            'categorias'=>(new CategoriaModelo())->buscaAtiva(),
+            'categorias'=>(new CategoriaModelo())->buscaAtiva('status=1')->ordem('titulo ASC')->resultado(true),
         ]));
     }
 
@@ -78,7 +78,7 @@ class SiteControlador extends Controlador{
     public function erro404():void{
         echo($this->template->renderizar('404.html', [
             'titulo'=>'Página não encontrada',
-            'categorias'=>(new CategoriaModelo())->buscaAtiva()
+            'categorias'=>(new CategoriaModelo())->buscaAtiva('status=1')->ordem('titulo ASC')->resultado(true),
         ]));
     }
 
@@ -96,7 +96,7 @@ class SiteControlador extends Controlador{
 
         echo($this->template->renderizar('post.html', [
             'post'=>$post,
-            'categorias'=>(new CategoriaModelo())->buscaAtiva()
+            'categorias'=>(new CategoriaModelo())->buscaAtiva('status=1')->ordem('titulo ASC')->resultado(true),
         ]));
     }
 
@@ -114,7 +114,7 @@ class SiteControlador extends Controlador{
 
         echo($this->template->renderizar('categoria.html', [
             'posts'=>$posts,
-            'categorias'=>(new CategoriaModelo())->buscaAtiva(),
+            'categorias'=>(new CategoriaModelo())->buscaAtiva('status=1')->ordem('titulo ASC')->resultado(true),
         ]));
     }
 }

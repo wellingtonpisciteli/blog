@@ -18,7 +18,7 @@ class Mensagem{
      */
     public function sucesso(string $mensagem): Mensagem
     {
-        $this->css='alert alert-success';
+        $this->css='alert alert-success fw-bold';
         $this->texto=$this->filtrar($mensagem);
         return $this;
     }

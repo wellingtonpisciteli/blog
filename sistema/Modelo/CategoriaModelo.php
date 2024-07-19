@@ -1,8 +1,10 @@
 <?php
 
 namespace sistema\Modelo;
+
 use sistema\Nucleo\Conexao;
-// use PDO;
+use sistema\Nucleo\Modelo;
+
 
  /**
  * Classe CategoriaModelo
@@ -11,29 +13,10 @@ use sistema\Nucleo\Conexao;
  * 
  * @author Wellington Borges
  */
-class CategoriaModelo{
-    /**
-     * Busca todas as categorias ativas.
-     *
-     * Esta função retorna todas as categorias da tabela 'categorias'
-     * que têm o parametro do termo.
-     *
-     * @return array Retorna um array de objetos que representam as categorias especificadas.
-     */
-    public function busca(?string $termo=null):array{
-        $termo=($termo ? "WHERE {$termo}" : "");
-        $query="SELECT * FROM categorias {$termo}";
-        $stmt=Conexao::getInstancia()->query($query);
-        // fetchAll() serve para retornar todas as linhas do db categorias, conforme administramos acima.
-        $resultado=$stmt->fetchAll();
-        return $resultado;
-    }
-
-    public function buscaAtiva():array{
-        $query="SELECT * FROM categorias WHERE status = 1 ORDER BY id ASC";
-        $stmt=Conexao::getInstancia()->query($query);
-        $resultado=$stmt->fetchAll();
-        return $resultado;
+class CategoriaModelo extends Modelo{
+    
+    public function __construct() {
+        parent::__construct('categorias');
     }
 
     /**

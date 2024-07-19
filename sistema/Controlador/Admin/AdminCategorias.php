@@ -9,7 +9,7 @@ class AdminCategorias extends AdminControlador{
     public function listar():void{
         $categoria=new CategoriaModelo();
         echo($this->template->renderizar('categorias/listar.html', [
-            'categorias'=>$categoria->busca(),
+            'categorias'=>$categoria->busca()->ordem('status ASC, id DESC')->resultado(true),
             'total'=>[
                 'ativo'=>$categoria->total('status=1'),
                 'inativo'=>$categoria->total('status=0'),

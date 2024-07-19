@@ -1,44 +1,19 @@
 <?php
 
 namespace sistema\Modelo;
+
 use sistema\Nucleo\Conexao;
+use sistema\Nucleo\Modelo;
 
 /**
  * Classe PostModelo
  *
  * @author Wellington Borges
  */
-class PostModelo{
-   /**
-     * Busca registros na tabela 'posts' com base em um termo opcional.
-     *
-     * Este método executa uma consulta SQL na tabela 'posts' e retorna todos os registros que correspondem ao
-     * critério especificado pelo parâmetro `$termo`. Se nenhum termo for fornecido, ele retorna todos os registros.
-     *
-     * @param string|null $termo Termo opcional para filtrar os resultados da consulta. Deve ser uma cláusula SQL válida 
-     * que seria usada após 'WHERE'. Exemplos: "status IN (0, 1)", "titulo LIKE '%PHP%'". Se não for fornecido, retorna todos os registros.
-     *
-     * @return array Retorna um array contendo todos os registros que correspondem ao critério especificado. Cada elemento do array
-     * é um array associativo representando uma linha da tabela 'posts'.
-     *
-     * Exemplo de uso:
-     *  - $objeto->busca(); // Retorna todos os registros da tabela 'posts'.
-     *  - $objeto->busca("status IN (0, 1)"); // Retorna registros onde o status é 0 ou 1.
-     *  - $objeto->busca("titulo LIKE '%PHP%'"); // Retorna registros onde o título contém a palavra 'PHP'.
-     */
-    public function busca(?string $termo=null):array{
-        $termo=($termo ? "WHERE {$termo}" : "");
-        $query="SELECT * FROM posts {$termo}";
-        $stmt=Conexao::getInstancia()->query($query);
-        $resultado=$stmt->fetchAll();
-        return $resultado;
-    }
-
-    public function buscaAtiva():array{
-        $query="SELECT * FROM posts WHERE status = 1 ORDER BY id ASC";
-        $stmt=Conexao::getInstancia()->query($query);
-        $resultado=$stmt->fetchAll();
-        return $resultado;
+class PostModelo extends Modelo{
+   
+    public function __construct(){
+        parent::__construct('posts');
     }
 
     /**

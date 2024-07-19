@@ -10,7 +10,7 @@ class AdminPosts extends AdminControlador{
     public function listar():void{
         $post=new PostModelo();
         echo($this->template->renderizar('posts/listar.html', [
-            'posts'=>$post->busca(),
+            'posts'=>$post->busca()->ordem('status ASC, id DESC')->resultado(true),
             'total'=>[
                 'ativo'=>$post->total('status=1'),
                 'inativo'=>$post->total('status=0'),
@@ -35,7 +35,7 @@ class AdminPosts extends AdminControlador{
         // Renderiza o template com as categorias
         echo($this->template->renderizar('posts/formulario.html', [
             //Categorias = Array associativo que recebe o res do método busca().
-            'categorias'=>(new CategoriaModelo())->buscaAtiva()
+            'categorias'=>(new CategoriaModelo())->buscaAtiva('status=1')->ordem('titulo ASC')->resultado(true)
         ]));
     }
 
@@ -52,7 +52,7 @@ class AdminPosts extends AdminControlador{
         }     
         echo($this->template->renderizar('posts/formulario.html', [
             'posts'=>$post,
-            'categorias'=>(new CategoriaModelo())->buscaAtiva()
+            'categorias'=>(new CategoriaModelo())->buscaAtiva('status=1')->ordem('titulo ASC')->resultado(true)
         ]));
     }
 
