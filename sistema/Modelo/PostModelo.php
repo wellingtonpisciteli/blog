@@ -58,14 +58,14 @@ class PostModelo extends Modelo{
     * Deve conter as chaves 'categoria_id', 'titulo', 'texto' e 'status'.
     * @return void
     */
-    public function armazenar(array $dados):void{
-        // Query SQL para inserir um novo post na tabela 'posts'
-        $query="INSERT INTO posts (categoria_id, titulo, texto, status) VALUES (:categoria_id, :titulo, :texto, :status)";
-        // Prepara a consulta SQL usando a conexão singleton da classe Conexao
-        $stmt=Conexao::getInstancia()->prepare($query);
-        // Executa a consulta SQL, passando os dados como parâmetros
-        $stmt->execute($dados);
-    }
+    // public function armazenar(array $dados):void{
+    //     // Query SQL para inserir um novo post na tabela 'posts'
+    //     $query="INSERT INTO posts (categoria_id, titulo, texto, status) VALUES (:categoria_id, :titulo, :texto, :status)";
+    //     // Prepara a consulta SQL usando a conexão singleton da classe Conexao
+    //     $stmt=Conexao::getInstancia()->prepare($query);
+    //     // Executa a consulta SQL, passando os dados como parâmetros
+    //     $stmt->execute($dados);
+    // }
 
     public function atualizar(array $dados, int $id):void{
         $query="UPDATE posts SET categoria_id=:categoria_id, titulo=:titulo, texto=:texto, status=:status WHERE id={$id}";

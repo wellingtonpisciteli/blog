@@ -53,11 +53,11 @@ class CategoriaModelo extends Modelo{
         return $resultado;
     }
 
-    public function armazenar(array $dados):void{
-        $query="INSERT INTO categorias (titulo, texto, status) VALUES (?, ?, ?);";
-        $stmt=Conexao::getInstancia()->prepare($query);
-        $stmt->execute([$dados['titulo'], $dados['texto'], $dados['status']]);
-    }
+    // public function armazenar(array $dados):void{
+    //     $query="INSERT INTO categorias (titulo, texto, status) VALUES (?, ?, ?);";
+    //     $stmt=Conexao::getInstancia()->prepare($query);
+    //     $stmt->execute([$dados['titulo'], $dados['texto'], $dados['status']]);
+    // }
 
     public function atualizar(array $dados, int $id):void{
         $query="UPDATE categorias SET titulo=:titulo, texto=:texto, status=:status WHERE id={$id}";
