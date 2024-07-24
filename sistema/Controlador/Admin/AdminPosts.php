@@ -37,7 +37,7 @@ class AdminPosts extends AdminControlador{
             }
         }     
         echo($this->template->renderizar('posts/formulario.html', [
-            'categorias'=>(new CategoriaModelo())->buscaAtiva('status=1')->ordem('titulo ASC')->resultado(true)
+            'categorias'=>(new CategoriaModelo())->buscaAtiva('status=1')->ordem('titulo ASC')
         ]));
     }
 
@@ -45,16 +45,27 @@ class AdminPosts extends AdminControlador{
         $post=(new PostModelo())->buscaPorId($id);
 
         if ($_SERVER["REQUEST_METHOD"]=="POST") {
+
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
             if(!empty($dados["titulo"]) && !empty($dados["texto"])){
-                (new PostModelo())->atualizar($dados, $id);
-                $this->mensagem->sucesso('Post editado com sucesso!')->flash();
-                Helpers::redirecionar('admin/posts/listar');
+                
+                $post=(new PostModelo())->buscaPorId($id);
+
+                $post->titulo=$dados['titulo'];
+                $post->categoria_id=$dados['categoria_id'];
+                $post->texto=$dados['texto'];
+                $post->status=$dados['status'];
+
+                if($post->salvar()){
+                    $this->mensagem->sucesso('Post atualizado com sucesso!')->flash();
+                    Helpers::redirecionar('admin/posts/listar');
+                }
             }
         }     
         echo($this->template->renderizar('posts/formulario.html', [
             'posts'=>$post,
-            'categorias'=>(new CategoriaModelo())->buscaAtiva('status=1')->ordem('titulo ASC')->resultado(true)
+            'categorias'=>(new CategoriaModelo())->busca('status=1')->resultado(true)
         ]));
     }
 

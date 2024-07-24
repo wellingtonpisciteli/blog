@@ -7,17 +7,16 @@ use sistema\Nucleo\Mensagem;
 
 class Modelo{
     protected $dados;
-    protected $querry;
-    protected $erros;
+    protected $query;
+    protected $erro;
     protected $parametros;
     protected $tabela;
     protected $ordem;
     protected $limite;
     protected $offset;
-    protected $erro;
     protected $mensagem;
-    protected $id;
 
+    
     public function __construct(string $tabela){
         $this->tabela=$tabela;
         $this->mensagem=(new Mensagem());
@@ -46,6 +45,10 @@ class Modelo{
         return $this->mensagem;
     }
 
+    public function dados(){
+        return $this->dados;
+    }
+
     public function __set($nome, $valor){
         if(empty($this->dados)){
             $this->dados=new \stdClass();
@@ -54,30 +57,39 @@ class Modelo{
         return $this->dados->$nome=$valor;
     }
 
+    public function __isset($nome){
+        return isset($this->dados->$nome); 
+    }
+
+    public function __get($nome){
+            return isset($this->dados->$nome) ?? null; 
+        }
+
 
     public function busca(?string $termos=null, ?string $parametros=null, string $colunas='*'){
         if($termos){
-            $this->querry="SELECT {$colunas} FROM ".$this->tabela." WHERE {$termos}";
+            $this->query="SELECT {$colunas} FROM " . $this->tabela . " WHERE {$termos}";
             parse_str($parametros, $this->parametros);
             return $this;
         }
-        $this->querry="SELECT {$colunas} FROM ".$this->tabela;
+
+        $this->query="SELECT {$colunas} FROM ".$this->tabela;
         return $this;
     }
 
     public function buscaAtiva(?string $termos=null, ?string $parametros=null, string $colunas='*'){
         if($termos){
-            $this->querry="SELECT {$colunas} FROM ".$this->tabela." WHERE {$termos}";
+            $this->query="SELECT {$colunas} FROM ".$this->tabela." WHERE {$termos}";
             parse_str($parametros, $this->parametros);
             return $this;
         }
-        $this->querry="SELECT {$colunas} FROM ".$this->tabela;
+        $this->query="SELECT {$colunas} FROM ".$this->tabela;
         return $this;
     }
 
     public function resultado(bool $todos=false){
         try{
-            $stmt=Conexao::getInstancia()->prepare($this->querry.$this->ordem.$this->limite.$this->offset);
+            $stmt=Conexao::getInstancia()->prepare($this->query.$this->ordem.$this->limite . $this->offset);
             $stmt->execute($this->parametros);
 
             if(!$stmt->rowCount()){
@@ -88,7 +100,7 @@ class Modelo{
                 return $stmt->fetchAll();
             }
 
-            return $stmt->fetchObject();
+            return $stmt->fetchObject(static::class);
             
         }catch(\PDOException $ex){
             $this->erro=$ex;
@@ -101,7 +113,7 @@ class Modelo{
             $colunas=implode(',', array_keys($dados));
             $valores=':'.implode(',:', array_keys($dados));
 
-            $query="INSERT INTO ".$this->tabela." ({$colunas}) VALUES ({$valores})";
+            $query="INSERT INTO " . $this->tabela . " ({$colunas}) VALUES ({$valores})";
             $stmt=Conexao::getInstancia()->prepare($query);
             $stmt->execute($this->filtro($dados));
 
@@ -113,31 +125,31 @@ class Modelo{
         }
     }
 
-    // protected function atualizar(array $dados, string $termos){
-    //     try{
-    //         $set=[];
+    protected function atualizar(array $dados, string $termos){
+        try{
+            $set=[];
 
-    //         foreach($dados as $chave=>$valor){
-    //             $set[]="{$chave} = :{$valor}";
-    //         }
-    //         $set=implode(',', $set);
-    //         $query="UPDATE ".$this->tabela." SET {$set} WHERE {$termos}";
+            foreach($dados as $chave=>$valor){
+                $set[]="{$chave} = :{$chave}";
+            }
+            $set=implode(',', $set);
+            $query="UPDATE ".$this->tabela." SET {$set} WHERE {$termos}";
 
-    //         $stmt=Conexao::getInstancia()->prepare($query);
-    //         $stmt->execute($this->filtro($dados));
+            $stmt=Conexao::getInstancia()->prepare($query);
+            $stmt->execute($this->filtro($dados));
 
-    //         return ($stmt->rowCount()??1);
+            return ($stmt->rowCount()??1);
 
-    //     }catch(\PDOException $ex){
-    //         $this->erro=$ex;
-    //         return null;
-    //     }
-    // }
+        }catch(\PDOException $ex){
+            $this->erro=$ex;
+            return null;
+        }
+    }
 
     private function filtro(array $dados){
         $filtro=[];
         foreach($dados as $chave=>$valor){
-            $filtro[$chave]= is_null($valor) ? null : filter_var($valor, FILTER_DEFAULT);
+            $filtro[$chave]= (is_null($valor) ? null : filter_var($valor, FILTER_DEFAULT));
         }
         return $filtro;
     }
@@ -147,13 +159,29 @@ class Modelo{
         return $dados;
     }
 
+    public function buscaPorId(int $id){
+        $busca=$this->busca("id={$id}");
+        return $busca->resultado();
+    }
+
     public function salvar(){
+        //CADASTRAR
         if(empty($this->id)){
-            $this->cadastrar($this->armazenar());
+            $id=$this->cadastrar($this->armazenar());
             if($this->erro){
                 $this->mensagem("Erro de sistema ao tentar cadastrar os dados");
             }
         }
+        //ATUALIZAR
+        if(!empty($this->id)){
+            $id=$this->id;
+            $this->atualizar($this->armazenar(), "id={$id}");
+            if($this->erro){
+                $this->mensagem("Erro de sistema ao tentar atualizar os dados");
+            }
+        }
+
+        $this->dados=$this->buscaPorId($id)->dados();
 
         return true;
     }
