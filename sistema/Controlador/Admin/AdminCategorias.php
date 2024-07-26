@@ -6,10 +6,11 @@ use sistema\Modelo\CategoriaModelo;
 use sistema\Nucleo\Helpers;
 
 class AdminCategorias extends AdminControlador{
+    
     public function listar():void{
         $categoria=new CategoriaModelo();
         echo($this->template->renderizar('categorias/listar.html', [
-            'categorias'=>$categoria->busca()->ordem('status ASC, id DESC')->resultado(true),
+            'categorias'=>$categoria->busca(),
             'total'=>[
                 'ativo'=>$categoria->total('status=1'),
                 'inativo'=>$categoria->total('status=0'),
@@ -23,7 +24,7 @@ class AdminCategorias extends AdminControlador{
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
             if(!empty($dados["titulo"]) && !empty($dados["texto"])){
                 (new CategoriaModelo())->armazenar($dados);
-                $this->mensagem->sucesso('Categoria cadastrado com sucesso!')->flash();
+                $this->mensagem->sucesso('Categoria cadastrada com sucesso!')->flash();
                 Helpers::redirecionar('admin/categorias/listar');
             }
         }  
@@ -37,7 +38,7 @@ class AdminCategorias extends AdminControlador{
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
             if(!empty($dados["titulo"]) && !empty($dados["texto"])){
                 (new CategoriaModelo())->atualizar($dados, $id);
-                $this->mensagem->sucesso('Categoria editado com sucesso!')->flash();
+                $this->mensagem->sucesso('Categoria editada com sucesso!')->flash();
                 Helpers::redirecionar('admin/categorias/listar');
             }
         }  

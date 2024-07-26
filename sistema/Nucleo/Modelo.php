@@ -15,7 +15,6 @@ class Modelo{
     protected $limite;
     protected $offset;
     protected $mensagem;
-
     
     public function __construct(string $tabela){
         $this->tabela=$tabela;
@@ -54,7 +53,7 @@ class Modelo{
             $this->dados=new \stdClass();
         }
 
-        return $this->dados->$nome=$valor;
+        $this->dados->$nome=$valor;
     }
 
     public function __isset($nome){
@@ -62,8 +61,8 @@ class Modelo{
     }
 
     public function __get($nome){
-            return isset($this->dados->$nome) ?? null; 
-        }
+        return $this->dados->$nome ?? null; 
+    }
 
 
     public function busca(?string $termos=null, ?string $parametros=null, string $colunas='*'){
@@ -77,15 +76,6 @@ class Modelo{
         return $this;
     }
 
-    public function buscaAtiva(?string $termos=null, ?string $parametros=null, string $colunas='*'){
-        if($termos){
-            $this->query="SELECT {$colunas} FROM ".$this->tabela." WHERE {$termos}";
-            parse_str($parametros, $this->parametros);
-            return $this;
-        }
-        $this->query="SELECT {$colunas} FROM ".$this->tabela;
-        return $this;
-    }
 
     public function resultado(bool $todos=false){
         try{
@@ -164,20 +154,49 @@ class Modelo{
         return $busca->resultado();
     }
 
+    public function apagar(string $termos){
+        try{
+            $query="DELETE FROM ".$this->tabela." WHERE {$termos}";
+
+            $stmt=Conexao::getInstancia()->prepare($query);
+            $stmt->execute();
+
+            return true;
+
+        }catch(\PDOException $ex){
+            $this->erro=$ex->getMessage();
+            return null;
+        }
+    }
+
+    public function total(?string $termo=null):int{
+
+        $this->busca($termo);
+        
+        $stmt=Conexao::getInstancia()->prepare($this->query);
+        $stmt->execute();
+        
+        // Retorna quantas linhas foram selecionadas
+        return $stmt->rowCount();
+    }
+
     public function salvar(){
         //CADASTRAR
         if(empty($this->id)){
             $id=$this->cadastrar($this->armazenar());
             if($this->erro){
                 $this->mensagem("Erro de sistema ao tentar cadastrar os dados");
+                return false;
             }
         }
+        
         //ATUALIZAR
         if(!empty($this->id)){
             $id=$this->id;
             $this->atualizar($this->armazenar(), "id={$id}");
             if($this->erro){
                 $this->mensagem("Erro de sistema ao tentar atualizar os dados");
+                return false;
             }
         }
 

@@ -7,8 +7,11 @@ use sistema\Modelo\CategoriaModelo;
 use sistema\Nucleo\Helpers;
 
 class AdminPosts extends AdminControlador{
+
     public function listar():void{
+
         $post=new PostModelo();
+
         echo($this->template->renderizar('posts/listar.html', [
             'posts'=>$post->busca()->ordem('status ASC, id DESC')->resultado(true),
             'total'=>[
@@ -20,11 +23,13 @@ class AdminPosts extends AdminControlador{
     }
 
     public function cadastrar():void{
-        if ($_SERVER["REQUEST_METHOD"]=="POST") {
+
+        if($_SERVER["REQUEST_METHOD"]=="POST"){
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
+            
             if(!empty($dados["titulo"]) && !empty($dados["texto"])){
                 $post=new PostModelo();
-
+                
                 $post->titulo=$dados['titulo'];
                 $post->categoria_id=$dados['categoria_id'];
                 $post->texto=$dados['texto'];
@@ -37,15 +42,14 @@ class AdminPosts extends AdminControlador{
             }
         }     
         echo($this->template->renderizar('posts/formulario.html', [
-            'categorias'=>(new CategoriaModelo())->buscaAtiva('status=1')->ordem('titulo ASC')
+            'categorias'=>(new CategoriaModelo())->busca('status=1')
         ]));
     }
 
     public function editar(int $id):void{
         $post=(new PostModelo())->buscaPorId($id);
 
-        if ($_SERVER["REQUEST_METHOD"]=="POST") {
-
+        if($_SERVER["REQUEST_METHOD"]=="POST"){
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
             if(!empty($dados["titulo"]) && !empty($dados["texto"])){
@@ -65,13 +69,25 @@ class AdminPosts extends AdminControlador{
         }     
         echo($this->template->renderizar('posts/formulario.html', [
             'posts'=>$post,
-            'categorias'=>(new CategoriaModelo())->busca('status=1')->resultado(true)
+            'categorias'=>(new CategoriaModelo())->busca('status=1')
         ]));
     }
 
     public function apagar(int $id):void{
-        (new PostModelo())->deletar($id);
-        $this->mensagem->sucesso('Post apagado!')->flash();
-        Helpers::redirecionar('admin/posts/listar');
+        if(is_int($id)){
+            $post=(new PostModelo())->buscaPorId($id);
+            if(!$post){
+                $this->mensagem->alerta("O post que está tentando deletar não existe.")->flash();
+                Helpers::redirecionar('admin/posts/listar');
+            }else{
+                if($post->apagar("id={$id}")){  
+                    $this->mensagem->sucesso("Post apagado com sucesso!")->flash();
+                    Helpers::redirecionar('admin/posts/listar');
+                }else{
+                    $this->mensagem->erro($post->erro())->flash();
+                    Helpers::redirecionar('admin/posts/listar');
+                }          
+            }
+        }
     }   
 }

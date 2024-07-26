@@ -12,9 +12,7 @@ $(document).ready(function(){
                 success: function(data){
                     if(data){
                         $('#buscaResultado').html(data);
-                    }else{
-                        $('#buscaResultado').html('</div>Nenhum resultado encontrado! Tente outra palavra!</div>');
-                    }         
+                    }
                 }
             });
         }else{
