@@ -35,7 +35,7 @@ class SiteControlador extends Controlador{
         echo($this->template->renderizar('index.html', [
             'titulo'=>'Blog PHP',
             'posts'=>$posts->resultado(true),
-            'categorias'=>$categoria,
+            'categorias'=>$categoria->resultado(true),
         ]));
     }
 
@@ -73,7 +73,7 @@ class SiteControlador extends Controlador{
         $categoria=(new CategoriaModelo())->busca("status=1");
         echo($this->template->renderizar('sobre.html', [
             'titulo'=>'Sobre nós',
-            'categorias'=>$categoria,
+            'categorias'=>$categoria->resultado(true),
         ]));
     }
 
@@ -85,7 +85,7 @@ class SiteControlador extends Controlador{
         $categoria=(new CategoriaModelo())->busca("status=1");
         echo($this->template->renderizar('404.html', [
             'titulo'=>'Página não encontrada',
-            'categorias'=>$categoria,
+            'categorias'=>$categoria->resultado(true),
         ]));
     }
 
@@ -104,7 +104,7 @@ class SiteControlador extends Controlador{
 
         echo($this->template->renderizar('post.html', [
             'post'=>$post,
-            'categorias'=>$categoria,
+            'categorias'=>$categoria->resultado(true),
         ]));
     }
 
@@ -114,7 +114,7 @@ class SiteControlador extends Controlador{
      * @param int $id O ID da categoria.
      */
     public function categoria(int $id):void{
-        $posts=(new CategoriaModelo())->posts($id);
+        $posts=(new CategoriaModelo())->posts('posts', 'categoria_id', $id)->resultado(true);
         $categoria=(new CategoriaModelo())->busca("status=1");
 
         if(!$posts){
@@ -123,7 +123,7 @@ class SiteControlador extends Controlador{
 
         echo($this->template->renderizar('categoria.html', [
             'posts'=>$posts,
-            'categorias'=>$categoria,
+            'categorias'=>$categoria->resultado(true),
         ]));
     }
 

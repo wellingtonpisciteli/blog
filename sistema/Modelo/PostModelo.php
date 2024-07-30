@@ -2,7 +2,6 @@
 
 namespace sistema\Modelo;
 
-use sistema\Nucleo\Conexao;
 use sistema\Nucleo\Modelo;
 
 /**

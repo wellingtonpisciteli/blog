@@ -64,7 +64,7 @@ class Modelo{
         return $this->dados->$nome ?? null; 
     }
 
-
+    
     public function busca(?string $termos=null, ?string $parametros=null, string $colunas='*'){
         if($termos){
             $this->query="SELECT {$colunas} FROM " . $this->tabela . " WHERE {$termos}";
@@ -74,6 +74,14 @@ class Modelo{
 
         $this->query="SELECT {$colunas} FROM ".$this->tabela;
         return $this;
+    }
+
+    public function posts(string $db, string $termo, int $id){
+        if($id){
+            $this->query="SELECT * FROM {$db} WHERE {$termo}={$id} AND status = 1 ORDER BY id DESC ";
+            return $this;
+        }
+        
     }
 
 

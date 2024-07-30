@@ -42,18 +42,18 @@ class AdminPosts extends AdminControlador{
             }
         }     
         echo($this->template->renderizar('posts/formulario.html', [
-            'categorias'=>(new CategoriaModelo())->busca('status=1')
+            'categorias'=>(new CategoriaModelo())->busca('status=1')->resultado(true)
         ]));
     }
 
     public function editar(int $id):void{
+
         $post=(new PostModelo())->buscaPorId($id);
 
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-            if(!empty($dados["titulo"]) && !empty($dados["texto"])){
-                
+            if(!empty($dados["titulo"]) && !empty($dados["texto"])){   
                 $post=(new PostModelo())->buscaPorId($id);
 
                 $post->titulo=$dados['titulo'];
@@ -69,13 +69,15 @@ class AdminPosts extends AdminControlador{
         }     
         echo($this->template->renderizar('posts/formulario.html', [
             'posts'=>$post,
-            'categorias'=>(new CategoriaModelo())->busca('status=1')
+            'categorias'=>(new CategoriaModelo())->busca('status=1')->resultado(true)
         ]));
     }
 
     public function apagar(int $id):void{
+
         if(is_int($id)){
             $post=(new PostModelo())->buscaPorId($id);
+            
             if(!$post){
                 $this->mensagem->alerta("O post que está tentando deletar não existe.")->flash();
                 Helpers::redirecionar('admin/posts/listar');
