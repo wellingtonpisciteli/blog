@@ -2,17 +2,24 @@
 {% extends "base.html" %}
 {% block corpo %}
 
-<main class="containerForm">
-    <div class="top">
+<main class="containerFormLogin">
+    <div class="topLogin">
         <h1>Painel Administrativo</h1>
         <h2>Informe seu login e senha de acesso.</h2>
     </div>
 
-    <form class="form" action="#">
-            <input type="email">
-            <input type="password">
-            <input type="submit" value="Entrar">
+    <form class="formLogin" action="#">
+        <input type="email" placeholder="Email">
+        <input id="senhaLogin" type="password" placeholder="Senha">
+        <div class="mostrarSenhaLogin">
+            <label for="mostrarSenhaLogin">
+                Mostrar senha
+            </label>
+            <input type="checkbox" id="mostrarSenhaLogin">
+        </div>
+        <input id="entrarLogin" class="entrarLogin" type="submit" value="Entrar">
     </form>
+    <p>LoginTeste 2024</p>
 
 </main>
 

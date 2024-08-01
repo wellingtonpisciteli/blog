@@ -84,6 +84,7 @@ btnCadastrar.addEventListener("click", ()=>{
         alert("Preencha todos os campos!")
     }
 })
+
     
 
 

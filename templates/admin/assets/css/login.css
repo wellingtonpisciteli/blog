@@ -3,11 +3,11 @@
 
 body{
     background-color: blue;
-    font-family: "Inter", "Helvetica Neue", Arial;
+    font-family: 'Open Sans', sans-serif;
 }
 
 
-.containerForm{
+.containerFormLogin{
     display: flex;
     position: relative;
     flex-direction: column;
@@ -22,38 +22,80 @@ body{
     background-color: white;
 }
 
-.top{
+.containerFormLogin p{
+    display: flex;
+    position: absolute;
+    bottom: 0px;
+    font-weight: lighter;
+}
+
+.topLogin{
     position: absolute;
     padding: 10px;
-    top: 40px;
+    top: 30px;
     text-align: center;
 
 }
 
-.top h2{
-    font-size: 1.9em;
+.topLogin h1{
+    font-weight: bold;
+    font-size: 2.3em;
+}
+
+.topLogin h2{
+    font-size: 1.8em;
     font-weight: lighter;
 }
 
-.form{
+.formLogin{
     display: flex;
     position: absolute;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 600px;
-    height: 250px;
+    height: 170px;
     top: 140px;
+    font-family: 'Roboto', sans-serif;
 }
 
 
 
-.form input{
+.formLogin input{
     width: 600px;
     padding: 10px;
     margin: 10px;
-
 }
+
+.entrarLogin{
+    display: flex;
+    position: absolute;
+    top: 180px;
+}
+
+.mostrarSenhaLogin{
+    display: flex;
+    position: absolute;
+    flex-direction: row;
+    align-items: center;
+    right: -15px;
+    width: 140px;
+    top: 155px;
+}
+
+.mostrarSenhaLogin label{
+    font-weight: lighter;
+}
+
+#mostrarSenhaLogin{
+    display: flex;
+    position: absolute;
+    width: 25px;
+    right: 0px;
+    cursor: pointer;
+}
+
+
 
 
 
