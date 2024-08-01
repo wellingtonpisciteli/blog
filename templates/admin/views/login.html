@@ -3,6 +3,7 @@
 {% block corpo %}
 
 <main class="containerFormLogin">
+
     <div class="topLogin">
         <h1>Painel Administrativo</h1>
         <h2>Informe seu login e senha de acesso.</h2>
@@ -20,7 +21,27 @@
         <input id="entrarLogin" class="entrarLogin" type="submit" value="Entrar">
     </form>
     <p>LoginTeste 2024</p>
-
+    
 </main>
+
+<script>
+
+    const mostrarSenhaLogin=document.getElementById("mostrarSenhaLogin")
+    const entrarLogin=document.getElementById("entrarLogin")
+    const senhaLogin=document.getElementById("senhaLogin")
+
+    let sinalLogin=0
+
+    mostrarSenhaLogin.addEventListener("click", ()=>{
+        if(sinalLogin==0){
+            senhaLogin.type="text"
+            sinalLogin=1
+        }else{
+            senhaLogin.type="password"
+            sinalLogin=0
+        }
+    })
+
+</script>
 
 {% endblock %}
