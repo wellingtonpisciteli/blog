@@ -5,7 +5,7 @@ namespace sistema\Nucleo;
 use sistema\Nucleo\Conexao;
 use sistema\Nucleo\Mensagem;
 
-class Modelo{
+abstract class Modelo{
     protected $dados;
     protected $query;
     protected $erro;
@@ -84,7 +84,6 @@ class Modelo{
         
     }
 
-
     public function resultado(bool $todos=false){
         try{
             $stmt=Conexao::getInstancia()->prepare($this->query.$this->ordem.$this->limite . $this->offset);
@@ -146,6 +145,7 @@ class Modelo{
 
     private function filtro(array $dados){
         $filtro=[];
+
         foreach($dados as $chave=>$valor){
             $filtro[$chave]= (is_null($valor) ? null : filter_var($valor, FILTER_DEFAULT));
         }
@@ -177,9 +177,7 @@ class Modelo{
         }
     }
 
-    public function total(?string $termo=null):int{
-
-        $this->busca($termo);
+    public function total():int{
         
         $stmt=Conexao::getInstancia()->prepare($this->query);
         $stmt->execute();

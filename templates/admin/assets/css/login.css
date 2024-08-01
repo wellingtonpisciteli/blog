@@ -1,0 +1,60 @@
+
+/* TELA DE LOGIN */
+
+body{
+    background-color: blue;
+    font-family: "Inter", "Helvetica Neue", Arial;
+}
+
+
+.containerForm{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+
+    top: 60px;
+
+    width: 700px;
+    height: 450px;
+    margin: auto;
+
+    background-color: white;
+}
+
+.top{
+    position: absolute;
+    padding: 10px;
+    top: 40px;
+    text-align: center;
+
+}
+
+.top h2{
+    font-size: 1.9em;
+    font-weight: lighter;
+}
+
+.form{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 250px;
+    top: 140px;
+}
+
+
+
+.form input{
+    width: 600px;
+    padding: 10px;
+    margin: 10px;
+
+}
+
+
+
+

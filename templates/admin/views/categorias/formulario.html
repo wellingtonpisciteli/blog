@@ -12,7 +12,9 @@
                 <h5 class="postsHome">
                     <a href="{{ url('admin/dashboard') }}" style="text-decoration: none; color: white;">Home</a>
                 </h5>
-                <h5 class="totalPosts total">Categorias</h5>
+                <h5 class="totalPosts total">
+                    <a href="{{ url('admin/categorias/listar') }}" style="text-decoration: none; color: white;">Categorias</a>
+                </h5>
             </div>
             <div class="form">
                 <form action="{%if categorias.id%}{{ url('admin/categorias/editar/'~categorias.id) }}{%else%}{{ url('admin/categorias/cadastrar') }}{%endif%}" method="post">

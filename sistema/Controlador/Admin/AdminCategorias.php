@@ -14,9 +14,9 @@ class AdminCategorias extends AdminControlador{
         echo($this->template->renderizar('categorias/listar.html', [
             'categorias'=>$categoria->busca()->ordem('status ASC, id DESC')->resultado(true),
             'total'=>[
-                'ativo'=>$categoria->total('status=1'),
-                'inativo'=>$categoria->total('status=0'),
-                'total'=>$categoria->total()
+                'ativo'=>$categoria->busca('status=1')->total(),
+                'inativo'=>$categoria->busca('status=0')->total(),
+                'total'=>$categoria->busca()->total()
             ]
         ]));
     }
