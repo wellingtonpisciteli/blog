@@ -12,12 +12,8 @@
     <form class="formLogin" action="#">
         <input type="email" placeholder="Email">
         <input id="senhaLogin" type="password" placeholder="Senha">
-        <div class="mostrarSenhaLogin">
-            <label for="mostrarSenhaLogin">
-                Mostrar senha
-            </label>
-            <input type="checkbox" id="mostrarSenhaLogin">
-        </div>
+        <i id="mostrarSenhaLogin" class="fa-regular fa-eye"></i>
+        <i id="naoMostrarSenhaLogin" class="fa-regular fa-eye-slash" style="display: none;"></i>
         <input id="entrarLogin" class="entrarLogin" type="submit" value="Entrar">
     </form>
     <p>LoginTeste 2024</p>
@@ -27,20 +23,26 @@
 <script>
 
     const mostrarSenhaLogin=document.getElementById("mostrarSenhaLogin")
+    const naoMostrarSenhaLogin=document.getElementById("naoMostrarSenhaLogin")
     const entrarLogin=document.getElementById("entrarLogin")
     const senhaLogin=document.getElementById("senhaLogin")
 
     let sinalLogin=0
 
     mostrarSenhaLogin.addEventListener("click", ()=>{
-        if(sinalLogin==0){
-            senhaLogin.type="text"
-            sinalLogin=1
-        }else{
-            senhaLogin.type="password"
-            sinalLogin=0
-        }
+        mostrarSenhaLogin.style.display="none"
+        naoMostrarSenhaLogin.style.display="flex"
+        senhaLogin.type="text"
+        sinalLogin=1
     })
+
+    naoMostrarSenhaLogin.addEventListener("click", ()=>{
+        naoMostrarSenhaLogin.style.display="none"
+        mostrarSenhaLogin.style.display="flex"
+        senhaLogin.type="password"
+        sinalLogin=0
+    })  
+
 
 </script>
 

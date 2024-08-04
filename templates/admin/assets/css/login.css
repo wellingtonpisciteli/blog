@@ -2,7 +2,7 @@
 /* TELA DE LOGIN */
 
 body{
-    background-color: blue;
+    background-color: rgba(0, 0, 128, 0.808);
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -15,17 +15,20 @@ body{
 
     top: 60px;
 
-    width: 700px;
+    width: 650px;
     height: 450px;
     margin: auto;
 
-    background-color: white;
+    background-color: cornflowerblue;
+
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.384);
 }
 
 .containerFormLogin p{
     display: flex;
     position: absolute;
-    bottom: 0px;
+    bottom: 7px;
     font-weight: lighter;
 }
 
@@ -34,12 +37,14 @@ body{
     padding: 10px;
     top: 30px;
     text-align: center;
+    color: white;
 
 }
 
 .topLogin h1{
     font-weight: bold;
     font-size: 2.3em;
+    color: rgba(0, 0, 0, 0.712);
 }
 
 .topLogin h2{
@@ -59,41 +64,25 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
-
-
 .formLogin input{
     width: 600px;
     padding: 10px;
     margin: 10px;
 }
 
+.formLogin i {
+    display: flex;
+    position: absolute;
+    top: 112px;
+    right: 6px;
+}
+
 .entrarLogin{
     display: flex;
     position: absolute;
-    top: 180px;
+    top: 165px;
 }
 
-.mostrarSenhaLogin{
-    display: flex;
-    position: absolute;
-    flex-direction: row;
-    align-items: center;
-    right: -15px;
-    width: 140px;
-    top: 155px;
-}
-
-.mostrarSenhaLogin label{
-    font-weight: lighter;
-}
-
-#mostrarSenhaLogin{
-    display: flex;
-    position: absolute;
-    width: 25px;
-    right: 0px;
-    cursor: pointer;
-}
 
 
 
