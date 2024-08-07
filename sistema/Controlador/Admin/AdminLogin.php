@@ -2,8 +2,10 @@
 
 namespace sistema\Controlador\Admin;
 
+use sistema\Controlador\UsuarioControlador;
 use sistema\Nucleo\Controlador;
 use sistema\Nucleo\Helpers;
+use sistema\Modelo\UsuarioModelo;
 
 class AdminLogin extends Controlador{
 
@@ -14,11 +16,19 @@ class AdminLogin extends Controlador{
 
     public function login():void{
 
+        $usuario=UsuarioControlador::usuario();
+        if($usuario && $usuario->level==3){
+            Helpers::redirecionar('admin/dashboard');
+        }
+
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
             if(isset($dados)){
                 if($this->checarDados($dados)){
-                    $this->mensagem->sucesso("Dados validos!")->flash();
+                    $usuario=(new UsuarioModelo())->login($dados, 3);
+                    if($usuario){
+                        Helpers::redirecionar('admin/login');
+                    }
                 }
             }
         }
