@@ -6,8 +6,9 @@
             <a class="perfil" href="#">Perfil</a>
             <a href="#">Sair</a>
         </div>
-        {% include 'menu2.html' %}        
+        {% include 'menu2.html' %}      
         <div class="conteudo">
+            {{flash()}}  
             <div class="linkHome">
                 <h5 class="postsHome">
                     <a href="{{ url('admin/dashboard') }}" style="text-decoration: none; color: white;">Home</a>
@@ -39,7 +40,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="btnCadastrar" id="btnCadastrar">
+                    <div class="btnCadastrar">
                         {% if categorias %}
                             <input type="submit" value="Atualizar">
                         {% else %}

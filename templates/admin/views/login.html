@@ -2,21 +2,27 @@
 {% extends "base.html" %}
 {% block corpo %}
 
+<div class="flash">
+    {{flash()}}
+</div>
+
+
+<img class="img" src="https://static.vecteezy.com/system/resources/previews/019/879/198/non_2x/user-icon-on-transparent-background-free-png.png" alt="">
+
 <main class="containerFormLogin">
 
     <div class="topLogin">
         <h1>Painel Administrativo</h1>
-        <h2>Informe seu login e senha de acesso.</h2>
     </div>
 
-    <form class="formLogin" action="#">
-        <input type="email" placeholder="Email">
-        <input id="senhaLogin" type="password" placeholder="Senha">
+    <form class="formLogin" action="{{ url('admin/login') }}" method="post">
+        <input type="email" name="email" placeholder="Email">
+        <input id="senhaLogin" name="senha" type="password" placeholder="Senha">
         <i id="mostrarSenhaLogin" class="fa-regular fa-eye"></i>
         <i id="naoMostrarSenhaLogin" class="fa-regular fa-eye-slash" style="display: none;"></i>
         <input id="entrarLogin" class="entrarLogin" type="submit" value="Entrar">
     </form>
-    <p>LoginTeste 2024</p>
+    <p>2024 - LoginTeste</p>
     
 </main>
 
@@ -42,6 +48,10 @@
         senhaLogin.type="password"
         sinalLogin=0
     })  
+
+    entrarLogin.addEventListener("click", ()=>{
+        
+    })
 
 
 </script>

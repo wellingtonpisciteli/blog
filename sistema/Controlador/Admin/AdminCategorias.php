@@ -37,6 +37,8 @@ class AdminCategorias extends AdminControlador{
                     $this->mensagem->sucesso('Categoria cadastrada com sucesso!')->flash();
                     Helpers::redirecionar('admin/categorias/listar');
                 }
+            }else{
+                $this->mensagem->alerta("Preencha todos os campos!")->flash();
             }
         }  
         echo($this->template->renderizar('categorias/formulario.html', []));
@@ -60,6 +62,8 @@ class AdminCategorias extends AdminControlador{
                     $this->mensagem->sucesso('Categoria atualizada com sucesso!')->flash();
                     Helpers::redirecionar('admin/categorias/listar');
                 }
+            }else{
+                $this->mensagem->alerta("Preencha todos os campos!")->flash();
             }
         }  
         echo($this->template->renderizar('categorias/formulario.html', [

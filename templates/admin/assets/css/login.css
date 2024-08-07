@@ -2,8 +2,25 @@
 /* TELA DE LOGIN */
 
 body{
-    background-color: rgba(0, 0, 128, 0.808);
+    display: flex;
+    background-color: ghostwhite;
     font-family: 'Open Sans', sans-serif;
+    justify-content: center;
+    align-items: center;
+}
+
+.img{
+    position: absolute;
+    top: 65px;
+    width: 200px;
+}
+
+.flash{
+    position: absolute;
+    width: 500px;
+    top: 5px;
+    text-align: center;
+    font-weight: bolder;
 }
 
 
@@ -13,38 +30,29 @@ body{
     flex-direction: column;
     align-items: center;
 
-    top: 60px;
+    top: 190px;
 
     width: 650px;
-    height: 450px;
+    height: 400px;
     margin: auto;
-
-    background-color: cornflowerblue;
-
-    border-radius: 10px;
-    border: 2px solid rgba(0, 0, 0, 0.384);
 }
 
 .containerFormLogin p{
     display: flex;
     position: absolute;
-    bottom: 7px;
+    bottom: 50px;
     font-weight: lighter;
 }
 
 .topLogin{
     position: absolute;
     padding: 10px;
-    top: 30px;
     text-align: center;
-    color: white;
-
 }
 
 .topLogin h1{
     font-weight: bold;
     font-size: 2.3em;
-    color: rgba(0, 0, 0, 0.712);
 }
 
 .topLogin h2{
@@ -58,29 +66,43 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 600px;
+    width: 500px;
     height: 170px;
-    top: 140px;
+    top: 60px;
     font-family: 'Roboto', sans-serif;
 }
 
+.formLogin label{
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
 .formLogin input{
-    width: 600px;
+    width: 500px;
     padding: 10px;
     margin: 10px;
+    border-radius: 10px;
 }
 
 .formLogin i {
     display: flex;
     position: absolute;
     top: 112px;
-    right: 6px;
+    right: 7px;
+    cursor: pointer;
 }
 
 .entrarLogin{
     display: flex;
     position: absolute;
     top: 165px;
+    background-color: rgb(88, 88, 255);
+    color: white;
+    font-weight: bold;
+}
+
+.entrarLogin:hover{
+    background-color: rgb(0, 78, 88);
 }
 
 

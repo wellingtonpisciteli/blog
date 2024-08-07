@@ -78,13 +78,6 @@ h2Elements.forEach(h2=>{
         tooltip.style.opacity='0'
     })
 })
-
-btnCadastrar.addEventListener("click", ()=>{
-    if(titulo.value=="" || texto.value==""){
-        alert("Preencha todos os campos!")
-    }
-})
-
     
 
 

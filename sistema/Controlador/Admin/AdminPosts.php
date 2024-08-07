@@ -39,6 +39,8 @@ class AdminPosts extends AdminControlador{
                     $this->mensagem->sucesso('Post cadastrado com sucesso!')->flash();
                     Helpers::redirecionar('admin/posts/listar');
                 }
+            }else{
+                $this->mensagem->alerta("Preencha todos os campos!")->flash();
             }
         }     
         echo($this->template->renderizar('posts/formulario.html', [
@@ -65,6 +67,8 @@ class AdminPosts extends AdminControlador{
                     $this->mensagem->sucesso('Post atualizado com sucesso!')->flash();
                     Helpers::redirecionar('admin/posts/listar');
                 }
+            }else{
+                $this->mensagem->alerta("Preencha todos os campos!")->flash();
             }
         }     
         echo($this->template->renderizar('posts/formulario.html', [

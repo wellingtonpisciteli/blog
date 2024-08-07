@@ -261,10 +261,11 @@ main{
     }
 }
 
+
 .conteudo{
     background: var(--cor9);
     width: 100%;
-    margin: 2%;
+    margin: 1.5%;
     padding: 10px;
     border-radius: 7px;
     box-shadow: 2px 5px 5px 2px rgba(0, 0, 0, 0.075);
