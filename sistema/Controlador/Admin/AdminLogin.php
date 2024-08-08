@@ -6,6 +6,7 @@ use sistema\Controlador\UsuarioControlador;
 use sistema\Nucleo\Controlador;
 use sistema\Nucleo\Helpers;
 use sistema\Modelo\UsuarioModelo;
+use sistema\Nucleo\Sessao;
 
 class AdminLogin extends Controlador{
 
@@ -19,6 +20,7 @@ class AdminLogin extends Controlador{
         $usuario=UsuarioControlador::usuario();
         if($usuario && $usuario->level==3){
             Helpers::redirecionar('admin/dashboard');
+            $this->mensagem->sucesso("Olá, {$usuario->nome}, seja bem-vindo ao painel de controle.")->flash();
         }
 
         if($_SERVER["REQUEST_METHOD"]=="POST"){

@@ -9,7 +9,6 @@ use sistema\Nucleo\Helpers;
 class AdminPosts extends AdminControlador{
 
     public function listar():void{
-
         $post=new PostModelo();
 
         echo($this->template->renderizar('posts/listar.html', [
@@ -23,7 +22,6 @@ class AdminPosts extends AdminControlador{
     }
 
     public function cadastrar():void{
-
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
             
@@ -49,7 +47,6 @@ class AdminPosts extends AdminControlador{
     }
 
     public function editar(int $id):void{
-
         $post=(new PostModelo())->buscaPorId($id);
 
         if($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -78,7 +75,6 @@ class AdminPosts extends AdminControlador{
     }
 
     public function apagar(int $id):void{
-
         if(is_int($id)){
             $post=(new PostModelo())->buscaPorId($id);
             

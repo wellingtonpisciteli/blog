@@ -25,7 +25,7 @@ class UsuarioControlador extends Controlador{
         parent::__construct('templates\site\views');
     }
 
-    public static function usuario(){
+    public static function usuario():?UsuarioModelo{
 
         $sessao=new Sessao();
         if(!$sessao->checar('usuarioId')){

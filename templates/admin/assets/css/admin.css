@@ -271,6 +271,13 @@ main{
     box-shadow: 2px 5px 5px 2px rgba(0, 0, 0, 0.075);
 }
 
+.Dash{
+    background-color: var(--cor8);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 7px;
+}
+
 .icon{
     position: absolute;
     width: 20px;
