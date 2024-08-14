@@ -47,7 +47,7 @@ class UsuarioModelo extends Modelo{
 
         (new Sessao())->criar("usuarioId", $usuario->id);
 
-        $this->mensagem->sucesso("{$usuario->nome}, seja bem vindo ao painel de controle")->flash();
+        $this->mensagem->sucesso("Olá, {$usuario->nome}, seja bem vindo ao painel de controle")->flash();
         return true;
     }
 

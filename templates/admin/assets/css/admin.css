@@ -276,6 +276,56 @@ main{
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 7px;
+    cursor: default;
+    position: relative;
+    margin-right: 15px;
+}
+
+.infosDash{
+    display: flex;
+    flex-direction: row;
+}
+
+#iDash{
+    display: flex; 
+    position: absolute; 
+    right: 10px; 
+    cursor: pointer; 
+    color: black;
+    flex-direction: row;
+}
+
+#iDash:hover{
+    color: var(--cor7);
+}
+
+.ativoInativo{
+    display: flex;
+    flex-direction: row;
+}
+
+.ativoInativo h5{
+    color: white;
+    padding: 5px;
+    width: 80px;
+    border-radius: 7px;
+    font-size: 0.95em;
+    font-weight: bold;
+}
+
+.ativoPostsDash{
+    display: flex;
+    background-color: var(--cor10);
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.inativoPostsDash{
+    display: flex;
+    background-color: var(--cor17);
+    justify-content: center;
+    align-items: center;
 }
 
 .icon{

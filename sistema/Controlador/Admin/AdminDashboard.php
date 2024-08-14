@@ -20,7 +20,9 @@ class AdminDashboard extends AdminControlador{
                 'inativo'=>$post->busca('status=0')->total()
             ],
             'usuarios'=>[
-                'total'=>$usuarios->busca()->total()
+                'total'=>$usuarios->busca()->total(),
+                'ativo'=>$usuarios->busca('status=1')->total(),
+                'inativo'=>$usuarios->busca('status=0')->total()
             ]
         ]));
     }

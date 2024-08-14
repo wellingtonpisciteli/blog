@@ -1,8 +1,10 @@
 <?php
 
 namespace sistema\Suporte;
+
 use Twig\Lexer;
 use sistema\Nucleo\Helpers;
+use sistema\Controlador\UsuarioControlador;
 
 class Template{
     private \Twig\Environment $twig;
@@ -48,6 +50,11 @@ class Template{
             $this->twig->addFunction(
                 new \Twig\TwigFunction('flash', function(){
                     return helpers::flash();
+                })
+            ),
+            $this->twig->addFunction(
+                new \Twig\TwigFunction('usuario', function(){
+                    return UsuarioControlador::usuario();
                 })
             )
         );
