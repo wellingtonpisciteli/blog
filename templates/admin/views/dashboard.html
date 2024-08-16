@@ -16,8 +16,9 @@
                 <div>
                     <h4 style="margin-bottom: 15px;">Dashboard</h4>
                 </div>
+                {{ flash() }}
+
                 <div class="infosDash">
-                    {{ flash() }}
                     <div class="posts Dash">  
                         <a href="{{ url('admin/posts/listar') }}">
                             <i class="fa-sharp fa-solid fa-file-pen" id="iDash"></i>
@@ -30,7 +31,7 @@
                         </div>
                     </div>
                     <div class="usuarios Dash">
-                        <a href="{{ url('admin/dashboard') }}">
+                        <a href="{{ url('admin/usuarios/listar') }}">
                             <i class="fa-solid fa-users" id="iDash"></i>
                         </a>
                         <h4>Usuários</h4>

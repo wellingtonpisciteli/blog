@@ -15,17 +15,26 @@ try{
     simpleRouter::post(URL_SITE.'buscar', 'SiteControlador@buscar');
 
     SimpleRouter::group(['namespace' => 'Admin'], function () {
+        //AdminDashboard
         SimpleRouter::get(URL_ADMIN.'dashboard', 'AdminDashboard@dashboard');
         SimpleRouter::get(URL_ADMIN.'sair', 'AdminDashboard@sair');
+
+        //AdminUsuarios
+        SimpleRouter::get(URL_ADMIN.'usuarios/listar', 'AdminUsuarios@listar');
+        SimpleRouter::match(['get','post'], URL_ADMIN.'usuarios/cadastrar', 'AdminUsuarios@cadastrar');
+        SimpleRouter::match(['get','post'], URL_ADMIN.'usuarios/editar/{id}', 'AdminUsuarios@editar');
+        SimpleRouter::get(URL_ADMIN.'usuarios/apagar/{id}', 'AdminUsuarios@apagar');
         
+        //AdminLogin
         SimpleRouter::match(['get','post'], URL_ADMIN.'login', 'AdminLogin@login');
 
+        //AdminPosts
         SimpleRouter::get(URL_ADMIN.'posts/listar', 'AdminPosts@listar');
         SimpleRouter::match(['get','post'], URL_ADMIN.'posts/cadastrar', 'AdminPosts@cadastrar');
         SimpleRouter::match(['get','post'], URL_ADMIN.'posts/editar/{id}', 'AdminPosts@editar');
         SimpleRouter::get(URL_ADMIN.'posts/apagar/{id}', 'AdminPosts@apagar');
 
-        
+        //AdminCategorias
         SimpleRouter::get(URL_ADMIN.'categorias/listar', 'AdminCategorias@listar');
         SimpleRouter::match(['get','post'], URL_ADMIN.'categorias/cadastrar', 'AdminCategorias@cadastrar');
         SimpleRouter::match(['get','post'], URL_ADMIN.'categorias/editar/{id}', 'AdminCategorias@editar');

@@ -13,9 +13,9 @@
                 <h5 class="postsHome">
                     <a href="{{ url('admin/dashboard') }}" style="text-decoration: none; color: white;">Home</a>
                 </h5>
-                <h5 class="totalPosts total"> {{ total.total }} categorias</h5>
-                <h5 class="totalAtivo total"> {{ total.ativo }} ativa</h5>
-                <h5 class="totalInativo total"> {{ total.inativo }} inativa</h5>
+                <h5 class="totalPosts total"> {{ total.total }} usuários</h5>
+                <h5 class="totalAtivo total"> {{ total.ativo }} ativo</h5>
+                <h5 class="totalInativo total"> {{ total.inativo }} inativo</h5>
             </div>
             <div class="posts">
                 <div class="table-responsive">
@@ -23,19 +23,28 @@
                         <thead>
                           <tr>
                             <th scope="col">id</th>
-                            <th scope="col">Titulo</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Level</th>
                             <th scope="col">Status</th>
                             <th scope="col">Ação</th>
                           </tr>
                         </thead>
                         <tbody>
-                            {% for categoria in categorias %}
+                            {% for usuario in usuarios %}
                                 <tr>
-                                    <th>{{ categoria.id }}</th>
-                                    <td>                    {{ categoria.titulo }}
+                                    <th>{{ usuario.id }}</th>
+                                    <td>{{ usuario.nome }}</td>
+                                    <td>{{ usuario.email }}</td>
+                                    <td>
+                                        {% if usuario.level!=3 %}
+                                            <p>Usuário</p>
+                                        {% else %}
+                                            <p  style="color: red; font-weight: bolder;">Admin</p>
+                                        {% endif %}
                                     </td>
                                     <td>
-                                        {% if categoria.status==1 %}
+                                        {% if usuario.status==1 %}
                                             <img class="icon Icategoria" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Circulo_verde.png" alt="">
                                         {% else %}
                                             <img class="icon Icategoria" src="https://cdn.pixabay.com/photo/2022/01/01/15/22/red-6907837_1280.png" alt="">
