@@ -26,12 +26,14 @@ class AdminUsuarios extends AdminControlador{
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-            if(!empty($dados["titulo"]) && !empty($dados["texto"])){
+            if($this->validarDados($dados)){
                 $usuario=new UsuarioModelo();
 
-                $usuario->titulo=$dados['titulo'];
-                $usuario->texto=$dados['texto'];
-                $usuario->status=$dados['status'];
+                $usuario->nome = $dados['nome'];
+                $usuario->email = $dados['email'];
+                $usuario->senha = $dados['senha'];
+                $usuario->level = $dados['level'];
+                $usuario->status = $dados['status'];
 
                 if($usuario->salvar()){
                     $this->mensagem->sucesso('Usuário cadastrado com sucesso!')->flash();
@@ -41,7 +43,9 @@ class AdminUsuarios extends AdminControlador{
                 $this->mensagem->alerta("Preencha todos os campos!")->flash();
             }
         }  
-        echo($this->template->renderizar('usuarios/formulario.html', []));
+        echo($this->template->renderizar('usuarios/formulario.html', [
+            'usuario'=>$dados
+        ]));
     }
 
     public function editar(int $id):void{
@@ -51,12 +55,14 @@ class AdminUsuarios extends AdminControlador{
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-            if(!empty($dados["titulo"]) && !empty($dados["texto"])){
+            if(isset($dados)){
                 $usuario=(new UsuarioModelo())->buscaPorId($id);
 
-                $usuario->titulo=$dados['titulo'];
-                $usuario->texto=$dados['texto'];
-                $usuario->status=$dados['status'];
+                $usuario->nome = $dados['nome'];
+                $usuario->email = $dados['email'];
+                $usuario->senha = $dados['senha'];
+                $usuario->level = $dados['level'];
+                $usuario->status = $dados['status'];
             
                 if($usuario->salvar()){
                     $this->mensagem->sucesso('Usuário atualizado com sucesso!')->flash();
@@ -66,27 +72,43 @@ class AdminUsuarios extends AdminControlador{
                 $this->mensagem->alerta("Preencha todos os campos!")->flash();
             }
         }  
-        echo($this->template->renderizar('categorias/formulario.html', [
-            'categorias'=>$usuario
+        echo($this->template->renderizar('usuarios/formulario.html', [
+            'usuario'=>$usuario
         ]));
     }
 
     public function apagar(int $id):void{
         if(is_int($id)){
-            $categoria=(new UsuarioModelo())->buscaPorId($id);
+            $usuario=(new UsuarioModelo())->buscaPorId($id);
             
-            if(!$categoria){
-                $this->mensagem->alerta("A categoria que está tentando deletar não existe.")->flash();
-                Helpers::redirecionar('admin/categorias/listar');
+            if(!$usuario){
+                $this->mensagem->alerta("O usuário que está tentando deletar não existe.")->flash();
+                Helpers::redirecionar('admin/usuarios/listar');
             }else{
-                if($categoria->apagar("id={$id}")){  
-                    $this->mensagem->sucesso("Categoria apagada com sucesso!")->flash();
-                    Helpers::redirecionar('admin/categorias/listar');
+                if($usuario->apagar("id={$id}")){  
+                    $this->mensagem->sucesso("Usuário apagado com sucesso!")->flash();
+                    Helpers::redirecionar('admin/usuarios/listar');
                 }else{
-                    $this->mensagem->erro($categoria->erro())->flash();
-                    Helpers::redirecionar('admin/categorias/listar');
+                    $this->mensagem->erro($usuario->erro())->flash();
+                    Helpers::redirecionar('admin/usuarios/listar');
                 }          
             }
         }
+    }
+
+    public function validarDados(array $dados):bool{
+        if(empty($dados["nome"])){
+            return false;
+        }
+
+        if(empty($dados["email"])){
+            return false;
+        }
+
+        if(empty($dados["senha"])){
+            return false;
+        }
+
+        return true;
     }
 }

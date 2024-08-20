@@ -570,3 +570,11 @@ main{
 .totalPosts{
     background-color: var(--cor7);
 }
+
+.posts{
+    cursor: default;
+}
+
+.posts tr:hover{
+    background-color: rgba(192, 192, 252, 0.096);
+}

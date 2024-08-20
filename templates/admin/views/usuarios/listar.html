@@ -51,22 +51,22 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        <a id="btnEditar" style="color: blue; text-decoration: none;" href="{{ url('admin/categorias/editar/'~categoria.id) }}">
+                                        <a id="btnEditar" style="color: blue; text-decoration: none;" href="{{ url('admin/usuarios/editar/'~usuario.id) }}">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
-                                        <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/categorias/apagar/'~categoria.id) }}">
+                                        <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/usuarios/apagar/'~usuario.id) }}">
                                             <i class="fa-sharp fa-solid fa-trash"></i>
                                         </a>
                                     </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
-                      </table>
+                    </table>
                 </div>
             </div>
             <div class="btnCadastrar">
                 <button style="margin-left: 7px; margin-right: 7px;">
-                    <a href="{{ url('admin/categorias/cadastrar') }}">Cadastrar</a>
+                    <a href="{{ url('admin/usuarios/cadastrar') }}">Cadastrar</a>
                 </button>
             </div>
         </div>
