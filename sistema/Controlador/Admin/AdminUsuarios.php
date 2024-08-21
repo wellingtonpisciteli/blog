@@ -22,10 +22,9 @@ class AdminUsuarios extends AdminControlador{
     }
 
     public function cadastrar():void{
+        $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
         if($_SERVER["REQUEST_METHOD"]=="POST"){
-            $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
             if($this->validarDados($dados)){
                 $usuario=new UsuarioModelo();
 
@@ -38,13 +37,15 @@ class AdminUsuarios extends AdminControlador{
                 if($usuario->salvar()){
                     $this->mensagem->sucesso('Usuário cadastrado com sucesso!')->flash();
                     Helpers::redirecionar('admin/usuarios/listar');
+                }else{
+                    $this->mensagem->erro("Email '{$usuario->email}' já está em uso, tente outro!")->flash();
                 }
             }else{
                 $this->mensagem->alerta("Preencha todos os campos!")->flash();
             }
         }  
         echo($this->template->renderizar('usuarios/formulario.html', [
-            'usuario'=>$dados
+            'usuario'=> $dados
         ]));
     }
 
@@ -67,6 +68,8 @@ class AdminUsuarios extends AdminControlador{
                 if($usuario->salvar()){
                     $this->mensagem->sucesso('Usuário atualizado com sucesso!')->flash();
                     Helpers::redirecionar('admin/usuarios/listar');
+                }else{
+                    $this->mensagem->erro("Email '{$usuario->email}' já está em uso, tente outro!")->flash();
                 }
             }else{
                 $this->mensagem->alerta("Preencha todos os campos!")->flash();

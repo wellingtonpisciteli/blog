@@ -44,24 +44,12 @@ main{
     width: 80.2%;
 }
 
-.imgUser{
-    position: absolute;
-    height: 45%;
-    left: 1%;
-    top: 20%;
-    padding-left: 2.3%;
-}
-
 .nome {
     position: absolute;
-    height: 60%;
-    right: 3%;
-    padding-left: 2.3%;
-    padding-right: 2.3%;
-    width: 220px;
+    right: 2.5%;
     cursor: pointer;
     font-size: 1.1em;
-    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.11) !important;
     background: var(--cor9);
     border-radius: 7px;
 }
@@ -69,11 +57,11 @@ main{
 .imgUserAbrir{
     position: absolute;
     height: 30%;
-    right: 4%;
-    top: 40%;
+    right: 90px;
+    top: 90%;
 }
 
-.opcoes{
+.opcoes {
     display: none;
     position: absolute;
     right: 3.2%;
@@ -85,14 +73,6 @@ main{
     background: var(--cor8);
     border: 1px solid black;
     border-radius: 8px;
-}
-
-.teste{
-    display: flex;
-    position: absolute;
-    right: 18px;
-    color: black;
-    font-size: 1.2em;
 }
 
 .opcoes a{

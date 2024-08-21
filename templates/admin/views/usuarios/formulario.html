@@ -16,7 +16,7 @@
                 </h5>
                 <h5 class="totalPosts total">
                     <a href="{{ url('admin/usuarios/listar') }}" style="text-decoration: none; color: white;">Usuários</a>
-                </h5>
+                </h5>          
             </div>
 
             <div class="form">
@@ -26,14 +26,16 @@
                         <input type="text" name="nome" id="nome" class="form-control" value="{{usuario.nome}}">
                     </div>
 
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" value="{{usuario.email}}">
-                    </div>
+                    <div class="categoriaEstatus">
+                        <div class="select status">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" id="email" class="form-control" value="{{usuario.email}}">
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="senha" class="form-label">Senha</label>
-                        <input type="password" name="senha" id="senha" class="form-control" value="{{usuario.senha}}">
+                        <div class="select categoria_id">
+                            <label for="senha" class="form-label">Senha</label>
+                            <input type="password" name="senha" id="senha" class="form-control" value="{{usuario.senha}}">
+                        </div>
                     </div>
 
                     <div class="categoriaEstatus">
@@ -58,7 +60,7 @@
                         </div>
                     </div>
                     <div class="btnCadastrar">
-                        {% if usuarios %}
+                        {% if usuario %}
                             <input type="submit" value="Atualizar">
                         {% else %}
                             <input type="submit" value="Cadastrar" >
