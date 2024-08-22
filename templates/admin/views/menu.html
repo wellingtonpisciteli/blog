@@ -2,6 +2,10 @@
     <img class="imgLogo" src="/blog/templates/admin/assets/img/php-logo.svg" alt="">
     <div class="menuItem">
         <a class="adm" href="#">Administração</a>
+        <a href="{{url('admin/dashboard')}}"> 
+            <i class="fa-solid fa-house"></i>
+            Home
+        </a>
         <a href="{{url('admin/posts/listar')}}"> 
             <i class="fa-solid fa-file-signature" style="padding-right: 3%;"></i>
             Posts
@@ -17,6 +21,12 @@
     </div>
 </div>
 <div class="menuFechado" id="menuFechado">
+    <a href="{{url('admin/dashboard')}}"> 
+        <h2>
+            <i class="fa-solid fa-house"></i>
+            <span class="tooltip">Home</span>
+        </h2>
+    </a>
     <a href="{{url('admin/posts/listar')}}"> 
         <h2>
             <i class="fa-solid fa-file-signature" style="padding-right: 3%;"></i>

@@ -73,6 +73,7 @@ main{
     background: var(--cor8);
     border: 1px solid black;
     border-radius: 8px;
+    z-index: 9999;
 }
 
 .opcoes a{
@@ -264,6 +265,7 @@ main{
 .infosDash{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 #iDash{
@@ -376,6 +378,7 @@ main{
         left: 0%;
         width: 30%;
         height: 100%;
+        z-index: 9999;
     }
 
     .menuItem2{

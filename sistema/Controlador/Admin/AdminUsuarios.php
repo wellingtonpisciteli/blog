@@ -8,7 +8,6 @@ use sistema\Nucleo\Helpers;
 class AdminUsuarios extends AdminControlador{
     
     public function listar():void{
-
         $usuario=new UsuarioModelo();
 
         echo($this->template->renderizar('usuarios/listar.html', [
@@ -50,13 +49,12 @@ class AdminUsuarios extends AdminControlador{
     }
 
     public function editar(int $id):void{
-
         $usuario=(new UsuarioModelo())->buscaPorId($id);
         
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-            if(isset($dados)){
+            if($this->validarDados($dados)){
                 $usuario=(new UsuarioModelo())->buscaPorId($id);
 
                 $usuario->nome = $dados['nome'];
