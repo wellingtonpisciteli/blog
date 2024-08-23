@@ -16,8 +16,8 @@ class AdminLogin extends Controlador{
     }
 
     public function login():void{
-
         $usuario=UsuarioControlador::usuario();
+
         if($usuario && $usuario->level==3){
             Helpers::redirecionar('admin/dashboard');
             $this->mensagem->sucesso("Olá, {$usuario->nome}, seja bem-vindo ao painel de controle.")->flash();
@@ -25,6 +25,7 @@ class AdminLogin extends Controlador{
 
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
+            
             if(isset($dados)){
                 if($this->checarDados($dados)){
                     $usuario=(new UsuarioModelo())->login($dados, 3);

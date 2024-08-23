@@ -90,5 +90,17 @@ class Helpers {
         header("Location: {$local}");
         exit();
     }
+
+    public static function validarSenha(string $senha):bool{
+        if(mb_strlen($senha)>=6 && mb_strlen($senha)<=50){
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function gerarSenha(string $senha):string{
+        return md5($senha);
+    }
 }
 

@@ -23,18 +23,18 @@
                 <form action="{% if usuario.id %}{{ url('admin/usuarios/editar/'~usuario.id) }}{% else %}{{ url('admin/usuarios/cadastrar') }}{% endif %}" method="post">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
-                        <input type="text" name="nome" id="nome" class="form-control" value="{{usuario.nome}}">
+                        <input placeholder="Nome" type="text" name="nome" id="nome" class="form-control" value="{{usuario.nome}}">
                     </div>
 
                     <div class="categoriaEstatus">
                         <div class="select status">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" value="{{usuario.email}}">
+                            <input placeholder="E-mail" type="email" name="email" id="email" class="form-control" value="{{usuario.email}}">
                         </div>
 
                         <div class="select categoria_id">
                             <label for="senha" class="form-label">Senha</label>
-                            <input type="password" name="senha" id="senha" class="form-control" value="{{usuario.senha}}">
+                            <input type="password" name="senha" id="senha" class="form-control" placeholder="Senha">
                         </div>
                     </div>
 
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="btnCadastrar">
-                        {% if usuario %}
+                        {% if usuario.id %}
                             <input type="submit" value="Atualizar">
                         {% else %}
                             <input type="submit" value="Cadastrar" >

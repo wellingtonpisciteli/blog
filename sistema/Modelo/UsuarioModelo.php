@@ -51,4 +51,16 @@ class UsuarioModelo extends Modelo{
         return true;
     }
 
+    public function salvar(): bool
+    {
+        if($this->busca("email = :e AND id != :id","e={$this->email}&id={$this->id}")->resultado()){
+                $this->mensagem->alerta("O e-mail ".$this->dados->email." já está cadastrado");
+                return false;
+            }
+        
+            parent::salvar();
+            
+        return true;
+    }
+
 }

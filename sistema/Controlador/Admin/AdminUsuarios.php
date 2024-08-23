@@ -25,22 +25,24 @@ class AdminUsuarios extends AdminControlador{
 
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             if($this->validarDados($dados)){
-                $usuario=new UsuarioModelo();
-
-                $usuario->nome = $dados['nome'];
-                $usuario->email = $dados['email'];
-                $usuario->senha = $dados['senha'];
-                $usuario->level = $dados['level'];
-                $usuario->status = $dados['status'];
-
-                if($usuario->salvar()){
-                    $this->mensagem->sucesso('Usuário cadastrado com sucesso!')->flash();
-                    Helpers::redirecionar('admin/usuarios/listar');
+                if(empty($dados['senha'])) {
+                    $this->mensagem->alerta('Informe uma senha para o usuário')->flash();
                 }else{
-                    $this->mensagem->erro("Email '{$usuario->email}' já está em uso, tente outro!")->flash();
+                    $usuario = new UsuarioModelo();
+
+                    $usuario->nome = $dados['nome'];
+                    $usuario->email = $dados['email'];
+                    $usuario->senha = Helpers::gerarSenha($dados['senha']);
+                    $usuario->level = $dados['level'];
+                    $usuario->status = $dados['status'];
+
+                    if ($usuario->salvar()) {
+                        $this->mensagem->sucesso('Usuário cadastrado com sucesso')->flash();
+                        Helpers::redirecionar('admin/usuarios/listar');
+                    } else {
+                        $usuario->mensagem()->flash();
+                    }
                 }
-            }else{
-                $this->mensagem->alerta("Preencha todos os campos!")->flash();
             }
         }  
         echo($this->template->renderizar('usuarios/formulario.html', [
@@ -50,29 +52,28 @@ class AdminUsuarios extends AdminControlador{
 
     public function editar(int $id):void{
         $usuario=(new UsuarioModelo())->buscaPorId($id);
+
+        $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
         
         if($_SERVER["REQUEST_METHOD"]=="POST"){
-            $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
-            if($this->validarDados($dados)){
-                $usuario=(new UsuarioModelo())->buscaPorId($id);
+            if ($this->validarDados($dados)) {
+                $usuario = (new UsuarioModelo())->buscaPorId($id);
 
                 $usuario->nome = $dados['nome'];
                 $usuario->email = $dados['email'];
-                $usuario->senha = $dados['senha'];
+                $usuario->senha = (!empty($dados['senha']) ? $dados['senha'] : $usuario->senha);
                 $usuario->level = $dados['level'];
                 $usuario->status = $dados['status'];
-            
-                if($usuario->salvar()){
-                    $this->mensagem->sucesso('Usuário atualizado com sucesso!')->flash();
+                $usuario->atualizado_em = date('Y-m-d H:i:s');
+
+                if ($usuario->salvar()) {
+                    $this->mensagem->sucesso('Usuário atualizado com sucesso')->flash();
                     Helpers::redirecionar('admin/usuarios/listar');
-                }else{
-                    $this->mensagem->erro("Email '{$usuario->email}' já está em uso, tente outro!")->flash();
+                } else {
+                    $usuario->mensagem()->flash();
                 }
-            }else{
-                $this->mensagem->alerta("Preencha todos os campos!")->flash();
             }
-        }  
+        }
         echo($this->template->renderizar('usuarios/formulario.html', [
             'usuario'=>$usuario
         ]));
@@ -98,16 +99,21 @@ class AdminUsuarios extends AdminControlador{
     }
 
     public function validarDados(array $dados):bool{
-        if(empty($dados["nome"])){
+        if(empty($dados['nome'])) {
+            $this->mensagem->alerta('Informe o nome do usuário')->flash();
             return false;
         }
 
-        if(empty($dados["email"])){
+        if(empty($dados['email'])) {
+            $this->mensagem->alerta('Informe o e-mail do usuário')->flash();
             return false;
         }
-
-        if(empty($dados["senha"])){
-            return false;
+        
+        if(!empty($dados['senha'])){
+            if(!Helpers::validarSenha($dados['senha'])){
+                $this->mensagem->alerta('A senha deve ter entre 6 e 50 caracteres!')->flash();
+                return false;
+            }
         }
 
         return true;

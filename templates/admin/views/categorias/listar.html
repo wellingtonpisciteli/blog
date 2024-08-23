@@ -21,12 +21,14 @@
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
-                          <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">Titulo</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Ação</th>
-                          </tr>
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">Status</th>
+                                {% if usuario().level==3 %}
+                                    <th scope="col">Ação</th>
+                                {% endif %}                          
+                            </tr>
                         </thead>
                         <tbody>
                             {% for categoria in categorias %}
@@ -42,12 +44,14 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        <a id="btnEditar" style="color: blue; text-decoration: none;" href="{{ url('admin/categorias/editar/'~categoria.id) }}">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                        <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/categorias/apagar/'~categoria.id) }}">
-                                            <i class="fa-sharp fa-solid fa-trash"></i>
-                                        </a>
+                                        {% if usuario().level==3 %}
+                                            <a id="btnEditar" style="color: blue; text-decoration: none;" href="{{ url('admin/categorias/editar/'~categoria.id) }}">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                            <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/categorias/apagar/'~categoria.id) }}">
+                                                <i class="fa-sharp fa-solid fa-trash"></i>
+                                            </a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}

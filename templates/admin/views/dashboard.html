@@ -11,11 +11,14 @@
                 <a class="perfil" href="#">Perfil</a>
                 <a href="{{url('admin/sair')}}">Sair</a>
             </div>
-            {% include 'menu2.html' %}        
+
+            {% include 'menu2.html' %}   
+                 
             <div class="conteudo">
                 <div>
                     <h4 style="margin-bottom: 15px;">Dashboard</h4>
                 </div>
+
                 {{ flash() }}
 
                 <div class="infosDash">
@@ -30,6 +33,7 @@
                             <h5 class="inativoPostsDash"> {{ posts.inativo }} Inativo</h5>
                         </div>
                     </div>
+
                     <div class="usuarios Dash">
                         <a href="{{ url('admin/usuarios/listar') }}">
                             <i class="fa-solid fa-users" id="iDash"></i>
@@ -41,6 +45,7 @@
                             <h5 class="inativoPostsDash">{{ usuarios.inativo }} Inativo</h5>
                         </div>
                     </div>
+
                     <div class="desenvolvimento Dash">
                         Conteúdo em desenvolvimento
                     </div>
