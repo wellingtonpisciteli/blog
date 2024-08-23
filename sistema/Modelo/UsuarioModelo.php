@@ -27,7 +27,7 @@ class UsuarioModelo extends Modelo{
             return false;
         }
 
-        if($dados['senha']!=$usuario->senha){
+        if(md5($dados['senha'])!=$usuario->senha){
             $this->mensagem->erro("Os dados informados para login estão incorretos!")->flash();
             return false;
         }
