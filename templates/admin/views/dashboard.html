@@ -34,6 +34,18 @@
                         </div>
                     </div>
 
+                    <div class="categorias Dash">  
+                        <a href="{{ url('admin/categorias/listar') }}">
+                            <i class="fa-solid fa-list" id="iDash"></i>
+                        </a>
+                        <h4>Categorias</h4>
+                        <h1 style="font-weight: bolder; font-size: 2.5em;" >{{ categorias.total }}</h1>
+                        <div class="ativoInativo">
+                            <h5 class="ativoPostsDash"> {{ categorias.ativo }} Ativa</h5>
+                            <h5 class="inativoPostsDash"> {{ categorias.inativo }} Inativa</h5>
+                        </div>
+                    </div>
+
                     <div class="usuarios Dash">
                         <a href="{{ url('admin/usuarios/listar') }}">
                             <i class="fa-solid fa-users" id="iDash"></i>
@@ -43,6 +55,18 @@
                         <div class="ativoInativo">
                             <h5 class="ativoPostsDash">{{ usuarios.ativo }} Ativo</h5>
                             <h5 class="inativoPostsDash">{{ usuarios.inativo }} Inativo</h5>
+                        </div>
+                    </div>
+
+                    <div class="admin Dash">
+                        <a href="{{ url('admin/usuarios/listar') }}">
+                            <i class="fa-solid fa-users" id="iDash"></i>
+                        </a>
+                        <h4>Admin</h4>
+                        <h1 style="font-weight: bolder; font-size: 2.5em;">{{ admin.total }}</h1>
+                        <div class="ativoInativo">
+                            <h5 class="ativoPostsDash">{{ admin.ativo }} Ativo</h5>
+                            <h5 class="inativoPostsDash">{{ admin.inativo }} Inativo</h5>
                         </div>
                     </div>
 

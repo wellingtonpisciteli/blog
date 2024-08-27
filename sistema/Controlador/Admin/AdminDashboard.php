@@ -2,6 +2,7 @@
 
 namespace sistema\Controlador\Admin;
 
+use sistema\Modelo\CategoriaModelo;
 use sistema\Modelo\PostModelo;
 use sistema\Modelo\UsuarioModelo;
 use sistema\Nucleo\Sessao;
@@ -12,6 +13,7 @@ class AdminDashboard extends AdminControlador{
     public function dashboard():void{
         $post=new PostModelo();
         $usuarios=new UsuarioModelo();
+        $categorias=new CategoriaModelo();
         
         echo($this->template->renderizar('dashboard.html', [
             'posts'=>[
@@ -19,10 +21,20 @@ class AdminDashboard extends AdminControlador{
                 'ativo'=>$post->busca('status=1')->total(),
                 'inativo'=>$post->busca('status=0')->total()
             ],
+            'categorias'=>[
+                'total'=>$categorias->busca()->total(),
+                'ativo'=>$categorias->busca('status=1')->total(),
+                'inativo'=>$categorias->busca('status=0')->total()
+            ],
             'usuarios'=>[
-                'total'=>$usuarios->busca()->total(),
-                'ativo'=>$usuarios->busca('status=1')->total(),
-                'inativo'=>$usuarios->busca('status=0')->total()
+                'total'=>$usuarios->busca('level!=3')->total(),
+                'ativo'=>$usuarios->busca('status=1 AND level!=3')->total(),
+                'inativo'=>$usuarios->busca('status=0 AND level!=3')->total()
+            ],
+            'admin'=>[
+                'total'=>$usuarios->busca('level=3')->total(),
+                'ativo'=>$usuarios->busca('status=1 AND level=3')->total(),
+                'inativo'=>$usuarios->busca('status=0 AND level=3')->total()
             ]
         ]));
     }

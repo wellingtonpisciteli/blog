@@ -100,7 +100,11 @@ class Helpers {
     }
 
     public static function gerarSenha(string $senha):string{
-        return md5($senha);
+        return password_hash($senha, PASSWORD_DEFAULT, ["cost=>10"]);
+    }
+
+    public static function verificarSenha(string $senha, string $hash):bool{
+        return password_verify($senha, $hash);
     }
 }
 

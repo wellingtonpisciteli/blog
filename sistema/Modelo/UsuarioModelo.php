@@ -4,6 +4,7 @@ namespace sistema\Modelo;
 
 use sistema\Nucleo\Modelo;
 use sistema\Nucleo\Sessao;
+use sistema\Nucleo\Helpers;
 
 class UsuarioModelo extends Modelo{
 
@@ -27,7 +28,7 @@ class UsuarioModelo extends Modelo{
             return false;
         }
 
-        if(md5($dados['senha'])!=$usuario->senha){
+        if(!Helpers::verificarSenha($dados['senha'], $usuario->senha)){
             $this->mensagem->erro("Os dados informados para login estão incorretos!")->flash();
             return false;
         }

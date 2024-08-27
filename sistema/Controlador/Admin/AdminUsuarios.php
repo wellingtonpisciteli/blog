@@ -61,8 +61,7 @@ class AdminUsuarios extends AdminControlador{
 
                 $usuario->nome = $dados['nome'];
                 $usuario->email = $dados['email'];
-                $usuario->senha = (!empty($dados['senha']) ? $dados['senha'] : $usuario->senha);
-                $usuario->senha=Helpers::gerarSenha($dados["senha"]);
+                $usuario->senha = (!empty($dados['senha']) ? Helpers::gerarSenha($dados["senha"]) : $usuario->senha);
                 $usuario->level = $dados['level'];
                 $usuario->status = $dados['status'];
                 $usuario->atualizado_em = date('Y-m-d H:i:s');
