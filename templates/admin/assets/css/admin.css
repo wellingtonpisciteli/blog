@@ -123,7 +123,7 @@ main{
     position: absolute;
     left: 0%;
     width: 19.8%;
-    height: 100%;
+    height: 120%;
 }
 
 .imgLogo{
@@ -225,7 +225,7 @@ main{
     right: 0%;
     background:var(--cor8);
     width: 80.2%;
-    height: 81%;
+    height: 100%;
     top: 11%;
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.568);
 }
@@ -260,6 +260,7 @@ main{
     cursor: default;
     position: relative;
     margin-right: 15px;
+    margin: auto;
 }
 
 .infosDash{
@@ -316,11 +317,27 @@ main{
     height: 20px;
 }
 
+.ultimosPosts{
+    margin-left: 29px;
+    margin-top: 15px; 
+    width: 44.5%;
+}
+
+.ultimosCategorias{
+    margin-top: 15px; 
+    width: 44.5%;
+}
+
+.ultimos{
+    display: flex;
+    flex-direction: row;
+}
+
 .rodape{
     display: flex;
     align-items: center;
     position: absolute;
-    bottom: 0%;
+    bottom: -20%;
     right: 0%;
     width: 80.2%;
     height: 8%;

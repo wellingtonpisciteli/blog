@@ -16,12 +16,14 @@ class AdminDashboard extends AdminControlador{
         $categorias=new CategoriaModelo();
         
         echo($this->template->renderizar('dashboard.html', [
-            'posts'=>[
+            'posts'=>$post->busca()->ordem('status ASC, id DESC')->limite(5)->resultado(true),
+            'total'=>[
                 'total'=>$post->busca()->total(),
                 'ativo'=>$post->busca('status=1')->total(),
                 'inativo'=>$post->busca('status=0')->total()
             ],
-            'categorias'=>[
+            'categorias'=>$categorias->busca()->ordem('status ASC, id DESC')->limite(5)->resultado(true),
+            'total'=>[
                 'total'=>$categorias->busca()->total(),
                 'ativo'=>$categorias->busca('status=1')->total(),
                 'inativo'=>$categorias->busca('status=0')->total()
