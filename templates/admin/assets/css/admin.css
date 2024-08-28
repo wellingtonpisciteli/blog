@@ -255,12 +255,12 @@ main{
 .Dash{
     background-color: var(--cor8);
     padding: 10px;
-    margin-bottom: 10px;
     border-radius: 7px;
     cursor: default;
     position: relative;
     margin-right: 15px;
     margin: auto;
+    width: 44.5%;
 }
 
 .infosDash{
@@ -287,13 +287,22 @@ main{
     flex-direction: row;
 }
 
+.totalPostsDash{
+    display: flex;
+    background-color: var(--cor7);
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+
 .ativoInativo h5{
     color: white;
-    padding: 5px;
-    width: 80px;
+    padding: 7px;
+    width: 100px;
     border-radius: 7px;
     font-size: 0.95em;
     font-weight: bold;
+    margin: auto;
 }
 
 .ativoPostsDash{
@@ -319,12 +328,12 @@ main{
 
 .ultimosPosts{
     margin-left: 29px;
-    margin-top: 15px; 
+    margin-top: 5px; 
     width: 44.5%;
 }
 
 .ultimosCategorias{
-    margin-top: 15px; 
+    margin-top: 5px; 
     width: 44.5%;
 }
 
