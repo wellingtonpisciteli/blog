@@ -34,6 +34,60 @@
                             <h5 class="ativoPostsDash"> {{ total.ativo }} Ativo</h5>
                             <h5 class="inativoPostsDash"> {{ total.inativo }} Inativo</h5>
                         </div>
+                        <hr>
+                        <div class="ultimosPosts Dash">
+                            <h5>
+                                Ultimos posts
+                            </h5>
+                            <a href="{{url('admin/posts/cadastrar')}}" >
+                                <i class="fa-solid fa-circle-plus" id="iDash" style="top: 10px;"></i>
+                            </a>
+                            
+                            <div class="posts">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Titulo</th>
+                                            {% if usuario().level==3 %}
+                                                <th scope="col">Ação</th>
+                                            {% endif %}
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for post in posts %}
+                                            <tr>
+                                                <td>
+                                                    {% if post.status==1 %}
+                                                    <img class="icon Ipost" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Circulo_verde.png" alt="">
+                                                    {% else %}
+                                                    <img class="icon Ipost" src="https://cdn.pixabay.com/photo/2022/01/01/15/22/red-6907837_1280.png" alt="">
+                                                    {% endif %}
+                                                    <span style="margin-left: 25px;">
+                                                        {{ post.titulo }}
+                                                    </span>
+                                                    <br>
+                                                    <small class="text-muted fw-normal">
+                                                        Escrito por AUTOR há 35 minutos em CATEGORIA
+                                                    </small>
+                                                </td>
+                                                <td>
+                                                    {% if usuario().level==3 %}
+                                                    <a style="color: blue; text-decoration: none;" href="{{url('admin/posts/editar/'~post.id)}}">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </a>
+                                                    <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/posts/apagar/'~post.id) }}">
+                                                        <i class="fa-sharp fa-solid fa-trash"></i>
+                                                    </a>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                      </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="categorias Dash">  
@@ -46,7 +100,56 @@
                             <h5 class="ativoPostsDash"> {{ total.ativo }} Ativa</h5>
                             <h5 class="inativoPostsDash"> {{ total.inativo }} Inativa</h5>
                         </div>
+                        <hr>
+                        <div class="ultimosCategorias Dash">
+                            <h5>Ultimas categorias</h5>
+                            <a href="{{url('admin/categorias/cadastrar')}}" >
+                                <i class="fa-solid fa-circle-plus" id="iDash" style="top: 10px;"></i>
+                            </a>
+                            <div class="posts">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Titulo</th>
+                                                {% if usuario().level==3 %}
+                                                    <th scope="col">Ação</th>
+                                                {% endif %}                          
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for categoria in categorias %}
+                                                <tr>
+                                                    <td>
+                                                        {% if categoria.status==1 %}
+                                                            <img class="icon Icategoria" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Circulo_verde.png" alt="">
+                                                        {% else %}
+                                                            <img class="icon Icategoria" src="https://cdn.pixabay.com/photo/2022/01/01/15/22/red-6907837_1280.png" alt="">
+                                                        {% endif %}                    
+                                                        <span style="margin-left: 28px;">
+                                                            {{ categoria.titulo }}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        {% if usuario().level==3 %}
+                                                            <a id="btnEditar" style="color: blue; text-decoration: none;" href="{{ url('admin/categorias/editar/'~categoria.id) }}">
+                                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                            </a>
+                                                            <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/categorias/apagar/'~categoria.id) }}">
+                                                                <i class="fa-sharp fa-solid fa-trash"></i>
+                                                            </a>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                      </table>
+                                </div>
+                            </div>            
+                        </div>
                     </div>
+                    
+
 
                     <!-- <div class="usuarios Dash">
                         <a href="{{ url('admin/usuarios/listar') }}">
@@ -72,109 +175,6 @@
                         </div>
                     </div> -->
                 </div>
-
-                <div class="ultimos">
-                    <div class="ultimosPosts Dash">
-                        <h5>
-                            Ultimos posts
-                        </h5>
-                        <a href="{{url('admin/posts/cadastrar')}}" >
-                            <i class="fa-solid fa-circle-plus" id="iDash" style="top: 10px;"></i>
-                        </a>
-                        
-                        <div class="posts">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                      <tr>
-                                        <th scope="col">Titulo</th>
-                                        {% if usuario().level==3 %}
-                                            <th scope="col">Ação</th>
-                                        {% endif %}
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for post in posts %}
-                                        <tr>
-                                            <td>
-                                                {% if post.status==1 %}
-                                                <img class="icon Ipost" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Circulo_verde.png" alt="">
-                                                {% else %}
-                                                <img class="icon Ipost" src="https://cdn.pixabay.com/photo/2022/01/01/15/22/red-6907837_1280.png" alt="">
-                                                {% endif %}
-                                                <span style="margin-left: 25px;">
-                                                    {{ post.titulo }}
-                                                </span>
-                                                <br>
-                                                <small class="text-muted fw-normal">
-                                                    Escrito por AUTOR há 35 minutos em CATEGORIA
-                                                </small>
-                                            </td>
-                                            <td>
-                                                {% if usuario().level==3 %}
-                                                <a style="color: blue; text-decoration: none;" href="{{url('admin/posts/editar/'~post.id)}}">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                </a>
-                                                <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/posts/apagar/'~post.id) }}">
-                                                    <i class="fa-sharp fa-solid fa-trash"></i>
-                                                </a>
-                                                {% endif %}
-                                            </td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                  </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="ultimosCategorias Dash">
-                        <h5>Ultimas categorias</h5>
-                        <a href="{{url('admin/categorias/cadastrar')}}" >
-                            <i class="fa-solid fa-circle-plus" id="iDash" style="top: 10px;"></i>
-                        </a>
-                        <div class="posts">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Titulo</th>
-                                            {% if usuario().level==3 %}
-                                                <th scope="col">Ação</th>
-                                            {% endif %}                          
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for categoria in categorias %}
-                                            <tr>
-                                                <td>
-                                                    {% if categoria.status==1 %}
-                                                        <img class="icon Icategoria" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Circulo_verde.png" alt="">
-                                                    {% else %}
-                                                        <img class="icon Icategoria" src="https://cdn.pixabay.com/photo/2022/01/01/15/22/red-6907837_1280.png" alt="">
-                                                    {% endif %}                    
-                                                    <span style="margin-left: 28px;">
-                                                        {{ categoria.titulo }}
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    {% if usuario().level==3 %}
-                                                        <a id="btnEditar" style="color: blue; text-decoration: none;" href="{{ url('admin/categorias/editar/'~categoria.id) }}">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-                                                        </a>
-                                                        <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/categorias/apagar/'~categoria.id) }}">
-                                                            <i class="fa-sharp fa-solid fa-trash"></i>
-                                                        </a>
-                                                    {% endif %}
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                  </table>
-                            </div>
-                        </div>            
-                    </div>
-                </div>            
             </div>
         </div>
     {% endblock %}

@@ -259,7 +259,6 @@ main{
     cursor: default;
     position: relative;
     margin-right: 15px;
-    margin: auto;
     width: 44.5%;
 }
 
@@ -267,6 +266,20 @@ main{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+.infosDash h4{
+    display: flex;
+    font-weight: lighter;
+    background-image: linear-gradient(to left, #8279fc, white);
+    margin-left: -10px;
+    margin-right: -9px;
+    margin-top: -10px;
+    align-items: center;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 7px 7px 0px 0px;
+
 }
 
 #iDash{
@@ -285,14 +298,14 @@ main{
 .ativoInativo{
     display: flex;
     flex-direction: row;
+    padding-top: 5px;
 }
 
 .totalPostsDash{
     display: flex;
-    background-color: var(--cor7);
+    background-color: var(--cor13);
     justify-content: center;
     align-items: center;
-    margin-right: 15px;
 }
 
 .ativoInativo h5{
@@ -327,20 +340,15 @@ main{
 }
 
 .ultimosPosts{
-    margin-left: 29px;
-    margin-top: 5px; 
-    width: 44.5%;
+    width: 100%;
+    margin-top: -10px;
 }
 
 .ultimosCategorias{
-    margin-top: 5px; 
-    width: 44.5%;
+    width: 100%;
+    margin-top: -10px;
 }
 
-.ultimos{
-    display: flex;
-    flex-direction: row;
-}
 
 .rodape{
     display: flex;
