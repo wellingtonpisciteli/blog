@@ -2,8 +2,6 @@
 {% extends "base.html" %}
 {% block corpo %}
 
-<!-- TENHO QUE ARRUMAR ESSE FRONT -->
-
 <main>
     {% include 'topo.html' %}
     {% include 'menu.html' %}
@@ -49,6 +47,7 @@
                                         <thead>
                                           <tr>
                                             <th scope="col">Titulo</th>
+                                            <th>Views</th>
                                             {% if usuario().level==3 %}
                                                 <th scope="col">Ação</th>
                                             {% endif %}
@@ -70,6 +69,9 @@
                                                     <small class="text-muted fw-normal">
                                                         Escrito por AUTOR há 35 minutos em CATEGORIA
                                                     </small>
+                                                </td>
+                                                <td>
+                                                    0
                                                 </td>
                                                 <td>
                                                     {% if usuario().level==3 %}
