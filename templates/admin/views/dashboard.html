@@ -3,184 +3,188 @@
 {% block corpo %}
 
 <main>
-    {% include 'topo.html' %}
-    {% include 'menu.html' %}
-    {% block conteudo %} 
-        <div class="container" id="container">
-            <div class="opcoes" id="opcoes">
-                <a class="perfil" href="#">Perfil</a>
-                <a href="{{url('admin/sair')}}">Sair</a>
+{% include 'topo.html' %}
+{% include 'menu.html' %}
+{% block conteudo %} 
+    <div class="container" id="container">
+        <div class="opcoes" id="opcoes">
+            <a class="perfil" href="#">Perfil</a>
+            <a href="{{url('admin/sair')}}">Sair</a>
+        </div>
+
+        {% include 'menu2.html' %}   
+                
+        <div class="conteudo">
+            <div>
+                <h4 style="margin-bottom: 25px;">Dashboard</h4>
             </div>
 
-            {% include 'menu2.html' %}   
-                 
-            <div class="conteudo">
-                <div>
-                    <h4 style="margin-bottom: 25px;">Dashboard</h4>
-                </div>
+            {{ flash() }}
 
-                {{ flash() }}
-
-                <div class="infosDash">
-                    <div class="posts Dash">  
-                        <a href="{{ url('admin/posts/listar') }}">
-                            <i class="fa-sharp fa-solid fa-file-pen" id="iDash"></i>
+            <div class="infosDash">
+                <div class="posts Dash">  
+                    <a href="{{ url('admin/posts/listar') }}">
+                        <i class="fa-sharp fa-solid fa-file-pen" id="iDash"></i>
+                    </a>
+                    <h4>Posts</h4>
+                    <div class="ativoInativo">
+                        <h5 class="totalPostsDash"> {{ total.total }} Total</h5>
+                        <h5 class="ativoPostsDash"> {{ total.ativo }} Ativo</h5>
+                        <h5 class="inativoPostsDash"> {{ total.inativo }} Inativo</h5>
+                    </div>
+                    <hr>
+                    <div class="ultimosPosts Dash">
+                        <h5>
+                            Ultimos posts
+                        </h5>
+                        <a href="{{url('admin/posts/cadastrar')}}" >
+                            <i class="fa-solid fa-circle-plus" id="iDash" style="top: 10px;"></i>
                         </a>
-                        <h4>Posts</h4>
-                        <div class="ativoInativo">
-                            <h5 class="totalPostsDash"> {{ total.total }} Total</h5>
-                            <h5 class="ativoPostsDash"> {{ total.ativo }} Ativo</h5>
-                            <h5 class="inativoPostsDash"> {{ total.inativo }} Inativo</h5>
-                        </div>
-                        <hr>
-                        <div class="ultimosPosts Dash">
-                            <h5>
-                                Ultimos posts
-                            </h5>
-                            <a href="{{url('admin/posts/cadastrar')}}" >
-                                <i class="fa-solid fa-circle-plus" id="iDash" style="top: 10px;"></i>
-                            </a>
-                            
-                            <div class="posts">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                          <tr>
-                                            <th scope="col">Titulo</th>
-                                            <th>Views</th>
-                                            {% if usuario().level==3 %}
-                                                <th scope="col">Ação</th>
-                                            {% endif %}
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for post in posts %}
-                                            <tr>
-                                                <td>
-                                                    {% if post.status==1 %}
-                                                    <img class="icon Ipost" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Circulo_verde.png" alt="">
-                                                    {% else %}
-                                                    <img class="icon Ipost" src="https://cdn.pixabay.com/photo/2022/01/01/15/22/red-6907837_1280.png" alt="">
+                        
+                        <div class="posts">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">Titulo</th>
+                                        <th>Views</th>
+                                        {% if usuario().level==3 %}
+                                            <th scope="col">Ação</th>
+                                        {% endif %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for post in posts %}
+                                        <tr>
+                                            <td>
+                                                {% if post.status==1 %}
+                                                <img class="icon Ipost" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Circulo_verde.png" alt="">
+                                                {% else %}
+                                                <img class="icon Ipost" src="https://cdn.pixabay.com/photo/2022/01/01/15/22/red-6907837_1280.png" alt="">
+                                                {% endif %}
+                                                <span style="margin-left: 25px;">
+                                                    {{ post.titulo }}
+                                                </span>
+                                                <br>
+                                                {% for categoria in categorias %}
+                                                <small class="text-muted fw-normal">
+                                                    {% if post.categoria_id==categoria.id %}
+                                                    Escrito por {{usuario().nome}} há {{ultimaAtualizacao()}} minutos em {{categoria.titulo}}
                                                     {% endif %}
-                                                    <span style="margin-left: 25px;">
-                                                        {{ post.titulo }}
-                                                    </span>
-                                                    <br>
-                                                    <small class="text-muted fw-normal">
-                                                        Escrito por AUTOR há 35 minutos em CATEGORIA
-                                                    </small>
-                                                </td>
-                                                <td>
-                                                    0
-                                                </td>
-                                                <td>
-                                                    {% if usuario().level==3 %}
-                                                    <a style="color: blue; text-decoration: none;" href="{{url('admin/posts/editar/'~post.id)}}">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/posts/apagar/'~post.id) }}">
-                                                        <i class="fa-sharp fa-solid fa-trash"></i>
-                                                    </a>
-                                                    {% endif %}
-                                                </td>
-                                            </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                      </table>
-                                </div>
+                                                </small>
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                0
+                                            </td>
+                                            <td>
+                                                {% if usuario().level==3 %}
+                                                <a style="color: blue; text-decoration: none;" href="{{url('admin/posts/editar/'~post.id)}}">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
+                                                <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/posts/apagar/'~post.id) }}">
+                                                    <i class="fa-sharp fa-solid fa-trash"></i>
+                                                </a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    </table>
                             </div>
                         </div>
                     </div>
-
-                    <div class="categorias Dash">  
-                        <a href="{{ url('admin/categorias/listar') }}">
-                            <i class="fa-solid fa-list" id="iDash"></i>
-                        </a>
-                        <h4>Categorias</h4>
-                        <div class="ativoInativo">
-                            <h5 class="totalPostsDash"> {{ total.total }} Total</h5>
-                            <h5 class="ativoPostsDash"> {{ total.ativo }} Ativa</h5>
-                            <h5 class="inativoPostsDash"> {{ total.inativo }} Inativa</h5>
-                        </div>
-                        <hr>
-                        <div class="ultimosCategorias Dash">
-                            <h5>Ultimas categorias</h5>
-                            <a href="{{url('admin/categorias/cadastrar')}}" >
-                                <i class="fa-solid fa-circle-plus" id="iDash" style="top: 10px;"></i>
-                            </a>
-                            <div class="posts">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Titulo</th>
-                                                {% if usuario().level==3 %}
-                                                    <th scope="col">Ação</th>
-                                                {% endif %}                          
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for categoria in categorias %}
-                                                <tr>
-                                                    <td>
-                                                        {% if categoria.status==1 %}
-                                                            <img class="icon Icategoria" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Circulo_verde.png" alt="">
-                                                        {% else %}
-                                                            <img class="icon Icategoria" src="https://cdn.pixabay.com/photo/2022/01/01/15/22/red-6907837_1280.png" alt="">
-                                                        {% endif %}                    
-                                                        <span style="margin-left: 28px;">
-                                                            {{ categoria.titulo }}
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        {% if usuario().level==3 %}
-                                                            <a id="btnEditar" style="color: blue; text-decoration: none;" href="{{ url('admin/categorias/editar/'~categoria.id) }}">
-                                                                <i class="fa-solid fa-pen-to-square"></i>
-                                                            </a>
-                                                            <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/categorias/apagar/'~categoria.id) }}">
-                                                                <i class="fa-sharp fa-solid fa-trash"></i>
-                                                            </a>
-                                                        {% endif %}
-                                                    </td>
-                                                </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                      </table>
-                                </div>
-                            </div>            
-                        </div>
-                    </div>
-                    
-
-
-                    <!-- <div class="usuarios Dash">
-                        <a href="{{ url('admin/usuarios/listar') }}">
-                            <i class="fa-solid fa-users" id="iDash"></i>
-                        </a>
-                        <h4>Usuários</h4>
-                        <h1 style="font-weight: bolder; font-size: 2.5em;">{{ usuarios.total }}</h1>
-                        <div class="ativoInativo">
-                            <h5 class="ativoPostsDash">{{ usuarios.ativo }} Ativo</h5>
-                            <h5 class="inativoPostsDash">{{ usuarios.inativo }} Inativo</h5>
-                        </div>
-                    </div>
-
-                    <div class="admin Dash">
-                        <a href="{{ url('admin/usuarios/listar') }}">
-                            <i class="fa-solid fa-users" id="iDash"></i>
-                        </a>
-                        <h4>Admin</h4>
-                        <h1 style="font-weight: bolder; font-size: 2.5em;">{{ admin.total }}</h1>
-                        <div class="ativoInativo">
-                            <h5 class="ativoPostsDash">{{ admin.ativo }} Ativo</h5>
-                            <h5 class="inativoPostsDash">{{ admin.inativo }} Inativo</h5>
-                        </div>
-                    </div> -->
                 </div>
+
+                <div class="categorias Dash">  
+                    <a href="{{ url('admin/categorias/listar') }}">
+                        <i class="fa-solid fa-list" id="iDash"></i>
+                    </a>
+                    <h4>Categorias</h4>
+                    <div class="ativoInativo">
+                        <h5 class="totalPostsDash"> {{ total.total }} Total</h5>
+                        <h5 class="ativoPostsDash"> {{ total.ativo }} Ativa</h5>
+                        <h5 class="inativoPostsDash"> {{ total.inativo }} Inativa</h5>
+                    </div>
+                    <hr>
+                    <div class="ultimosCategorias Dash">
+                        <h5>Ultimas categorias</h5>
+                        <a href="{{url('admin/categorias/cadastrar')}}" >
+                            <i class="fa-solid fa-circle-plus" id="iDash" style="top: 10px;"></i>
+                        </a>
+                        <div class="posts">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Titulo</th>
+                                            {% if usuario().level==3 %}
+                                                <th scope="col">Ação</th>
+                                            {% endif %}                          
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for categoria in categorias %}
+                                            <tr>
+                                                <td>
+                                                    {% if categoria.status==1 %}
+                                                        <img class="icon Icategoria" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Circulo_verde.png" alt="">
+                                                    {% else %}
+                                                        <img class="icon Icategoria" src="https://cdn.pixabay.com/photo/2022/01/01/15/22/red-6907837_1280.png" alt="">
+                                                    {% endif %}                    
+                                                    <span style="margin-left: 28px;">
+                                                        {{ categoria.titulo }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    {% if usuario().level==3 %}
+                                                        <a id="btnEditar" style="color: blue; text-decoration: none;" href="{{ url('admin/categorias/editar/'~categoria.id) }}">
+                                                            <i class="fa-solid fa-pen-to-square"></i>
+                                                        </a>
+                                                        <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/categorias/apagar/'~categoria.id) }}">
+                                                            <i class="fa-sharp fa-solid fa-trash"></i>
+                                                        </a>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    </table>
+                            </div>
+                        </div>            
+                    </div>
+                </div>
+                
+
+
+                <!-- <div class="usuarios Dash">
+                    <a href="{{ url('admin/usuarios/listar') }}">
+                        <i class="fa-solid fa-users" id="iDash"></i>
+                    </a>
+                    <h4>Usuários</h4>
+                    <h1 style="font-weight: bolder; font-size: 2.5em;">{{ usuarios.total }}</h1>
+                    <div class="ativoInativo">
+                        <h5 class="ativoPostsDash">{{ usuarios.ativo }} Ativo</h5>
+                        <h5 class="inativoPostsDash">{{ usuarios.inativo }} Inativo</h5>
+                    </div>
+                </div>
+
+                <div class="admin Dash">
+                    <a href="{{ url('admin/usuarios/listar') }}">
+                        <i class="fa-solid fa-users" id="iDash"></i>
+                    </a>
+                    <h4>Admin</h4>
+                    <h1 style="font-weight: bolder; font-size: 2.5em;">{{ admin.total }}</h1>
+                    <div class="ativoInativo">
+                        <h5 class="ativoPostsDash">{{ admin.ativo }} Ativo</h5>
+                        <h5 class="inativoPostsDash">{{ admin.inativo }} Inativo</h5>
+                    </div>
+                </div> -->
             </div>
         </div>
-    {% endblock %}
-    {% include 'rodape.html' %}
+    </div>
+{% endblock %}
+{% include 'rodape.html' %}
 </main>
 
 {% endblock %}

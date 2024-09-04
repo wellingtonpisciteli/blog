@@ -8,7 +8,6 @@ use sistema\Nucleo\Helpers;
 class AdminCategorias extends AdminControlador{
     
     public function listar():void{
-
         $categoria=new CategoriaModelo();
 
         echo($this->template->renderizar('categorias/listar.html', [
@@ -22,7 +21,6 @@ class AdminCategorias extends AdminControlador{
     }
 
     public function cadastrar():void{
-
         if($_SERVER["REQUEST_METHOD"]=="POST"){
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
@@ -32,9 +30,10 @@ class AdminCategorias extends AdminControlador{
                 $categoria->titulo=$dados['titulo'];
                 $categoria->texto=$dados['texto'];
                 $categoria->status=$dados['status'];
+                $categoria->cadastrado_em=date('Y-m-d H:i:s');
 
                 if($categoria->salvar()){
-                    $this->mensagem->sucesso('Categoria cadastrada com sucesso!')->flash();
+                    $this->mensagem->sucesso('Categoria cadastrada com sucesso em '."{$categoria->cadastrado_em}.")->flash();
                     Helpers::redirecionar('admin/categorias/listar');
                 }
             }else{
@@ -45,7 +44,6 @@ class AdminCategorias extends AdminControlador{
     }
 
     public function editar(int $id):void{
-
         $categoria=(new CategoriaModelo())->buscaPorId($id);
         
         if($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -57,9 +55,10 @@ class AdminCategorias extends AdminControlador{
                 $categoria->titulo=$dados['titulo'];
                 $categoria->texto=$dados['texto'];
                 $categoria->status=$dados['status'];
+                $categoria->atualizado_em=date('Y-m-d H:i:s');
             
                 if($categoria->salvar()){
-                    $this->mensagem->sucesso('Categoria atualizada com sucesso!')->flash();
+                    $this->mensagem->sucesso('Categoria atualizada com sucesso em '."{$categoria->atualizado_em}.")->flash();
                     Helpers::redirecionar('admin/categorias/listar');
                 }
             }else{

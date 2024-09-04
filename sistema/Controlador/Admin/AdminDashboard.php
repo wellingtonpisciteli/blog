@@ -26,7 +26,7 @@ class AdminDashboard extends AdminControlador{
             'total'=>[
                 'total'=>$categorias->busca()->total(),
                 'ativo'=>$categorias->busca('status=1')->total(),
-                'inativo'=>$categorias->busca('status=0')->total()
+                'inativo'=>$categorias->busca('status=0')->total(),
             ],
             'usuarios'=>[
                 'total'=>$usuarios->busca('level!=3')->total(),

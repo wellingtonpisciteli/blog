@@ -184,7 +184,7 @@ main{
     align-items: center;
     position: absolute;
     left: 0%;
-    height: 100%;
+    height: 120%;
     width: 5%;
     background: var(--cor3);
 }
@@ -259,7 +259,17 @@ main{
     cursor: default;
     position: relative;
     margin-right: 15px;
-    width: 44.5%;
+    width: 61%;
+}
+
+.categorias{
+    background-color: var(--cor8);
+    padding: 10px;
+    border-radius: 7px;
+    cursor: default;
+    position: relative;
+    margin-right: 15px;
+    width: 36%;
 }
 
 .infosDash{

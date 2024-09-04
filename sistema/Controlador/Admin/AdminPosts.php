@@ -32,9 +32,10 @@ class AdminPosts extends AdminControlador{
                 $post->categoria_id=$dados['categoria_id'];
                 $post->texto=$dados['texto'];
                 $post->status=$dados['status'];
+                $post->cadastrado_em=date('Y-m-d H:i:s');
 
                 if($post->salvar()){
-                    $this->mensagem->sucesso('Post cadastrado com sucesso!')->flash();
+                    $this->mensagem->sucesso('Post cadastrado com sucesso em '."{$post->cadastrado_em}.")->flash();
                     Helpers::redirecionar('admin/posts/listar');
                 }
             }else{
@@ -59,9 +60,10 @@ class AdminPosts extends AdminControlador{
                 $post->categoria_id=$dados['categoria_id'];
                 $post->texto=$dados['texto'];
                 $post->status=$dados['status'];
+                $post->atualizado_em=date('Y-m-d H:i:s');
 
                 if($post->salvar()){
-                    $this->mensagem->sucesso('Post atualizado com sucesso!')->flash();
+                    $this->mensagem->sucesso('Post atualizado com sucesso em '."{$post->atualizado_em}.")->flash();
                     Helpers::redirecionar('admin/posts/listar');
                 }
             }else{
