@@ -3,6 +3,7 @@
 namespace sistema\Controlador\Admin;
 
 use sistema\Modelo\CategoriaModelo;
+use sistema\Modelo\PostModelo;
 use sistema\Nucleo\Helpers;
 
 class AdminCategorias extends AdminControlador{
@@ -73,6 +74,7 @@ class AdminCategorias extends AdminControlador{
     public function apagar(int $id):void{
         if(is_int($id)){
             $categoria=(new CategoriaModelo())->buscaPorId($id);
+            $posts=(new PostModelo())->busca("categoria_id={$categoria->id}")->resultado(true);
             
             if(!$categoria){
                 $this->mensagem->alerta("A categoria que está tentando deletar não existe.")->flash();
@@ -80,6 +82,9 @@ class AdminCategorias extends AdminControlador{
             }else{
                 if($categoria->apagar("id={$id}")){  
                     $this->mensagem->sucesso("Categoria apagada com sucesso!")->flash();
+                    Helpers::redirecionar('admin/categorias/listar');
+                }elseif($posts){
+                    $this->mensagem->erro("Não foi possível excluir esta categoria porque ela contém posts relacionados. Por favor, remova ou reatribua esses posts a outra categoria antes de tentar novamente.")->flash();
                     Helpers::redirecionar('admin/categorias/listar');
                 }else{
                     $this->mensagem->erro($categoria->erro())->flash();

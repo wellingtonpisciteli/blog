@@ -68,6 +68,7 @@ abstract class Modelo{
     public function busca(?string $termos=null, ?string $parametros=null, string $colunas='*'){
         if($termos){
             $this->query="SELECT {$colunas} FROM " . $this->tabela . " WHERE {$termos}";
+            // Converte os parâmetros da string para um array associativo
             parse_str($parametros, $this->parametros);
             return $this;
         }
@@ -86,7 +87,7 @@ abstract class Modelo{
 
     public function resultado(bool $todos=false){
         try{
-            $stmt=Conexao::getInstancia()->prepare($this->query.$this->ordem.$this->limite . $this->offset);
+            $stmt=Conexao::getInstancia()->prepare($this->query.$this->ordem.$this->limite.$this->offset);
             $stmt->execute($this->parametros);
 
             if(!$stmt->rowCount()){
