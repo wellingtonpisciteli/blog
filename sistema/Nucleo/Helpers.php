@@ -108,15 +108,5 @@ class Helpers {
     public static function verificarSenha(string $senha, string $hash):bool{
         return password_verify($senha, $hash);
     }
-
-    public static function ultimaAtualizacao(){
-        $post=(new PostModelo());
-        $atualizado_em=$post->atualizado_em=date('Y-m-d H:i:s');
-        $ultimaAtualizacao = strtotime($atualizado_em);
-        $atualizacaoAtual=time();
-        $diferencaSegundos=$atualizacaoAtual - $ultimaAtualizacao;
-        $diferencaMinutos=round($diferencaSegundos/60);
-        return $diferencaMinutos;
-    }
 }
 

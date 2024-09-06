@@ -56,11 +56,6 @@ class Template{
                 new \Twig\TwigFunction('usuario', function(){
                     return UsuarioControlador::usuario();
                 })
-            ),
-            $this->twig->addFunction(
-                new \Twig\TwigFunction('ultimaAtualizacao', function(){
-                    return helpers::ultimaAtualizacao();
-                })
             )
         );
     }

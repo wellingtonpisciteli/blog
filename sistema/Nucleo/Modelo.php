@@ -95,7 +95,7 @@ abstract class Modelo{
             }
 
             if($todos){
-                return $stmt->fetchAll();
+                return $stmt->fetchAll(\PDO::FETCH_CLASS, static::class);
             }
 
             return $stmt->fetchObject(static::class);

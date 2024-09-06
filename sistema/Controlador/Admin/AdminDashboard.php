@@ -20,7 +20,7 @@ class AdminDashboard extends AdminControlador{
             'total'=>[
                 'total'=>$post->busca()->total(),
                 'ativo'=>$post->busca('status=1')->total(),
-                'inativo'=>$post->busca('status=0')->total()
+                'inativo'=>$post->busca('status=0')->total(),
             ],
             'categorias'=>$categorias->busca()->ordem('status ASC, id DESC')->limite(5)->resultado(true),
             'total'=>[

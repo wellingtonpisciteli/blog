@@ -63,16 +63,12 @@
                                                 <img class="icon Ipost" src="https://cdn.pixabay.com/photo/2022/01/01/15/22/red-6907837_1280.png" alt="">
                                                 {% endif %}
                                                 <span style="margin-left: 25px;">
-                                                    {{ post.titulo }}
+                                                    {{post.titulo}}
                                                 </span>
                                                 <br>
-                                                {% for categoria in categorias %}
                                                 <small class="text-muted fw-normal">
-                                                    {% if post.categoria_id==categoria.id %}
-                                                    Escrito por {{usuario().nome}} há {{ultimaAtualizacao()}} minutos em {{categoria.titulo}}
-                                                    {% endif %}
+                                                    Escrito por {{post.usuario.nome}} há 0 minutos em {{post.categoria.titulo}}
                                                 </small>
-                                                {% endfor %}
                                             </td>
                                             <td>
                                                 0
