@@ -34,7 +34,7 @@ class AdminCategorias extends AdminControlador{
                 $categoria->cadastrado_em=date('Y-m-d H:i:s');
 
                 if($categoria->salvar()){
-                    $this->mensagem->sucesso('Categoria cadastrada com sucesso em '."{$categoria->cadastrado_em}.")->flash();
+                    $this->mensagem->sucesso("Categoria cadastrada com sucesso!")->flash();
                     Helpers::redirecionar('admin/categorias/listar');
                 }
             }else{
@@ -59,7 +59,7 @@ class AdminCategorias extends AdminControlador{
                 $categoria->atualizado_em=date('Y-m-d H:i:s');
             
                 if($categoria->salvar()){
-                    $this->mensagem->sucesso('Categoria atualizada com sucesso em '."{$categoria->atualizado_em}.")->flash();
+                    $this->mensagem->sucesso("Categoria atualizada com sucesso!")->flash();
                     Helpers::redirecionar('admin/categorias/listar');
                 }
             }else{

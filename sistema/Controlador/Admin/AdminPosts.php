@@ -35,7 +35,7 @@ class AdminPosts extends AdminControlador{
                 $post->cadastrado_em=date('Y-m-d H:i:s');
 
                 if($post->salvar()){
-                    $this->mensagem->sucesso('Post cadastrado com sucesso em '."{$post->cadastrado_em}.")->flash();
+                    $this->mensagem->sucesso("Post cadastrado com sucesso!")->flash();
                     Helpers::redirecionar('admin/posts/listar');
                 }
             }else{
@@ -63,7 +63,7 @@ class AdminPosts extends AdminControlador{
                 $post->atualizado_em=date('Y-m-d H:i:s');
 
                 if($post->salvar()){
-                    $this->mensagem->sucesso('Post atualizado com sucesso em '."{$post->atualizado_em}.")->flash();
+                    $this->mensagem->sucesso("Post atualizado com sucesso!")->flash();
                     Helpers::redirecionar('admin/posts/listar');
                 }
             }else{

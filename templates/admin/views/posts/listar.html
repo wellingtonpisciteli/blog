@@ -32,30 +32,61 @@
                         </thead>
                         <tbody>
                             {% for post in posts %}
-                                <tr>
-                                    <th>{{ post.id }}</th>
-                                    <td>                    
-                                        {{ post.titulo }}
-                                    </td>
-                                    <td>
-                                        {% if post.status==1 %}
-                                            <img class="icon Ipost" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Circulo_verde.png" alt="">
-                                        {% else %}
-                                            <img class="icon Ipost" src="https://cdn.pixabay.com/photo/2022/01/01/15/22/red-6907837_1280.png" alt="">
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        {% if usuario().level==3 %}
-                                        <a style="color: blue; text-decoration: none;" href="{{url('admin/posts/editar/'~post.id)}}">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
+                            <tr>
+                                <th>{{ post.id }}</th>
+                                <td>                    
+                                    {{ post.titulo }}
+                                </td>
+                                <td>
+                                    {% if post.status==1 %}
+                                        <img class="icon Ipost" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Circulo_verde.png" alt="">
+                                    {% else %}
+                                        <img class="icon Ipost" src="https://cdn.pixabay.com/photo/2022/01/01/15/22/red-6907837_1280.png" alt="">
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if usuario().level==3 %}
+                                    <a href="#info{{post.id}}"
+                                    data-bs-toggle="offcanvas" tooltip="tooltip" title="Status">
+                                        <i class="fa-solid fa-circle-info"  style="margin-right: 10px; color: darkorange;"></i>
+                                    </a>
 
-                                        <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/posts/apagar/'~post.id) }}">
-                                            <i class="fa-sharp fa-solid fa-trash"></i>
-                                        </a>
-                                        {% endif %}
-                                    </td>
-                                </tr>
+                                    <div class="offcanvas offcanvas-start" tabindex="-1" id="info{{post.id}}" aria-labelledby="offcanvasMenuLabel">
+                                        <div class="offcanvas-header">
+                                            <h5 class="offcanvas-title" id="offcanvasMenuLabel">
+                                                {{post.titulo}}
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
+                                        </div>
+                                        <div class="offcanvas-body">
+                                            <ul class="list-unstyled">
+                                                <li>
+                                                    <a href="#" class="nav-link">
+                                                        Cadastrado em: <b>{{post.cadastrado_em|date("d:m:Y")}} às {{post.atualizado_em|date("H:i")}}</b>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="nav-link">
+                                                        Atualizado em: <b>
+                                                        {{post.atualizado_em|date("d:m:Y")}} às {{post.atualizado_em|date("H:i")}}</b>
+                                                    </a>
+                                                </li>
+                                                <li><a href="#" class="nav-link">Ultima visita em:</a></li>
+                                                <li><a href="#" class="nav-link">Cadastrado por: <b>{{post.usuario.nome}}</b>
+                                                </a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <a style="color: blue; text-decoration: none;" href="{{url('admin/posts/editar/'~post.id)}}">
+                                        <i class="fa-solid fa-pen-to-square" tooltip="tooltip" title="Editar"></i>
+                                    </a>
+
+                                    <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/posts/apagar/'~post.id) }}">
+                                        <i class="fa-sharp fa-solid fa-trash" tooltip="tooltip" title="Apagar"></i>
+                                    </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
                             {% endfor %}
                         </tbody>
                       </table>
@@ -69,3 +100,4 @@
         </div>
     </div>
 {% endblock %}
+

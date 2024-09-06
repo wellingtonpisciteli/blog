@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-9 col-md-12 border p-3">
             <h1>{{post.titulo}}</h1>
-
+            <small style="margin-bottom: 10px; display: flex; color: black;">Por {{post.usuario.nome}} {{post.cadastrado_em|date("d/m/Y")}} às {{post.cadastrado_em|date("H:i")}}</small>
             <p style="text-align: justify;">{{post.texto}}</p>
         </div>
         <div class="col-lg-3">
