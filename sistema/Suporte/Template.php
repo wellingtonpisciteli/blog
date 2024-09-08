@@ -56,7 +56,12 @@ class Template{
                 new \Twig\TwigFunction('usuario', function(){
                     return UsuarioControlador::usuario();
                 })
-            )
+            ),
+            $this->twig->addFunction(
+                new \Twig\TwigFunction('contarTempo', function(string $data){
+                    return helpers::contarTempo($data);
+                })
+            ),
         );
     }
 }

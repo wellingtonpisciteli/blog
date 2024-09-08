@@ -67,7 +67,7 @@
                                                 </span>
                                                 <br>
                                                 <small class="text-muted fw-normal">
-                                                    Escrito por {{post.usuario.nome}} há 0 minutos em {{post.categoria.titulo |upper}}
+                                                    Escrito por {{post.usuario.nome}} {{ contarTempo(post.cadastrado_em) }} em {{post.categoria.titulo |upper}}
                                                 </small>
                                             </td>
                                             <td>

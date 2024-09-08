@@ -14,8 +14,8 @@
                                 <h4 class="card-title">{{post.titulo}}</h4>
                                 <small style="display: flex; flex-direction: row; margin-bottom: 10px; margin-top: 10px;">
                                     {{post.categoria.titulo |upper}}
-                                    <p style=" display: flex; position: absolute; right: 20px;">{{post.cadastrado_em|date("d/m/Y")}}</p>
-                                </small>
+                                    <p style=" display: flex; position: absolute; right: 20px;">{{post.cadastrado_em|date("d/m/Y")}} {{ contarTempo(post.cadastrado_em) }}</p>
+                                </small> 
                                 <p class="card-text">{{resumirTxt(post.texto, 150)}}</p>
                             </a>
                         </div>
