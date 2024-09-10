@@ -3,6 +3,7 @@
 namespace sistema\Modelo;
 
 use sistema\Nucleo\Modelo;
+use sistema\Modelo\UsuarioModelo;
 
 /**
  * Classe PostModelo
@@ -23,6 +24,7 @@ class PostModelo extends Modelo{
     }
 
     public function usuario():?UsuarioModelo{
+
         if($this->usuario_id){
             return (new UsuarioModelo())->buscaPorId($this->usuario_id);
         }

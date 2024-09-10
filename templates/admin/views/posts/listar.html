@@ -24,7 +24,7 @@
                           <tr>
                             <th scope="col">id</th>
                             <th scope="col">Titulo</th>
-                            <th>Views</th>
+                            <th>Visitas</th>
                             <th scope="col">Status</th>
                             {% if usuario().level==3 %}
                                 <th scope="col">Ação</th>
@@ -39,7 +39,7 @@
                                     {{ post.titulo }}
                                 </td>
                                 <td>
-                                    0
+                                    {{post.visitas}}
                                 </td>
                                 <td>
                                     {% if post.status==1 %}
@@ -66,7 +66,7 @@
                                             <ul class="list-unstyled">
                                                 <li>
                                                     <a href="#" class="nav-link">
-                                                        Cadastrado em: <b>{{post.cadastrado_em|date("d:m:Y")}} às {{post.atualizado_em|date("H:i")}}</b>
+                                                        Cadastrado em: <b>{{post.cadastrado_em|date("d:m:Y")}} às {{post.cadastrado_em|date("H:i")}}</b>
                                                     </a>
                                                 </li>
                                                 <li>
@@ -75,7 +75,7 @@
                                                         {{post.atualizado_em|date("d:m:Y")}} às {{post.atualizado_em|date("H:i")}}</b>
                                                     </a>
                                                 </li>
-                                                <li><a href="#" class="nav-link">Ultima visita em:</a></li>
+                                                <li><a href="#" class="nav-link">Ultima visita em:<b> {{post.ultima_visita_em|date("d:m:Y H:i")}}</b></a></li>
                                                 <li><a href="#" class="nav-link">Cadastrado por: <b>{{post.usuario.nome}}</b>
                                                 </a></li>
                                             </ul>

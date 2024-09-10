@@ -19,6 +19,10 @@ class Sessao{
         return $this;
     }
 
+    public function obterChave($chave) {
+        return $_SESSION[$chave] ?? null;
+    }
+
     public function carregar():?object{
         return (object) $_SESSION;
     }
@@ -36,6 +40,7 @@ class Sessao{
         session_destroy();
         return $this;
     }
+
 
     /**
      * Obtém o valor de um atributo da sessão.
