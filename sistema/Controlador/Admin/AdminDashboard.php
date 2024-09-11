@@ -33,11 +33,12 @@ class AdminDashboard extends AdminControlador{
                 'ativo'=>$usuarios->busca('status=1 AND level!=3')->total(),
                 'inativo'=>$usuarios->busca('status=0 AND level!=3')->total()
             ],
-            'admin'=>[
-                'total'=>$usuarios->busca('level=3')->total(),
-                'ativo'=>$usuarios->busca('status=1 AND level=3')->total(),
-                'inativo'=>$usuarios->busca('status=0 AND level=3')->total()
-            ]
+            'admin'=>$usuarios->busca()->ordem('ultimo_login DESC')->limite(3)->resultado(true),
+            'total'=>[
+                'total'=>$usuarios->busca()->total(),
+                'ativo'=>$usuarios->busca('status=1')->total(),
+                'inativo'=>$usuarios->busca('status=0')->total(),
+            ],
         ]));
     }
 

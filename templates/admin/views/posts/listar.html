@@ -66,16 +66,16 @@
                                             <ul class="list-unstyled">
                                                 <li>
                                                     <a href="#" class="nav-link">
-                                                        Cadastrado em: <b>{{post.cadastrado_em|date("d:m:Y")}} às {{post.cadastrado_em|date("H:i")}}</b>
+                                                        Cadastrado em: <b>{{post.cadastrado_em|date("d/m/Y")}} às {{post.cadastrado_em|date("H:i")}}</b>
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="#" class="nav-link">
                                                         Atualizado em: <b>
-                                                        {{post.atualizado_em|date("d:m:Y")}} às {{post.atualizado_em|date("H:i")}}</b>
+                                                        {{post.atualizado_em|date("d/m/Y")}} às {{post.atualizado_em|date("H:i")}}</b>
                                                     </a>
                                                 </li>
-                                                <li><a href="#" class="nav-link">Ultima visita em:<b> {{post.ultima_visita_em|date("d:m:Y H:i")}}</b></a></li>
+                                                <li><a href="#" class="nav-link">Ultima visita em:<b> {{post.ultima_visita_em|date("d/m/Y H:i")}}</b></a></li>
                                                 <li><a href="#" class="nav-link">Cadastrado por: <b>{{post.usuario.nome}}</b>
                                                 </a></li>
                                             </ul>

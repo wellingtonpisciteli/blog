@@ -123,7 +123,7 @@ main{
     position: absolute;
     left: 0%;
     width: 19.8%;
-    height: 120%;
+    height: 160%;
 }
 
 .imgLogo{
@@ -184,7 +184,7 @@ main{
     align-items: center;
     position: absolute;
     left: 0%;
-    height: 120%;
+    height: 160%;
     width: 5%;
     background: var(--cor3);
 }
@@ -225,7 +225,6 @@ main{
     right: 0%;
     background:var(--cor8);
     width: 80.2%;
-    height: 100%;
     top: 11%;
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.568);
 }
@@ -272,6 +271,16 @@ main{
     width: 36%;
 }
 
+.admin{
+    background-color: var(--cor8);
+    padding: 10px;
+    border-radius: 7px;
+    cursor: default;
+    position: relative;
+    margin-top: 15px;
+    width: 44%;
+}
+
 .infosDash{
     display: flex;
     flex-direction: row;
@@ -289,7 +298,6 @@ main{
     font-weight: bold;
     padding: 5px;
     border-radius: 7px 7px 0px 0px;
-
 }
 
 #iDash{
@@ -359,12 +367,17 @@ main{
     margin-top: -10px;
 }
 
+.ultimosAdmin{
+    width: 100%;
+    margin-top: -10px;
+}
+
 
 .rodape{
     display: flex;
     align-items: center;
     position: absolute;
-    bottom: -20%;
+    bottom: -60%;
     right: 0%;
     width: 80.2%;
     height: 8%;

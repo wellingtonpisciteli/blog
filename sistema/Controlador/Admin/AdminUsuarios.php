@@ -99,8 +99,8 @@ class AdminUsuarios extends AdminControlador{
     }
 
     public function validarDados(array $dados):bool{
-        if(empty($dados['nome'])) {
-            $this->mensagem->alerta('Informe o nome do usuário')->flash();
+        if(empty($dados['nome']) || strlen($dados['nome'])>=20) {
+            $this->mensagem->alerta('Informe o nome do usuário até 20 caracteres.')->flash();
             return false;
         }
 

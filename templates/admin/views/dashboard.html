@@ -15,8 +15,8 @@
         {% include 'menu2.html' %}   
                 
         <div class="conteudo">
-            <div>
-                <h4 style="margin-bottom: 25px;">Dashboard</h4>
+            <div style="display: flex;">
+                <h5 style="margin-bottom: 25px;"><b>Dashboard</b> - {{saudacao()}}, {{usuario().nome}}. Seu ultimo login foi em {{ usuario().ultimo_login|date("d/m/Y")}} às {{usuario().ultimo_login|date('H:i') }}</h5>
             </div>
 
             {{ flash() }}
@@ -86,13 +86,13 @@
                                         </tr>
                                         {% endfor %}
                                     </tbody>
-                                    </table>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="categorias Dash">  
+                <div class="categorias Dash">
                     <a href="{{ url('admin/categorias/listar') }}">
                         <i class="fa-solid fa-list" id="iDash"></i>
                     </a>
@@ -145,27 +145,82 @@
                                             </tr>
                                         {% endfor %}
                                     </tbody>
-                                    </table>
+                                </table>
                             </div>
                         </div>            
                     </div>
                 </div>
-                
-
-
-                <!-- <div class="usuarios Dash">
-                    <a href="{{ url('admin/usuarios/listar') }}">
-                        <i class="fa-solid fa-users" id="iDash"></i>
-                    </a>
-                    <h4>Usuários</h4>
-                    <h1 style="font-weight: bolder; font-size: 2.5em;">{{ usuarios.total }}</h1>
-                    <div class="ativoInativo">
-                        <h5 class="ativoPostsDash">{{ usuarios.ativo }} Ativo</h5>
-                        <h5 class="inativoPostsDash">{{ usuarios.inativo }} Inativo</h5>
-                    </div>
-                </div>
 
                 <div class="admin Dash">
+                    <a href="{{ url('admin/usuarios/listar') }}">
+                        <i class="fa-sharp fa-solid fa-file-pen" id="iDash"></i>
+                    </a>
+                    <h4>Admin</h4>
+                    <div class="ativoInativo">
+                        <h5 class="totalPostsDash"> {{ total.total }} Total</h5>
+                        <h5 class="ativoPostsDash"> {{ total.ativo }} Ativo</h5>
+                        <h5 class="inativoPostsDash"> {{ total.inativo }} Inativo</h5>
+                    </div>
+                    <hr>
+                    <div class="ultimosAdmin Dash">
+                        <h5>
+                            Ultimos login
+                        </h5>
+                        <a href="{{url('admin/usuarios/cadastrar')}}" >
+                            <i class="fa-solid fa-circle-plus" id="iDash" style="top: 10px;"></i>
+                        </a>
+                        
+                        <div class="posts">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">Nome</th>
+                                        <th>Data - Hora</th>
+                                        {% if usuario().level==3 %}
+                                            <th scope="col">Ação</th>
+                                        {% endif %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for adm in admin %}
+                                        {% if adm.level==3 %}
+                                        <tr>
+                                            <td>
+                                                {% if adm.status==1 %}
+                                                <img class="icon Ipost" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Circulo_verde.png" alt="">
+                                                {% else %}
+                                                <img class="icon Ipost" src="https://cdn.pixabay.com/photo/2022/01/01/15/22/red-6907837_1280.png" alt="">
+                                                {% endif %}
+                                                <span style="margin-left: 25px;">
+                                                    {{adm.nome}}
+                                                </span>
+                                                <br>
+                                            </td>
+                                            <td>
+                                                {{adm.ultimo_login|date("d/m/Y H:i")}}
+                                            </td>
+                                            <td>
+                                                {% if usuario().level==3 %}
+                                                <a style="color: blue; text-decoration: none;" href="{{url('admin/usuarios/editar/'~adm.id)}}">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
+                                                <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/usuarios/apagar/'~adm.id) }}">
+                                                    <i class="fa-sharp fa-solid fa-trash"></i>
+                                                </a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                
+                <!-- <div class="admin Dash">
                     <a href="{{ url('admin/usuarios/listar') }}">
                         <i class="fa-solid fa-users" id="iDash"></i>
                     </a>

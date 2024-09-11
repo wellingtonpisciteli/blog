@@ -28,8 +28,22 @@ class Helpers {
         return null;
     }
 
-    public static function saudacao() {
-        return "testando";
+    /**
+     * Saudação de acordo com o horário
+     * @return string saudação
+     */
+    public static function saudacao(): string
+    {
+        $hora = date('H');
+
+        $saudacao = match (true) {
+            $hora >= 0 and $hora <= 5 => 'Boa madrugada',
+            $hora >= 6 and $hora <= 12 => 'Bom dia',
+            $hora >= 13 and $hora <= 18 => 'Boa tarde',
+            default => 'Boa noite'
+        };
+
+        return $saudacao;
     }
 
     public static function resumirTxt(string $texto,int $limite,string $continue='...'):string{
