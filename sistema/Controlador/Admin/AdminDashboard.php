@@ -16,28 +16,30 @@ class AdminDashboard extends AdminControlador{
         $categorias=new CategoriaModelo();
         
         echo($this->template->renderizar('dashboard.html', [
-            'posts'=>$post->busca()->ordem('status ASC, id DESC')->limite(3)->resultado(true),
-            'total'=>[
+            'posts'=>[
+                'posts'=>$post->busca()->ordem('id DESC')->limite(3)->resultado(true),
                 'total'=>$post->busca()->total(),
                 'ativo'=>$post->busca('status=1')->total(),
                 'inativo'=>$post->busca('status=0')->total(),
             ],
-            'categorias'=>$categorias->busca()->ordem('status ASC, id DESC')->limite(5)->resultado(true),
-            'total'=>[
+            
+            'categorias'=>[
+                'categorias'=>$categorias->busca()->ordem('id DESC')->limite(5)->resultado(true),
                 'total'=>$categorias->busca()->total(),
                 'ativo'=>$categorias->busca('status=1')->total(),
                 'inativo'=>$categorias->busca('status=0')->total(),
             ],
             'usuarios'=>[
+                'usuarios'=>$usuarios->busca('level!=3')->ordem('ultimo_login DESC')->limite(3)->resultado(true),
                 'total'=>$usuarios->busca('level!=3')->total(),
                 'ativo'=>$usuarios->busca('status=1 AND level!=3')->total(),
                 'inativo'=>$usuarios->busca('status=0 AND level!=3')->total()
             ],
-            'admin'=>$usuarios->busca()->ordem('ultimo_login DESC')->limite(3)->resultado(true),
-            'total'=>[
-                'total'=>$usuarios->busca()->total(),
-                'ativo'=>$usuarios->busca('status=1')->total(),
-                'inativo'=>$usuarios->busca('status=0')->total(),
+            'admin'=>[
+                'admin'=>$usuarios->busca('level=3')->ordem('ultimo_login DESC')->limite(3)->resultado(true),
+                'total'=>$usuarios->busca('level=3')->total(),
+                'ativo'=>$usuarios->busca('status=1 AND level=3')->total(),
+                'inativo'=>$usuarios->busca('status=0 AND level=3')->total(),
             ],
         ]));
     }

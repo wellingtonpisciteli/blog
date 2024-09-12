@@ -12,9 +12,11 @@ class AdminPosts extends AdminControlador{
 
     public function listar():void{
         $post=new PostModelo();
+        $categoria=new CategoriaModelo();
 
         echo($this->template->renderizar('posts/listar.html', [
             'posts'=>$post->busca()->ordem('status ASC, id DESC')->resultado(true),
+            'categorias'=>$categoria->busca()->ordem('status ASC, id DESC')->resultado(true),
             'total'=>[
                 'ativo'=>$post->busca('status=1')->total(),
                 'inativo'=>$post->busca('status=0')->total(),

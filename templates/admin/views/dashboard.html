@@ -28,9 +28,9 @@
                     </a>
                     <h4>Posts</h4>
                     <div class="ativoInativo">
-                        <h5 class="totalPostsDash"> {{ total.total }} Total</h5>
-                        <h5 class="ativoPostsDash"> {{ total.ativo }} Ativo</h5>
-                        <h5 class="inativoPostsDash"> {{ total.inativo }} Inativo</h5>
+                        <h5 class="totalPostsDash"> {{ posts.total }} Total</h5>
+                        <h5 class="ativoPostsDash"> {{ posts.ativo }} Ativo</h5>
+                        <h5 class="inativoPostsDash"> {{ posts.inativo }} Inativo</h5>
                     </div>
                     <hr>
                     <div class="ultimosPosts Dash">
@@ -54,7 +54,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for post in posts %}
+                                        {% for post in posts.posts %}
                                         <tr>
                                             <td>
                                                 {% if post.status==1 %}
@@ -98,9 +98,9 @@
                     </a>
                     <h4>Categorias</h4>
                     <div class="ativoInativo">
-                        <h5 class="totalPostsDash"> {{ total.total }} Total</h5>
-                        <h5 class="ativoPostsDash"> {{ total.ativo }} Ativa</h5>
-                        <h5 class="inativoPostsDash"> {{ total.inativo }} Inativa</h5>
+                        <h5 class="totalPostsDash"> {{ categorias.total }} Total</h5>
+                        <h5 class="ativoPostsDash"> {{ categorias.ativo }} Ativa</h5>
+                        <h5 class="inativoPostsDash"> {{ categorias.inativo }} Inativa</h5>
                     </div>
                     <hr>
                     <div class="ultimosCategorias Dash">
@@ -120,7 +120,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for categoria in categorias %}
+                                        {% for categoria in categorias.categorias %}
                                             <tr>
                                                 <td>
                                                     {% if categoria.status==1 %}
@@ -151,15 +151,15 @@
                     </div>
                 </div>
 
-                <div class="admin Dash">
+                <div class="admin Dash" style="width: 48.5%;">
                     <a href="{{ url('admin/usuarios/listar') }}">
                         <i class="fa-sharp fa-solid fa-file-pen" id="iDash"></i>
                     </a>
                     <h4>Admin</h4>
                     <div class="ativoInativo">
-                        <h5 class="totalPostsDash"> {{ total.total }} Total</h5>
-                        <h5 class="ativoPostsDash"> {{ total.ativo }} Ativo</h5>
-                        <h5 class="inativoPostsDash"> {{ total.inativo }} Inativo</h5>
+                        <h5 class="totalPostsDash"> {{ admin.total }} Total</h5>
+                        <h5 class="ativoPostsDash"> {{ admin.ativo }} Ativo</h5>
+                        <h5 class="inativoPostsDash"> {{ admin.inativo }} Inativo</h5>
                     </div>
                     <hr>
                     <div class="ultimosAdmin Dash">
@@ -183,8 +183,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for adm in admin %}
-                                        {% if adm.level==3 %}
+                                        {% for adm in admin.admin %}
+                                        {% if usuarios %}
                                         <tr>
                                             <td>
                                                 {% if adm.status==1 %}
@@ -198,7 +198,11 @@
                                                 <br>
                                             </td>
                                             <td>
+                                                {% if adm.ultimo_login %}
                                                 {{adm.ultimo_login|date("d/m/Y H:i")}}
+                                                {% else %}
+                                                Não há login!
+                                                {% endif %}
                                             </td>
                                             <td>
                                                 {% if usuario().level==3 %}
@@ -220,17 +224,78 @@
                     </div>
                 </div> 
                 
-                <!-- <div class="admin Dash">
+                <div class="admin Dash" style="width: 48.5%;">
                     <a href="{{ url('admin/usuarios/listar') }}">
-                        <i class="fa-solid fa-users" id="iDash"></i>
+                        <i class="fa-sharp fa-solid fa-file-pen" id="iDash"></i>
                     </a>
-                    <h4>Admin</h4>
-                    <h1 style="font-weight: bolder; font-size: 2.5em;">{{ admin.total }}</h1>
+                    <h4>Usuários</h4>
                     <div class="ativoInativo">
-                        <h5 class="ativoPostsDash">{{ admin.ativo }} Ativo</h5>
-                        <h5 class="inativoPostsDash">{{ admin.inativo }} Inativo</h5>
+                        <h5 class="totalPostsDash"> {{ usuarios.total }} Total</h5>
+                        <h5 class="ativoPostsDash"> {{ usuarios.ativo }} Ativo</h5>
+                        <h5 class="inativoPostsDash"> {{ usuarios.inativo }} Inativo</h5>
                     </div>
-                </div> -->
+                    <hr>
+                    <div class="ultimosAdmin Dash">
+                        <h5>
+                            Ultimos login
+                        </h5>
+                        <a href="{{url('admin/usuarios/cadastrar')}}" >
+                            <i class="fa-solid fa-circle-plus" id="iDash" style="top: 10px;"></i>
+                        </a>
+                        
+                        <div class="posts">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">Nome</th>
+                                        <th>Data - Hora</th>
+                                        {% if usuario().level==3 %}
+                                            <th scope="col">Ação</th>
+                                        {% endif %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for usuario in usuarios.usuarios %}
+                                        {% if usuarios %}
+                                        <tr>
+                                            <td>
+                                                {% if usuario.status==1 %}
+                                                <img class="icon Ipost" src="https://upload.wikimedia.org/wikipedia/commons/2/27/Circulo_verde.png" alt="">
+                                                {% else %}
+                                                <img class="icon Ipost" src="https://cdn.pixabay.com/photo/2022/01/01/15/22/red-6907837_1280.png" alt="">
+                                                {% endif %}
+                                                <span style="margin-left: 25px;">
+                                                    {{usuario.nome}}
+                                                </span>
+                                                <br>
+                                            </td>
+                                            <td>
+                                                {% if usuario.ultimo_login %}
+                                                {{usuario.ultimo_login|date("d/m/Y H:i")}}
+                                                {% else %}
+                                                Não há login!
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if usuario().level==3 %}
+                                                <a style="color: blue; text-decoration: none;" href="{{url('admin/usuarios/editar/'~usuario.id)}}">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
+                                                <a style="margin-left: 10px; color: brown; text-decoration: none;" href="{{ url('admin/usuarios/apagar/'~usuario.id) }}">
+                                                    <i class="fa-sharp fa-solid fa-trash"></i>
+                                                </a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
             </div>
         </div>
     </div>

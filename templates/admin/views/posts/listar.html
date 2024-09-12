@@ -24,6 +24,7 @@
                           <tr>
                             <th scope="col">id</th>
                             <th scope="col">Titulo</th>
+                            <th>Categoria</th>
                             <th>Visitas</th>
                             <th scope="col">Status</th>
                             {% if usuario().level==3 %}
@@ -37,6 +38,13 @@
                                 <th>{{ post.id }}</th>
                                 <td>                    
                                     {{ post.titulo }}
+                                </td>
+                                <td>
+                                    {% for categoria in categorias %}
+                                        {% if categoria.id==post.categoria_id %}
+                                            {{categoria.titulo}}
+                                        {% endif %}
+                                    {% endfor %}
                                 </td>
                                 <td>
                                     {{post.visitas}}

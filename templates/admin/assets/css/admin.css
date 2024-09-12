@@ -68,7 +68,7 @@ main{
     top: -2%;
     justify-content: center;
     width: 160px;
-    height: 15%;
+    height: 9%;
     flex-direction: column;
     background: var(--cor8);
     border: 1px solid black;
@@ -371,7 +371,6 @@ main{
     width: 100%;
     margin-top: -10px;
 }
-
 
 .rodape{
     display: flex;
