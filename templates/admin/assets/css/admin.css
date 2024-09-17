@@ -95,9 +95,34 @@ main{
     font-weight: bolder;
 }
 
-@media(max-width:1350px){
+@media(min-width:1000px){
     .opcoes a{
         padding: 2px;
+    }
+
+    .opcoes{
+        height: 6%;
+        top: -12px;
+    }
+
+    .categorias{
+        width: 35% !important;
+    }
+
+    .menu{
+        height: 167% !important; 
+    }
+
+    .menuFechado{
+        height: 167% !important; 
+    }
+
+    .container{
+        height: 156% !important;
+    }
+
+    .rodape{
+        bottom: -67% !important;
     }
 }
 
@@ -278,7 +303,7 @@ main{
     cursor: default;
     position: relative;
     margin-top: 15px;
-    width: 44%;
+    width: 48%;
 }
 
 .infosDash{
@@ -464,6 +489,16 @@ main{
     .rodape{
         width: 100% !important;
         left: 0% !important;
+    }
+
+    .opcoes{
+        height: 6%;
+    }
+}
+
+@media(max-width:750px){
+    .opcoes{
+        height: 4%;
     }
 }
 

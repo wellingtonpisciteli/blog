@@ -92,10 +92,10 @@ class SiteControlador extends Controlador{
     /**
      * Exibe um post específico.
      *
-     * @param int $id O ID do post a ser exibido.
+     * @param string $slug O slug do post a ser exibido.
      */
-    public function post(int $id):void{
-        $post=(new PostModelo())->buscaPorId($id);
+    public function post(string $slug):void{
+        $post=(new PostModelo())->buscaSlug($slug);
         $categoria=(new CategoriaModelo())->busca("status=1");
 
         if(!$post){

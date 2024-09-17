@@ -31,14 +31,14 @@ class AdminPosts extends AdminControlador{
             
             if(!empty($dados["titulo"]) && !empty($dados["texto"])){
                 $post=new PostModelo();
-                $usuario_id=(new Sessao())->obterChave("usuarioId");
 
                 $post->titulo=$dados['titulo'];
                 $post->categoria_id=$dados['categoria_id'];
+                $post->slug=Helpers::slug($dados['titulo'])."-".uniqid();
                 $post->texto=$dados['texto'];
                 $post->status=$dados['status'];
                 $post->cadastrado_em=date('Y-m-d H:i:s');
-                $post->usuario_id=$usuario_id;
+                $post->usuario_id=$this->usuario->id;
 
                 if($post->salvar()){
                     $this->mensagem->sucesso("Post cadastrado com sucesso!")->flash();

@@ -163,6 +163,11 @@ abstract class Modelo{
         return $busca->resultado();
     }
 
+    public function buscaSlug(string $slug){
+        $busca=$this->busca("slug=:s","s={$slug}");
+        return $busca->resultado();
+    }
+
     public function apagar(string $termos){
         try{
             $query="DELETE FROM ".$this->tabela." WHERE {$termos}";
