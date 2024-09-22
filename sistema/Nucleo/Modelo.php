@@ -77,30 +77,31 @@ abstract class Modelo{
         return $this;
     }
 
-    public function posts(string $db, string $termo, int $id){
-        if($id){
-            $this->query="SELECT * FROM {$db} WHERE {$termo}={$id} AND status = 1 ORDER BY id DESC ";
-            return $this;
-        }
+    // public function posts(string $db, string $termo, int $id){
+    //     if($id){
+    //         $this->query="SELECT * FROM {$db} WHERE {$termo}={$id} AND status = 1 ORDER BY id DESC ";
+    //         return $this;
+    //     }
         
-    }
+    // }
 
-    public function resultado(bool $todos=false){
-        try{
-            $stmt=Conexao::getInstancia()->prepare($this->query.$this->ordem.$this->limite.$this->offset);
+    public function resultado(bool $todos=false): mixed
+    {
+        try {
+            $stmt=Conexao::getInstancia()->prepare($this->query . $this->ordem . $this->limite . $this->offset);
             $stmt->execute($this->parametros);
 
-            if(!$stmt->rowCount()){
+            if (!$stmt->rowCount()) {
                 return null;
             }
 
-            if($todos){
+            if ($todos) {
+                //PDO::FETCH_CLASS: Retorna instâncias da classe especificada, mapeando as colunas de cada linha para propriedades nomeadas na classe.
                 return $stmt->fetchAll(\PDO::FETCH_CLASS, static::class);
             }
-
+            //fetchObject - Busca a próxima linha e a retorna como um objeto
             return $stmt->fetchObject(static::class);
-            
-        }catch(\PDOException $ex){
+        } catch (\PDOException $ex) {
             $this->erro=$ex;
             return null;
         }
@@ -163,7 +164,7 @@ abstract class Modelo{
         return $busca->resultado();
     }
 
-    public function buscaSlug(string $slug){
+    public function buscaPorSlug(string $slug){
         $busca=$this->busca("slug=:s","s={$slug}");
         return $busca->resultado();
     }
@@ -186,7 +187,7 @@ abstract class Modelo{
     public function total():int{
         
         $stmt=Conexao::getInstancia()->prepare($this->query);
-        $stmt->execute();
+        $stmt->execute($this->parametros);
         
         // Retorna quantas linhas foram selecionadas
         return $stmt->rowCount();
@@ -215,5 +216,18 @@ abstract class Modelo{
         $this->dados=$this->buscaPorId($id)->dados();
 
         return true;
+    }
+
+    private function ultimoId():int
+    {
+        return Conexao::getInstancia()->query("SELECT MAX(id) as maximo FROM {$this->tabela}")->fetch()->maximo+1;
+    }
+
+    protected function slug()
+    {
+        $checarSlug=$this->busca("slug=:s AND id != :id","s={$this->slug}&id={$this->id}");
+        if($checarSlug->total()){
+            $this->slug="{$this->slug}-{$this->ultimoId()}";
+        }
     }
 }

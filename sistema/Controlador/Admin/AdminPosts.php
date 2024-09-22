@@ -34,7 +34,7 @@ class AdminPosts extends AdminControlador{
 
                 $post->titulo=$dados['titulo'];
                 $post->categoria_id=$dados['categoria_id'];
-                $post->slug=Helpers::slug($dados['titulo'])."-".uniqid();
+                $post->slug=Helpers::slug($dados['titulo']);
                 $post->texto=$dados['texto'];
                 $post->status=$dados['status'];
                 $post->cadastrado_em=date('Y-m-d H:i:s');
@@ -62,7 +62,9 @@ class AdminPosts extends AdminControlador{
             if(!empty($dados["titulo"]) && !empty($dados["texto"])){   
                 $post=(new PostModelo())->buscaPorId($id);
 
+                $post->usuario_id=$this->usuario->id;
                 $post->titulo=$dados['titulo'];
+                $post->slug=Helpers::slug($dados['titulo']);
                 $post->categoria_id=$dados['categoria_id'];
                 $post->texto=$dados['texto'];
                 $post->status=$dados['status'];

@@ -28,6 +28,7 @@ class AdminCategorias extends AdminControlador{
             if(!empty($dados["titulo"]) && !empty($dados["texto"])){
                 $categoria=new CategoriaModelo();
 
+                $categoria->slug=Helpers::slug($dados['titulo']);
                 $categoria->titulo=$dados['titulo'];
                 $categoria->texto=$dados['texto'];
                 $categoria->status=$dados['status'];
@@ -53,6 +54,7 @@ class AdminCategorias extends AdminControlador{
             if(!empty($dados["titulo"]) && !empty($dados["texto"])){
                 $categoria=(new CategoriaModelo())->buscaPorId($id);
 
+                $categoria->slug=Helpers::slug($dados['titulo']);
                 $categoria->titulo=$dados['titulo'];
                 $categoria->texto=$dados['texto'];
                 $categoria->status=$dados['status'];

@@ -30,13 +30,12 @@ class SiteControlador extends Controlador{
      */
     public function index():void{
         $posts=(new PostModelo())->busca("status=1");
-        $categoria=(new CategoriaModelo())->busca("status=1");
 
         echo($this->template->renderizar('index.html', [
             'titulo'=>'Blog PHP',
             'posts'=>$posts->resultado(true),
-            'categorias'=>$categoria->resultado(true),
-        ]));
+            'categorias'=>$this->categorias(),
+        ]));   
     }
 
     /**
@@ -94,22 +93,20 @@ class SiteControlador extends Controlador{
      *
      * @param string $slug O slug do post a ser exibido.
      */
-    public function post(string $slug):void{
-        $post=(new PostModelo())->buscaSlug($slug);
-        $categoria=(new CategoriaModelo())->busca("status=1");
-
+    public function post(string $slug, int $id): void{
+        $post=(new PostModelo())->buscaPorId($id);
         if(!$post){
             Helpers::redirecionar('404');
         }
 
         $post->visitas+=1;
-        $post->ultima_visita_em=date('Y:d:m H:i');
+        $post->ultima_visita_em=date('Y-m-d H:i:s');
         $post->salvar();
 
-        echo($this->template->renderizar('post.html', [
+        echo $this->template->renderizar('post.html', [
             'post'=>$post,
-            'categorias'=>$categoria->resultado(true),
-        ]));
+            'categorias'=>$this->categorias(),
+        ]);
     }
 
     /**
@@ -117,19 +114,34 @@ class SiteControlador extends Controlador{
      *
      * @param int $id O ID da categoria.
      */
-    public function categoria(int $id):void{
-        $posts=(new CategoriaModelo())->posts('posts', 'categoria_id', $id)->resultado(true);
-        $categoria=(new CategoriaModelo())->busca("status=1");
+    public function categorias(): array{
+        return (new CategoriaModelo())->busca("status=1")->resultado(true);
+    }
 
-        if(!$posts){
+    /**
+     * Lista posts por categoria
+     * @param string $slug
+     * @return void
+     */
+    public function categoria(string $slug): void{
+
+        $categoria=(new CategoriaModelo())->buscaPorSlug($slug);
+        $post=(new CategoriaModelo())->post($categoria->id);
+        
+        if(!$categoria){
             Helpers::redirecionar('404');
         }
 
-        echo($this->template->renderizar('categoria.html', [
-            'posts'=>$posts,
-            'categorias'=>$categoria->resultado(true),
-        ]));
+        $categoria->visitas+=1;
+        $categoria->ultima_visita_em=date('Y-m-d H:i:s');
+        $categoria->salvar();
+        
+        echo $this->template->renderizar('categoria.html', [
+            'posts'=>$post,
+            'categorias'=>$this->categorias(),
+        ]);
     }
+    
 
 
 }

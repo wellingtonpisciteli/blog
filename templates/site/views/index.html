@@ -10,7 +10,7 @@
                 <div class="col-md-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            <a class="text-decoration-none text-dark" href="{{url('post/'~post.slug)}}" tooltip="tooltip" title="{{post.titulo}}">
+                            <a class="text-decoration-none text-dark" href="{{url('post/'~post.slug~'/'~post.id)}}" tooltip="tooltip" title="{{post.titulo}}">
                                 <h4 class="card-title">{{post.titulo}}</h4>
                                 <small style="display: flex; flex-direction: row; margin-bottom: 10px; margin-top: 10px;">
                                     {{post.categoria.titulo |upper}}
