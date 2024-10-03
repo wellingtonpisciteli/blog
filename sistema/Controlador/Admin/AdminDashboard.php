@@ -46,7 +46,7 @@ class AdminDashboard extends AdminControlador{
 
     public function sair():void{
         $sessao=new Sessao();
-        $sessao->limpar("usuarioId");
+        $sessao->limpar("adminUsuario");
 
         $this->mensagem->informa("Você saiu do Painel de Controle!")->flash();
 

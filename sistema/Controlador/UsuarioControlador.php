@@ -25,14 +25,19 @@ class UsuarioControlador extends Controlador{
         parent::__construct('templates\site\views');
     }
 
-    public static function usuario():?UsuarioModelo{
+    public static function adminUsuario():?UsuarioModelo {
+        $sessao=new Sessao();
+        if(!$sessao->checar('adminUsuarioId')){
+            return null;
+        }
+        return(new UsuarioModelo())->buscaPorId($sessao->adminUsuarioId);
+    }
 
+    public static function usuario():?UsuarioModelo{
         $sessao=new Sessao();
         if(!$sessao->checar('usuarioId')){
             return null;
         }
-
-        return (new UsuarioModelo())->buscaPorId($sessao->usuarioId);
-
+        return(new UsuarioModelo())->buscaPorId($sessao->usuarioId);
     }
 }

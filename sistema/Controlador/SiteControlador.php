@@ -2,10 +2,13 @@
 
 namespace sistema\Controlador;
 
+use sistema\Controlador\Admin\AdminLogin;
 use sistema\Nucleo\Controlador;
 use sistema\Modelo\PostModelo;
 use sistema\Nucleo\Helpers;
 use sistema\Modelo\CategoriaModelo;
+use sistema\Modelo\UsuarioModelo;
+use sistema\Nucleo\Sessao;
 
 /**
  * Controlador para a seção pública do site.
@@ -142,6 +145,29 @@ class SiteControlador extends Controlador{
         ]);
     }
     
+    public function entrar():void{
+        //criei uma nova sessão para o usuario
+        $usuario=UsuarioControlador::usuario();
+    
+        if($_SERVER["REQUEST_METHOD"]=="POST") {
+            $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
+    
+            if(isset($dados)){
+                $usuario=(new UsuarioModelo())->login($dados, 1);
+                if($usuario){
+                    Helpers::redirecionar();
+                }
+            }
+        }
+        $this->index();
+    }
+
+    public function sair():void{
+        $sessao=new Sessao();
+        $sessao->limpar("usuarioId");
+
+        Helpers::redirecionar();
+    }
 
 
 }

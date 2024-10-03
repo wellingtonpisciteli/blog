@@ -13,7 +13,12 @@ try{
     SimpleRouter::get(URL_SITE.'404', 'SiteControlador@erro404');
     SimpleRouter::get(URL_SITE.'post/{slug}/{id}', 'SiteControlador@post');
     simpleRouter::get(URL_SITE.'categoria/{slug}', 'SiteControlador@categoria');
+    simpleRouter::get(URL_SITE.'cadastre-se', 'SiteControlador@cadastre-se');
     simpleRouter::post(URL_SITE.'buscar', 'SiteControlador@buscar');
+
+    SimpleRouter::match(['get','post'], URL_SITE.'entrar', 'SiteControlador@entrar');
+
+    SimpleRouter::get(URL_SITE.'sair', 'SiteControlador@sair');
 
     SimpleRouter::group(['namespace' => 'Admin'], function () {
         //AdminDashboard

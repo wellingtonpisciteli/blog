@@ -20,35 +20,36 @@ class UsuarioModelo extends Modelo{
     }
 
     public function login(array $dados, int $level=1){
-
         $usuario=(new UsuarioModelo())->buscaPorEmail($dados["email"]);
-
+    
         if(!$usuario){
             $this->mensagem->erro("Os dados informados para login estão incorretos!")->flash();
             return false;
         }
-
+    
         if(!Helpers::verificarSenha($dados['senha'], $usuario->senha)){
             $this->mensagem->erro("Os dados informados para login estão incorretos!")->flash();
             return false;
         }
-
+    
         if($usuario->status!=1){
             $this->mensagem->erro("Para fazer login, primeiro ative sua conta!")->flash();
             return false;
         }
-
-        if($usuario->level < $level){
-            $this->mensagem->erro("Usuário não permitido.")->flash();
-            return false;
-        }
-
+    
         $usuario->ultimo_login=date('Y-m-d H:i:s');
         $usuario->salvar();
-
-        (new Sessao())->criar("usuarioId", $usuario->id);
-
-        $this->mensagem->sucesso("Olá, {$usuario->nome}, seja bem vindo ao painel de controle.")->flash();
+    
+        // Verifica o nível de usuário e cria a sessão correta (admin ou site)
+        if($level==3){
+            // Sessão para o admin
+            (new Sessao())->criar("adminUsuarioId", $usuario->id);
+            $this->mensagem->sucesso("Olá, {$usuario->nome}, seja bem-vindo ao painel de controle.")->flash();
+        }else{
+            // Sessão para o site
+            (new Sessao())->criar("usuarioId", $usuario->id);
+        }
+    
         return true;
     }
 
@@ -63,5 +64,4 @@ class UsuarioModelo extends Modelo{
             
         return true;
     }
-
 }

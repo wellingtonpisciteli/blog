@@ -28,14 +28,83 @@
         </form>
 
         <div class="text-end">
-          <a href="" class="btn btn-outline-light me-2" tooltip="tooltip" title="Faça login">
+          <a type="button" class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+            {% if usuario() %}
+              {{usuario().nome}}
+            {% else %}
               Entrar
+            {% endif %}
           </a>
-          <a href="" class="btn btn-warning" tooltip="tooltip" title="Junte-se a nós">
-              Cadastre-se
+          {% if usuario()%}
+          <a href="{{url('sair')}}" type="button" class="btn btn-warning">
+           Sair
           </a>
+          {% else %}
+          <a href="{{url()}}" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#registerModal">
+            cadastre-se
+          </a>
+          {% endif %}        
         </div>
       </div>
+      
+      {% if not usuario() %}
+      <!-- Modal de Login -->
+      <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel" style="color: black;">Login</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body">
+              <form action="{{ url('entrar') }}" method="post">
+                <div class="mb-3">
+                  <label for="emailInput" class="form-label" style="color: black;">Email</label>
+                  <input type="email"  name="email" class="form-control" id="emailInput" placeholder="Digite seu email">
+                </div>
+                <div class="mb-3">
+                  <label for="passwordInput" class="form-label" style="color: black;">Senha</label>
+                  <input type="password" name="senha" class="form-control" id="passwordInput" placeholder="Digite sua senha">
+                </div>
+                <input type="submit" class="btn btn-dark" value="entrar" style="margin-left: 35%; width: 150px;">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Modal de Cadastro -->
+      {% if not usuario().id %}
+      <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="registerModalLabel" style="color: black;">Cadastro</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label for="nameInput" class="form-label" style="color: black;">Nome</label>
+                  <input type="text" class="form-control" id="nameInput" placeholder="Digite seu nome">
+                </div>
+                <div class="mb-3">
+                  <label for="emailRegisterInput" class="form-label" style="color: black;">Email</label>
+                  <input type="email" class="form-control" id="emailRegisterInput" placeholder="Digite seu email">
+                </div>
+                <div class="mb-3">
+                  <label for="passwordRegisterInput" class="form-label" style="color: black;">Senha</label>
+                  <input type="password" class="form-control" id="passwordRegisterInput" placeholder="Digite sua senha">
+                </div>
+                <button type="submit" class="btn btn-dark" style="margin-left: 35%; width: 150px;">Cadastrar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
 
       <div id="buscaResultado"></div>
     </div>

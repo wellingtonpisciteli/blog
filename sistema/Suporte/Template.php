@@ -58,6 +58,11 @@ class Template{
                 })
             ),
             $this->twig->addFunction(
+                new \Twig\TwigFunction('adminUsuario', function(){
+                    return UsuarioControlador::adminUsuario();
+                })
+            ),
+            $this->twig->addFunction(
                 new \Twig\TwigFunction('contarTempo', function(string $data){
                     return helpers::contarTempo($data);
                 })

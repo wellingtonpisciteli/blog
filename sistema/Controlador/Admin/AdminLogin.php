@@ -15,22 +15,18 @@ class AdminLogin extends Controlador{
         parent::__construct('templates/admin/views');     
     }
 
-    public function login():void{
-        $usuario=UsuarioControlador::usuario();
-
-        if($usuario && $usuario->level==3){
-            Helpers::redirecionar('admin/dashboard');
-            $this->mensagem->sucesso("Olá, {$usuario->nome}, seja bem-vindo ao painel de controle.")->flash();
-        }
-
-        if($_SERVER["REQUEST_METHOD"]=="POST"){
+    public function login(): void {
+        //criei uma nova sessão para o admin
+        $usuario=UsuarioControlador::adminUsuario();
+    
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
             $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
-            
+    
             if(isset($dados)){
                 if($this->checarDados($dados)){
                     $usuario=(new UsuarioModelo())->login($dados, 3);
                     if($usuario){
-                        Helpers::redirecionar('admin/login');
+                        Helpers::redirecionar('admin/dashboard');
                     }
                 }
             }

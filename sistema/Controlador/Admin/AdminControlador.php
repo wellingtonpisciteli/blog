@@ -17,9 +17,9 @@ class AdminControlador extends Controlador{
         
         parent::__construct('templates/admin/views');
 
-        $this->usuario=UsuarioControlador::usuario();
+        $this->usuario=UsuarioControlador::adminUsuario();
 
-        if(!$this->usuario OR $this->usuario->level!=3 OR $this->usuario->status!=1){
+        if(!$this->usuario OR $this->usuario->status!=1 OR $this->usuario->level!=3){
             $this->mensagem->erro("Faça login para acessar o painel de controle!")->flash();
 
             $sessao=new Sessao();
