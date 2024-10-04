@@ -35,13 +35,13 @@
               Entrar
             {% endif %}
           </a>
-          {% if usuario()%}
+          {% if usuario() %}
           <a href="{{url('sair')}}" type="button" class="btn btn-warning">
-           Sair
+            Sair
           </a>
           {% else %}
-          <a href="{{url()}}" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#registerModal">
-            cadastre-se
+          <a type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#registerModal">
+            Cadastre-se
           </a>
           {% endif %}        
         </div>
@@ -58,7 +58,7 @@
             </div>
             
             <div class="modal-body">
-              <form action="{{ url('entrar') }}" method="post">
+              <form action="{{ url('loginFront') }}" method="post">
                 <div class="mb-3">
                   <label for="emailInput" class="form-label" style="color: black;">Email</label>
                   <input type="email"  name="email" class="form-control" id="emailInput" placeholder="Digite seu email">
@@ -85,18 +85,18 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form>
+              <form action="{{ url('cadastroFront') }} " method="post">
                 <div class="mb-3">
                   <label for="nameInput" class="form-label" style="color: black;">Nome</label>
-                  <input type="text" class="form-control" id="nameInput" placeholder="Digite seu nome">
+                  <input type="text" name="nome" class="form-control" id="nameInput" placeholder="Digite seu nome">
                 </div>
                 <div class="mb-3">
                   <label for="emailRegisterInput" class="form-label" style="color: black;">Email</label>
-                  <input type="email" class="form-control" id="emailRegisterInput" placeholder="Digite seu email">
+                  <input type="email" name="email" class="form-control" id="emailRegisterInput" placeholder="Digite seu email">
                 </div>
                 <div class="mb-3">
                   <label for="passwordRegisterInput" class="form-label" style="color: black;">Senha</label>
-                  <input type="password" class="form-control" id="passwordRegisterInput" placeholder="Digite sua senha">
+                  <input type="password" name="senha" class="form-control" id="passwordRegisterInput" placeholder="Digite sua senha">
                 </div>
                 <button type="submit" class="btn btn-dark" style="margin-left: 35%; width: 150px;">Cadastrar</button>
               </form>

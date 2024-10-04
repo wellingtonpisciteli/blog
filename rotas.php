@@ -16,7 +16,8 @@ try{
     simpleRouter::get(URL_SITE.'cadastre-se', 'SiteControlador@cadastre-se');
     simpleRouter::post(URL_SITE.'buscar', 'SiteControlador@buscar');
 
-    SimpleRouter::match(['get','post'], URL_SITE.'entrar', 'SiteControlador@entrar');
+    SimpleRouter::match(['get','post'], URL_SITE.'loginFront', 'SiteControlador@loginFront');
+    SimpleRouter::match(['get','post'], URL_SITE.'cadastroFront', 'SiteControlador@cadastroFront');
 
     SimpleRouter::get(URL_SITE.'sair', 'SiteControlador@sair');
 

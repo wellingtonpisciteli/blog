@@ -9,6 +9,7 @@ use sistema\Nucleo\Helpers;
 use sistema\Modelo\CategoriaModelo;
 use sistema\Modelo\UsuarioModelo;
 use sistema\Nucleo\Sessao;
+use sistema\Controlador\Admin\AdminUsuarios;
 
 /**
  * Controlador para a seção pública do site.
@@ -144,8 +145,34 @@ class SiteControlador extends Controlador{
             'categorias'=>$this->categorias(),
         ]);
     }
+
+    public function cadastroFront():void{
+        $dados=filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $adminUsuario=(new AdminUsuarios());
+
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            if($adminUsuario->validarDados($dados)){
+                if(empty($dados['senha'])){
+                    $this->mensagem->alerta('Informe uma senha para o usuário')->flash();
+                }else{
+                    $usuario=new UsuarioModelo();
+
+                    $usuario->nome=$dados['nome'];
+                    $usuario->email=$dados['email'];
+                    $usuario->senha=Helpers::gerarSenha($dados['senha']);
+                    $usuario->status=1;
+
+                    if($usuario->salvar() && $usuario){
+                        $this->loginFront();
+                        Helpers::redirecionar();
+                    }
+                }
+            }
+        }
+        $this->index();
+    }
     
-    public function entrar():void{
+    public function loginFront():void{
         //criei uma nova sessão para o usuario
         $usuario=UsuarioControlador::usuario();
     
